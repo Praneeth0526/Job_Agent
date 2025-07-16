@@ -1,1 +1,9 @@
-venv/
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# Browser Profile
+chrome_profile/
