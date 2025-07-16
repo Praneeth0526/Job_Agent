@@ -1,0 +1,55 @@
+2025-07-16 20:10:48,133 - INFO - main2 - --- Job Application Agent ---
+2025-07-16 20:10:48,133 - INFO - main2 - Initializing database and starting scheduler...
+2025-07-16 20:10:48,133 - INFO - main2 - Agent is running. The first pipeline will execute now, then daily at 8:00 AM.
+2025-07-16 20:10:48,133 - INFO - main2 - Press Ctrl-C to exit.
+2025-07-16 20:10:48,133 - INFO - main2 - =============================================
+2025-07-16 20:10:48,133 - INFO - main2 - Starting the full job agent pipeline...
+2025-07-16 20:10:48,133 - INFO - main2 - [1/5] Scraping for new job listings...
+2025-07-16 20:11:17,750 - INFO - main2 - Scraper found no new jobs. Pipeline finished for this run.
+2025-07-16 20:16:56,334 - INFO - main2 - Scheduler stopped by user. Goodbye.
+2025-07-16 21:04:11,167 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-16 21:04:11,189 - INFO - app - Resume parsed. Found 13 skills.
+2025-07-16 21:06:57,247 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-16 21:06:57,263 - INFO - app - Resume parsed. Found 13 skills.
+2025-07-16 21:07:40,337 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-16 21:07:40,359 - INFO - app - Resume parsed. Found 13 skills.
+2025-07-16 21:07:42,179 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-16 21:07:42,204 - INFO - app - Resume parsed. Found 13 skills.
+2025-07-16 21:10:50,713 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-16 21:10:50,736 - INFO - app - Resume parsed. Found 13 skills.
+2025-07-16 21:11:56,609 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-16 21:11:56,631 - INFO - app - Resume parsed. Found 13 skills.
+2025-07-16 21:17:24,477 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-16 21:17:24,504 - INFO - app - Resume parsed. Found 13 skills.
+2025-07-16 21:17:24,506 - INFO - logger - ====== WebDriver manager ======
+2025-07-16 21:17:24,603 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-16 21:17:24,736 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-16 21:17:24,799 - INFO - logger - There is no [linux64] chromedriver "138.0.7204.157" for browser google-chrome "138.0.7204" in cache
+2025-07-16 21:17:24,800 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-16 21:17:24,958 - INFO - logger - WebDriver version 138.0.7204.157 selected
+2025-07-16 21:17:24,960 - INFO - logger - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.157/linux64/chromedriver-linux64.zip
+2025-07-16 21:17:24,960 - INFO - logger - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.157/linux64/chromedriver-linux64.zip
+2025-07-16 21:17:25,062 - INFO - logger - Driver downloading response is 200
+2025-07-16 21:17:28,276 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-16 21:17:28,413 - INFO - logger - Driver has been saved in cache [/home/praneeth/.wdm/drivers/chromedriver/linux64/138.0.7204.157]
+2025-07-16 21:19:57,293 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-16 21:19:57,308 - INFO - app - Resume parsed. Found 13 skills.
+2025-07-16 21:19:57,308 - INFO - logger - ====== WebDriver manager ======
+2025-07-16 21:19:57,380 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-16 21:19:57,439 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-16 21:19:57,490 - INFO - logger - Driver [/home/praneeth/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver-linux64/chromedriver] found in cache
+2025-07-16 21:20:30,739 - WARNING - app - Scraper returned no jobs.
+2025-07-16 21:20:34,377 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-16 21:20:34,392 - INFO - app - Resume parsed. Found 13 skills.
+2025-07-16 21:20:34,393 - INFO - logger - ====== WebDriver manager ======
+2025-07-16 21:20:34,478 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-16 21:20:34,540 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-16 21:20:34,600 - INFO - logger - Driver [/home/praneeth/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver-linux64/chromedriver] found in cache
+2025-07-16 21:21:02,051 - WARNING - app - Scraper returned no jobs.
+2025-07-16 21:22:17,230 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-16 21:22:17,254 - INFO - app - Resume parsed. Found 13 skills.
+2025-07-16 21:22:17,255 - INFO - logger - ====== WebDriver manager ======
+2025-07-16 21:22:17,356 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-16 21:22:17,410 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-16 21:22:17,468 - INFO - logger - Driver [/home/praneeth/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver-linux64/chromedriver] found in cache
+2025-07-16 21:23:16,444 - WARNING - app - Scraper returned no jobs.
