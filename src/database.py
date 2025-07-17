@@ -161,29 +161,6 @@ def get_jobs_by_status(status="found"):
     return jobs
 
 
-def get_job_status(job_id):
-    """
-    Retrieves the status of a specific job.
-
-    Args:
-        job_id (int): The unique ID of the job to check.
-
-    Returns:
-        str: The status of the job, or None if not found.
-    """
-    conn = get_db_connection()
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT status FROM applications WHERE id = ?", (job_id,))
-        result = cursor.fetchone()
-        return result['status'] if result else None
-    except Exception as e:
-        print(f"An error occurred while fetching job status for ID {job_id}: {e}")
-        return None
-    finally:
-        conn.close()
-
-
 def get_all_jobs():
     """Retrieves all jobs from the database."""
     conn = get_db_connection()

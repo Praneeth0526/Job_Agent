@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.pyc
+.idea/
+.venv/
+data/
+chrome_profile_for_job_agent/
+chrome_profile/
+temp/
+critical_error.png
+linkedin_jobs.csv
+linkedin_job_descriptions.csv
+test.ipynb
+job_applications.db

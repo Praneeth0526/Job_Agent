@@ -1,8 +1,20 @@
-requests
-selenium
-python-dotenv
+# Core framework for the web UI
 streamlit
-PyPDF2
-python-docx
+
+# For browser automation and web scraping
+selenium
+
+# For parsing HTML and XML from web pages
 beautifulsoup4
-webdriver-manager
+
+# For reading and parsing PDF resume files
+PyMuPDF
+
+# For interacting with the Google Gemini API
+google-generativeai
+
+# For loading environment variables (like your API key) from a .env file
+python-dotenv
+
+# For data manipulation and saving to CSV (though not explicitly in the README, it's used in your code)
+pandas

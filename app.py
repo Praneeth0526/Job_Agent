@@ -84,22 +84,6 @@ def find_relevant_jobs(jobs_list, resume_skills):
     return sorted(scored_jobs, key=lambda x: x['score'], reverse=True)
 
 
-# --- 3. AUTOMATION LOGIC: SELENIUM HANDLERS ---
-
-class StreamlitStatusUpdater:
-    """A wrapper class to pass Streamlit's UI functions to the automator module."""
-
-    def info(self, message): st.info(message)
-    def success(self, message): st.success(message)
-    def warning(self, message): st.warning(message, icon="⚠️")
-    def image(self, path): st.image(path)
-
-    def error(self, message, e=None):
-        st.error(message, icon="🚨")
-        if e:
-            st.error(f"Details: {e}", icon="📄")
-
-
 # --- 4. STREAMLIT UI ---
 
 st.set_page_config(layout="wide", page_title="AI Job Agent", page_icon="🤖")
@@ -154,26 +138,26 @@ button[kind="primary"]:focus {
 }
 
 /* Red 'Skip' and 'Cancel' buttons */
-/* This affects ALL non-primary buttons by default. */
-button[kind="secondary"] {
+/* This specifically targets the second button in a button row to be red */
+div[data-testid="stHorizontalBlock"] > div:nth-child(2) > div[data-testid="stVerticalBlock"] button[kind="secondary"] {
     background-color: #dc3545 !important;
     color: white !important;
     border-color: #dc3545 !important;
 }
-button[kind="secondary"]:hover, button[kind="secondary"]:focus {
+div[data-testid="stHorizontalBlock"] > div:nth-child(2) > div[data-testid="stVerticalBlock"] button[kind="secondary"]:hover,
+div[data-testid="stHorizontalBlock"] > div:nth-child(2) > div[data-testid="stVerticalBlock"] button[kind="secondary"]:focus {
     background-color: #c82333 !important;
     border-color: #c82333 !important;
 }
 
-/* Yellow 'AI Insights' buttons - Overriding the general secondary style */
-/* This targets the button in the third column of the job card controls. */
-div[data-testid="stHorizontalBlock"] > div:nth-child(3) > div[data-testid="stVerticalBlock"] button[kind="secondary"] {
+/* Yellow 'Generate AI Insights' button inside an expander */
+div[data-testid="stExpander"] button[kind="secondary"] {
     background-color: #ffc107 !important;
     color: #212529 !important;
     border-color: #ffc107 !important;
 }
-div[data-testid="stHorizontalBlock"] > div:nth-child(3) > div[data-testid="stVerticalBlock"] button[kind="secondary"]:hover,
-div[data-testid="stHorizontalBlock"] > div:nth-child(3) > div[data-testid="stVerticalBlock"] button[kind="secondary"]:focus {
+div[data-testid="stExpander"] button[kind="secondary"]:hover,
+div[data-testid="stExpander"] button[kind="secondary"]:focus {
     background-color: #e0a800 !important;
     border-color: #d39e00 !important;
     color: #212529 !important;
@@ -212,12 +196,12 @@ if 'rejected_jobs' not in st.session_state:
     st.session_state.rejected_jobs = set()
 if 'driver' not in st.session_state:
     st.session_state.driver = None
-if 'show_insights_for' not in st.session_state:
-    st.session_state.show_insights_for = None
 if 'resume_path' not in st.session_state:
     st.session_state.resume_path = None
 if 'fetching_jobs' not in st.session_state:
     st.session_state.fetching_jobs = False
+if 'current_page' not in st.session_state:
+    st.session_state.current_page = 1
 
 # --- Sidebar Controls ---
 with st.sidebar:
@@ -282,20 +266,26 @@ if st.session_state.get('fetching_jobs'):
         # --- SCRAPE & PROCESS (Now always live and headless) ---
         if st.session_state.my_skills:
             log.info(f"Running intelligent LinkedIn search based on your resume...")
-            # Ensure a browser session is active, reusing it if possible
-            if st.session_state.driver is None:
-                log.info("No active driver found. Initializing a new headless one for scraping.")
-                st.session_state.driver = automator.initialize_driver(headless=True)
-                show_info("Background browser session started for scraping.")
+            
+            # Use a temporary, isolated headless driver for scraping to avoid conflicts
+            # with the user-facing browser used for applying.
+            scraper_driver = None
+            try:
+                log.info("Initializing temporary headless browser for scraping...")
+                scraper_driver = automator.initialize_driver(headless=True)
 
-            if st.session_state.driver:
-                st.session_state.scraped_jobs = scraper.run_scraper(
-                    st.session_state.driver, st.session_state.my_skills, location,
-                    email=LINKEDIN_EMAIL, password=LINKEDIN_PASSWORD, additional_keywords=search_term
-                )
-            else:
-                show_error("Could not initialize the browser. Scraping aborted.")
-                st.session_state.scraped_jobs = []
+                if scraper_driver:
+                    st.session_state.scraped_jobs = scraper.run_scraper(
+                        scraper_driver, st.session_state.my_skills, location,
+                        email=LINKEDIN_EMAIL, password=LINKEDIN_PASSWORD, additional_keywords=search_term
+                    )
+                else:
+                    show_error("Could not initialize the background browser. Scraping aborted.")
+                    st.session_state.scraped_jobs = []
+            finally:
+                if scraper_driver:
+                    scraper_driver.quit()
+                    log.info("Temporary scraper browser session closed.")
 
             # --- DATABASE INTEGRATION & RANKING ---
             if st.session_state.scraped_jobs:
@@ -324,7 +314,9 @@ if st.session_state.get('fetching_jobs'):
                 log.warning("Scraper returned no jobs.")
 
     # Reset the flag after the process is complete
+    # Also reset to page 1 to show the newest results first
     st.session_state.fetching_jobs = False
+    st.session_state.current_page = 1
     st.rerun()
 
 # --- Main Content Area ---
@@ -334,66 +326,80 @@ jobs_to_display = database.get_jobs_by_status('found')
 if not jobs_to_display and not st.session_state.get('fetching_jobs'):
     st.info("No new jobs to display. Click 'Fetch & Rank Jobs' in the sidebar to search for more.")
 else:
-    st.header(f"📬 {len(jobs_to_display)} New Jobs Found For Review")
-    st.markdown("---")
+    # --- Pagination Setup ---
+    # We use 9 jobs per page to fit the 3-column grid perfectly.
+    JOBS_PER_PAGE = 9
+    total_jobs = len(jobs_to_display)
 
-    # Display jobs in a grid
-    cols = st.columns(3)
-    for i, job in enumerate(jobs_to_display):
-        job_id = job.get('id')
-        if not job_id:
-            log.warning(f"Skipping a job because it has no ID: {job.get('title')}")
-            continue
+    if total_jobs > 0:
+        total_pages = (total_jobs + JOBS_PER_PAGE - 1) // JOBS_PER_PAGE
 
-        with cols[i % 3]:
-            with st.container(border=True):
-                st.subheader(job.get('title', 'No Title'))
-                st.write(f"**Company:** {job.get('company', 'N/A')}")
-                st.write(f"**Location:** {job.get('location', 'N/A')}")
-                #st.metric(label="Relevance Score", value=job.get('score', 0))
+        start_index = (st.session_state.current_page - 1) * JOBS_PER_PAGE
+        end_index = start_index + JOBS_PER_PAGE
+        jobs_on_this_page = jobs_to_display[start_index:end_index]
 
-                # The 'matched_skills' field from the DB is a pre-formatted string.
-                # We just need to display it directly.
-                matched_skills_str = job.get('matched_skills')
-                if matched_skills_str:
-                    st.write(f"**Matched Skills:** {matched_skills_str}")
+        st.header(f"📬 {total_jobs} New Jobs Found For Review")
+        st.markdown("---")
 
-                with st.expander("Show Job Criteria"):
-                    st.markdown(job.get('criteria', 'Not available.'), unsafe_allow_html=True)
+        # Display jobs in a grid
+        cols = st.columns(3)
+        for i, job in enumerate(jobs_on_this_page):
+            job_id = job.get('id')
+            if not job_id:
+                log.warning(f"Skipping a job because it has no ID: {job.get('title')}")
+                continue
 
-                c1, c2, c3 = st.columns([1, 1, 1])
+            with cols[i % 3]:
+                with st.container(border=True):
+                    st.subheader(job.get('title', 'No Title'))
+                    st.write(f"**Company:** {job.get('company', 'N/A')}")
+                    st.write(f"**Location:** {job.get('location', 'N/A')}")
 
-                if c1.button("Approve & Apply", key=f"approve_{job_id}", type="primary", use_container_width=True):
-                    log.info(f"User approved job for application: {job.get('title')}")
-                    database.update_job_status(job_id, 'applying')
-                    st.rerun()
+                    matched_skills_str = job.get('matched_skills')
+                    if matched_skills_str:
+                        st.write(f"**Matched Skills:** {matched_skills_str}")
 
-                if c2.button("Skip", key=f"reject_{job_id}", use_container_width=True):
-                    log.info(f"User skipped job: {job.get('title')}")
-                    database.update_job_status(job_id, 'rejected')
-                    st.rerun()
+                    with st.expander("Show Job Criteria"):
+                        st.markdown(job.get('criteria', 'Not available.'), unsafe_allow_html=True)
 
-                with c3:
-                    # This button now toggles the display of insights below
-                    if st.button("💡 AI Insights", key=f"ai_{job_id}", use_container_width=True):
-                        # Toggle display: if already showing for this job, hide it.
-                        if st.session_state.get('show_insights_for') == job_id:
-                            st.session_state['show_insights_for'] = None
+                    with st.expander("💡 AI Insights"):
+                        # Generate insights on-demand the first time the expander is opened
+                        if f"insights_{job_id}" in st.session_state:
+                            st.markdown(st.session_state[f"insights_{job_id}"])
                         else:
-                            # Otherwise, show it and generate insights if they don't exist yet
-                            st.session_state['show_insights_for'] = job_id
-                            if f"insights_{job_id}" not in st.session_state:
+                            if st.button("Generate AI Insights", key=f"gen_insights_{job_id}"):
                                 with st.spinner("Asking the AI for talking points..."):
                                     log.info(f"Generating AI insights for: {job.get('title')}")
                                     prompt = llm_helper.generate_talking_points_prompt(job, st.session_state.my_skills)
                                     insights = llm_helper.get_ai_insights(prompt)
                                     st.session_state[f"insights_{job_id}"] = insights
+                                    st.rerun()
 
-                # --- Display AI Insights below the buttons if toggled ---
-                if st.session_state.get('show_insights_for') == job_id:
-                    if f"insights_{job_id}" in st.session_state:
-                        st.info(f"**AI Insights for {job.get('title')}**")
-                        st.markdown(st.session_state[f"insights_{job_id}"])
+                    c1, c2 = st.columns(2)
+                    if c1.button("Approve & Apply", key=f"approve_{job_id}", type="primary", use_container_width=True):
+                        log.info(f"User approved job for application: {job.get('title')}")
+                        database.update_job_status(job_id, 'applying')
+                        st.rerun()
+
+                    if c2.button("Skip", key=f"reject_{job_id}", use_container_width=True):
+                        log.info(f"User skipped job: {job.get('title')}")
+                        database.update_job_status(job_id, 'rejected')
+                        st.rerun()
+
+        # --- Pagination Controls ---
+        if total_pages > 1:
+            st.markdown("---")
+            p_cols = st.columns([1, 1, 1])
+            with p_cols[0]:
+                if st.button("⬅️ Previous", use_container_width=True, disabled=(st.session_state.current_page <= 1)):
+                    st.session_state.current_page -= 1
+                    st.rerun()
+            with p_cols[1]:
+                st.markdown(f"<p style='text-align: center; margin-top: 0.5em;'>Page {st.session_state.current_page} of {total_pages}</p>", unsafe_allow_html=True)
+            with p_cols[2]:
+                if st.button("Next ➡️", use_container_width=True, disabled=(st.session_state.current_page >= total_pages)):
+                    st.session_state.current_page += 1
+                    st.rerun()
 
 # --- Section for jobs ready to be applied for ---
 jobs_to_apply = database.get_jobs_by_status('applying')
@@ -464,7 +470,7 @@ if jobs_to_apply:
                                 st.session_state.driver = automator.initialize_driver()
 
                         if st.session_state.driver:
-                            automator.start_application(st.session_state.driver, job['job_url'], resume_data, edited_application_text)
+                            automator.start_application(st.session_state.driver, job['job_url'])
                         else:
                             show_error("Could not initialize browser for automation.")
                             st.stop()  # stop execution if browser fails
