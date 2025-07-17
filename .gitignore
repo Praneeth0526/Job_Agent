@@ -1,7 +1,7 @@
 # Python
 __pycache__/
 *.pyc
-.idea
+.idea/
 
 
 # Environment
@@ -9,3 +9,11 @@ __pycache__/
 
 # Browser Profile
 chrome_profile/
+chrome_profile_for_job_agent/
+
+job_application.db
+job_applications.db
+linkedin_job_descriptions.csv
+linkedin_jobs.csv
+linkedin_scraper.log
+test.py

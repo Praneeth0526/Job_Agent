@@ -41,6 +41,44 @@ def generate_talking_points_prompt(job, user_skills):
     return prompt
 
 
+def generate_application_text_prompt(job_details, resume_text):
+    """
+    Creates a prompt for the AI to generate a compelling cover letter summary.
+
+    Args:
+        job_details (dict): A dictionary with job info.
+        resume_text (str): The full text of the user's resume.
+
+    Returns:
+        str: A formatted prompt string for generating application text.
+    """
+    # Clean up the job criteria HTML for the prompt
+    soup = BeautifulSoup(job_details.get('criteria', ''), 'html.parser')
+    job_description = soup.get_text(separator=' ', strip=True)
+
+    prompt = f"""
+    You are a world-class career coach and professional writer. Your task is to write a compelling, 2-3 paragraph summary for a job application based on my resume and the job description provided.
+
+    The summary should be concise, professional, and tailored to the specific role. It must highlight the direct overlap between my experience and skills (from my resume) and the key requirements of the job description. Do not write a full cover letter, but rather a powerful introductory summary that can be used in an online application form.
+
+    **Job Title:** {job_details.get('title', 'N/A')}
+    **Company:** {job_details.get('company', 'N/A')}
+
+    **Job Description:**
+    ---
+    {job_description[:1500]}...
+    ---
+
+    **My Full Resume:**
+    ---
+    {resume_text}
+    ---
+
+    Generate the 2-3 paragraph application summary now.
+    """
+    return prompt
+
+
 def get_ai_insights(prompt):
     """
     Calls the Gemini API to generate insights.

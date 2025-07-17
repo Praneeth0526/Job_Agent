@@ -1,173 +1,328 @@
-# src/automator.py
+# --------------------------------------------------------------------------
+# --- AI JOB APPLICATION AGENT - AUTOMATOR MODULE
+# --- Version: 2.0
+# --- Description: Handles browser automation for filling out job applications
+# ---              on various platforms (Greenhouse, Workday, Lever, etc.).
+# --------------------------------------------------------------------------
+
 import time
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
+
+# It's good practice to manage WebDriver installation.
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 
-# --- Constants ---
-# This path is used to create a dedicated Chrome profile for the bot.
-CHROME_PROFILE_PATH = "user-data-dir=chrome_profile_for_job_agent"
-
-SELECTORS = {
-    "workday": {
-        "apply_button": (By.XPATH, "//a[contains(@data-automation-id, 'apply')]"),
-        "autofill_option": (By.XPATH, "//div[contains(@data-automation-id, 'autofillWithResume')] | //a[contains(@data-automation-id, 'autofillWithResume')]"),
-        "resume_input": (By.XPATH, "//input[@type='file' and contains(@aria-label, 'resume')]"),
-        "next_button": (By.XPATH, "//button[contains(@data-automation-id, 'next')] | //button[contains(@data-automation-id, 'continue')]")
-    },
-    "greenhouse": {
-        "iframe": (By.ID, "grnhse_iframe"),
-        "form_field": (By.ID, "first_name"),
-        "attach_button": (By.CSS_SELECTOR, "[data-source='attach']"),
-        "resume_input": (By.CSS_SELECTOR, "input[type='file']"),
-        "upload_confirmation": (By.XPATH, "//button[contains(text(), 'Change')]")
-    },
-    "lever": {
-        "apply_button": (By.CLASS_NAME, "postings-btn"),
-        "resume_input": (By.NAME, "resume"),
-        "upload_confirmation": (By.CLASS_NAME, "filename")
-    }
-}
-
-
-class StatusUpdater:
-    """A default, print-based status updater for non-UI testing."""
-
-    def info(self, message): print(f"INFO: {message}")
-    def success(self, message): print(f"SUCCESS: {message}")
-    def error(self, message, e=None): print(f"ERROR: {message}{(' - ' + str(e)) if e else ''}")
-    def warning(self, message): print(f"WARNING: {message}")
-    def image(self, path): print(f"IMAGE: An image was saved to {path}")
-
 
 def initialize_driver():
-    """Creates and returns a Selenium WebDriver instance with a persistent profile."""
+    """Initializes and returns a Selenium WebDriver instance."""
+    # Using a persistent profile can help with logins, but for this task, a fresh one is fine.
+    # CHROME_PROFILE_PATH = "user-data-dir=chrome_profile_for_job_agent"
     options = webdriver.ChromeOptions()
-    options.add_argument(CHROME_PROFILE_PATH)
+    # options.add_argument(CHROME_PROFILE_PATH)
+    options.add_argument("--start-maximized")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
-    # You can add --headless if you don't want the browser window to show up
+    # To see the browser in action, keep headless mode off.
     # options.add_argument("--headless")
+
+    # Use webdriver_manager to handle the driver automatically
     service = Service(ChromeDriverManager().install())
-    return webdriver.Chrome(service=service, options=options)
+    driver = webdriver.Chrome(service=service, options=options)
+    print("WebDriver initialized.")
+    return driver
 
 
-def apply_on_workday(driver, resume_path, status_updater):
+def _fill_workday_form(driver, resume_data, application_text):
     """Handles the application process for Workday portals."""
+    print("Workday portal detected. Starting form fill process.")
+    wait = WebDriverWait(driver, 20)
+
     try:
-        status_updater.info("Workday portal detected. Starting automation...")
-        wait = WebDriverWait(driver, 20)
-
-        apply_button = wait.until(EC.element_to_be_clickable(SELECTORS["workday"]["apply_button"]))
-        apply_button.click()
-
-        wait.until(EC.any_of(
-            EC.element_to_be_clickable(SELECTORS["workday"]["autofill_option"]),
-            EC.presence_of_element_located(SELECTORS["workday"]["resume_input"])
+        # Step 1: Often Workday has an "Autofill with Resume" option first.
+        # It's generally better to use this as it can pre-populate many fields.
+        print("Looking for 'Autofill with Resume' option...")
+        # Common XPATH for this button.
+        autofill_button = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, "//a[@data-automation-id='autofillWithResume']")
         ))
+        autofill_button.click()
+        print("Clicked 'Autofill with Resume'.")
 
-        file_input = driver.find_element(*SELECTORS["workday"]["resume_input"])
-        file_input.send_keys(resume_path)
+        # Now, find the file input for the resume.
+        resume_input = wait.until(EC.presence_of_element_located(
+            # This selector looks for a file input associated with a resume label.
+            (By.XPATH, "//input[@type='file' and contains(@aria-label, 'resume')]")
+        ))
+        resume_input.send_keys(resume_data['resume_path'])
+        print(f"Resume uploaded from: {resume_data['resume_path']}")
 
-        status_updater.success("Resume submitted to Workday for autofill.")
-        status_updater.info("Waiting for resume parsing to complete...")
+        # After upload, Workday parses the resume. We need to wait for the 'Next' or 'Continue'
+        # button to become clickable, which indicates parsing is done.
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, "//button[contains(@data-automation-id, 'next')] | //button[contains(@data-automation-id, 'continue')]")
+        ))
+        print("Workday has likely parsed the resume. Manual review of the following pages is required.")
 
-        wait.until(EC.element_to_be_clickable(SELECTORS["workday"]["next_button"]))
+    except (TimeoutException, NoSuchElementException) as e:
+        print(f"Could not complete the initial Workday autofill step. Error: {e}")
+        print("The process will require full manual completion from here.")
 
-        status_updater.warning("Please review the auto-filled fields and proceed through the next steps manually.")
-        return True
-
-    except Exception as e:
-        status_updater.error("Error during Workday automation. Manual application required.", e)
-        error_path = "workday_error.png"
-        driver.save_screenshot(error_path)
-        status_updater.image(error_path)
-        return False
+    # Workday is multi-page. This function would ideally handle only the first page.
+    # The agent pauses here for manual review.
 
 
-def apply_on_greenhouse(driver, resume_path, status_updater):
+def _fill_greenhouse_form(driver, resume_data, application_text):
     """Handles the application process for Greenhouse portals."""
+    print("Greenhouse portal detected. Starting form fill process.")
+    wait = WebDriverWait(driver, 15)
+
     try:
-        status_updater.info("Greenhouse portal detected. Starting automation...")
-        wait = WebDriverWait(driver, 15)
+        # Greenhouse often uses an iframe. We must switch to it first.
+        print("Checking for Greenhouse iframe...")
+        iframe = wait.until(EC.presence_of_element_located((By.ID, "grnhse_iframe")))
+        driver.switch_to.frame(iframe)
+        print("Switched to iframe.")
+    except TimeoutException:
+        # If no iframe is found, we might be on the main page.
+        print("No iframe detected, continuing on main page.")
 
+    try:
+        # --- Resume Upload ---
         try:
-            iframe = wait.until(EC.presence_of_element_located(SELECTORS["greenhouse"]["iframe"]))
-            driver.switch_to.frame(iframe)
-            status_updater.info("Switched to Greenhouse iframe.")
-        except TimeoutException:
-            status_updater.info("No iframe detected, continuing on main page.")
+            print("Looking for resume upload button...")
+            # Greenhouse has an "Attach" button that reveals the file input
+            attach_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "[data-source='attach']")))
+            attach_button.click()
+            resume_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
+            resume_input.send_keys(resume_data['resume_path'])
+            # Wait for the upload to be confirmed (e.g., a "Change" button appears)
+            wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(text(), 'Change')]")))
+            print(f"Resume uploaded: {os.path.basename(resume_data['resume_path'])}")
+        except (TimeoutException, NoSuchElementException) as e:
+            print(f"Could not upload resume. This step might need manual intervention. Error: {e}")
 
-        wait.until(EC.presence_of_element_located(SELECTORS["greenhouse"]["form_field"]))
-        attach_button = driver.find_element(*SELECTORS["greenhouse"]["attach_button"])
-        attach_button.click()
-        resume_input = wait.until(EC.presence_of_element_located(SELECTORS["greenhouse"]["resume_input"]))
-        resume_input.send_keys(resume_path)
-        wait.until(EC.presence_of_element_located(SELECTORS["greenhouse"]["upload_confirmation"]))
+        # --- Fill Text Fields ---
+        # Note: Greenhouse often auto-fills after resume upload. This code serves as a backup.
+        field_map = {
+            'first_name': (By.ID, 'first_name'),
+            'last_name': (By.ID, 'last_name'),
+            'email': (By.ID, 'email'),
+            'phone': (By.ID, 'phone'),
+        }
 
-        status_updater.success("Resume attached successfully on Greenhouse!")
-        status_updater.warning("Please fill any remaining fields and submit manually.")
-        return True
+        for key, selector in field_map.items():
+            try:
+                field = driver.find_element(*selector)
+                # Only fill if the field is empty after resume parsing
+                if not field.get_attribute('value'):
+                    print(f"Filling '{key}'...")
+                    field.send_keys(resume_data[key])
+            except NoSuchElementException:
+                print(f"Field '{key}' not found. Skipping.")
 
-    except Exception as e:
-        status_updater.error("Error during Greenhouse automation. Manual application required.", e)
-        error_path = "greenhouse_error.png"
-        driver.save_screenshot(error_path)
-        status_updater.image(error_path)
-        return False
+        # --- Cover Letter / Additional Info ---
+        try:
+            print("Looking for cover letter text area...")
+            # Selector for the cover letter box. It might have different labels.
+            cover_letter_box = driver.find_element(By.ID, "cover_letter_text")
+            cover_letter_box.send_keys(application_text)
+            print("Pasted AI-generated application text.")
+        except NoSuchElementException:
+            print("Cover letter text area not found. Skipping.")
+
     finally:
+        # IMPORTANT: Always switch back to the default content when done with an iframe.
         driver.switch_to.default_content()
 
 
-def apply_on_lever(driver, resume_path, status_updater):
+def _fill_lever_form(driver, resume_data, application_text):
     """Handles the application process for Lever portals."""
-    try:
-        status_updater.info("Lever portal detected. Starting automation...")
-        wait = WebDriverWait(driver, 15)
-        apply_button = wait.until(EC.element_to_be_clickable(SELECTORS["lever"]["apply_button"]))
-        apply_button.click()
-        resume_input = wait.until(EC.presence_of_element_located(SELECTORS["lever"]["resume_input"]))
-        resume_input.send_keys(resume_path)
-        wait.until(EC.presence_of_element_located(SELECTORS["lever"]["upload_confirmation"]))
+    print("Lever portal detected. Starting form fill process.")
+    wait = WebDriverWait(driver, 15)
 
-        status_updater.success("Resume attached successfully on Lever!")
-        status_updater.warning("Please fill any remaining fields and submit manually.")
-        return True
+    try:
+        # --- Resume Upload ---
+        try:
+            print("Looking for resume upload input...")
+            # Lever forms often have a direct file input.
+            resume_input = wait.until(EC.presence_of_element_located((By.NAME, "resume")))
+            resume_input.send_keys(resume_data['resume_path'])
+            # Wait for confirmation of upload (e.g., the filename appears)
+            wait.until(EC.presence_of_element_located((By.CLASS_NAME, "filename")))
+            print(f"Resume uploaded: {os.path.basename(resume_data['resume_path'])}")
+        except (TimeoutException, NoSuchElementException) as e:
+            print(f"Could not upload resume. This step might need manual intervention. Error: {e}")
+
+        # --- Fill Text Fields ---
+        # Lever often uses name attributes for fields.
+        field_map = {
+            'name': (By.NAME, 'name'),  # Lever often combines first and last name
+            'email': (By.NAME, 'email'),
+            'phone': (By.NAME, 'phone'),
+            'org': (By.NAME, 'org'),  # Current company
+            'urls[LinkedIn]': (By.NAME, 'urls[LinkedIn]')
+        }
+
+        for key, selector in field_map.items():
+            try:
+                field = driver.find_element(*selector)
+                if not field.get_attribute('value'):
+                    print(f"Looking to fill '{key}'...")
+                    # Add logic here to map resume_data to these fields if needed.
+                    # e.g., if key == 'name': field.send_keys(f"{resume_data['first_name']} {resume_data['last_name']}")
+            except NoSuchElementException:
+                print(f"Field '{key}' not found. Skipping.")
+
+        # --- Cover Letter / Additional Info ---
+        try:
+            print("Looking for cover letter/additional info text area...")
+            # Lever's text area for cover letter often has the name 'comments'
+            comments_box = driver.find_element(By.NAME, "comments")
+            comments_box.send_keys(application_text)
+            print("Pasted AI-generated application text.")
+        except NoSuchElementException:
+            print("Cover letter/additional info text area not found. Skipping.")
 
     except Exception as e:
-        status_updater.error("Error during Lever automation. Manual application required.", e)
-        error_path = "lever_error.png"
-        driver.save_screenshot(error_path)
-        status_updater.image(error_path)
-        return False
+        print(f"An unexpected error occurred on the Lever form: {e}")
 
 
-def automate_application(driver, job, resume_path, status_updater):
-    """Main router to delegate application automation to the correct handler."""
-    status_updater.info(f"Attempting to automate application for: **{job.get('title')}**")
-    job_url = job.get('link')
-    if not job_url:
-        status_updater.error("Job URL not found. Cannot apply.")
+def _fill_generic_form(driver, resume_data, application_text):
+    """
+    A fallback handler for unknown application portals.
+    It attempts to find common fields but will likely require manual completion.
+    """
+    print("Unknown portal type. Attempting generic field fill.")
+    print("WARNING: This is a best-effort attempt. Manual review is highly recommended.")
+    wait = WebDriverWait(driver, 10)
+
+    # --- Generic Resume Upload Attempt ---
+    try:
+        print("Attempting to find a resume file input...")
+        # A generic XPath looking for any file input that might be for a resume.
+        resume_input = wait.until(EC.presence_of_element_located(
+            (By.XPATH, "//input[@type='file' and (contains(@name, 'resume') or contains(@id, 'resume'))]")
+        ))
+        resume_input.send_keys(resume_data['resume_path'])
+        print("Found and filled a potential resume input.")
+    except (TimeoutException, NoSuchElementException):
+        print("Could not find a standard resume upload input.")
+
+    # --- Generic Text Field Fill Attempt ---
+    # Try to find fields based on common name/id attributes.
+    generic_field_map = {
+        resume_data['first_name']: (By.XPATH, "//*[self::input or self::textarea][contains(@name, 'first_name') or contains(@id, 'first_name')]"),
+        resume_data['last_name']: (By.XPATH, "//*[self::input or self::textarea][contains(@name, 'last_name') or contains(@id, 'last_name')]"),
+        resume_data['email']: (By.XPATH, "//*[self::input or self::textarea][contains(@name, 'email') or contains(@id, 'email')]"),
+        resume_data['phone']: (By.XPATH, "//*[self::input or self::textarea][contains(@name, 'phone') or contains(@id, 'phone')]"),
+        application_text: (By.XPATH, "//*[self::textarea][contains(@name, 'cover') or contains(@id, 'cover') or contains(@name, 'comment')]")
+    }
+
+    for text_to_fill, selector in generic_field_map.items():
+        try:
+            field = driver.find_element(*selector)
+            if not field.get_attribute('value'):
+                print("Found a generic field and filling it.")
+                field.send_keys(text_to_fill)
+        except NoSuchElementException:
+            pass  # Silently skip if not found on a generic page
+
+
+def start_application(job_url, resume_data, application_text):
+    """
+    Initializes a browser, navigates to the job URL, and attempts to fill the application.
+
+    Args:
+        job_url (str): The URL of the job application page.
+        resume_data (dict): A dictionary containing parsed resume information.
+        application_text (str): The AI-generated text for cover letters/summaries.
+    """
+    # Defensive check for required data
+    if not all([job_url, resume_data, application_text]):
+        print("Error: Missing job_url, resume_data, or application_text.")
         return
 
-    driver.get(job_url)
-    status_updater.success(f"Navigated to job page: {job_url}")
-    time.sleep(2)
-
+    driver = initialize_driver()
     try:
-        if "workday" in job_url:
-            apply_on_workday(driver, resume_path, status_updater)
-        elif "greenhouse" in job_url:
-            apply_on_greenhouse(driver, resume_path, status_updater)
-        elif "lever.co" in job_url:
-            apply_on_lever(driver, resume_path, status_updater)
+        print(f"Navigating to job URL: {job_url}")
+        driver.get(job_url)
+        time.sleep(3)  # Allow page to settle
+
+        # --- Platform Detection Logic ---
+        if "workday" in job_url.lower():
+            _fill_workday_form(driver, resume_data, application_text)
+        elif "greenhouse.io" in job_url.lower() or "boards.greenhouse.io" in job_url.lower():
+            _fill_greenhouse_form(driver, resume_data, application_text)
+        elif "lever.co" in job_url.lower():
+            _fill_lever_form(driver, resume_data, application_text)
         else:
-            status_updater.warning("Unknown career portal. Please apply manually on the opened page.")
-            return
+            _fill_generic_form(driver, resume_data, application_text)
+
+        # --- Final Manual Review Step ---
+        print("\n" + "=" * 50)
+        print("✅ Automation complete. The form has been pre-filled.")
+        print("Please review all fields in the browser window carefully.")
+        print("=" * 50 + "\n")
+
+        # This input will pause the script until the user presses Enter in the console.
+        # This is the moment to manually check the form, complete any CAPTCHAs,
+        # and fill in any fields the bot missed.
+        input("--> Press Enter in this terminal after you have reviewed and are ready to submit...")
+
+        # In a fully automated system, you would find the submit button and click it here.
+        # For example:
+        # try:
+        #     submit_button = driver.find_element(By.XPATH, "//button[@type='submit']")
+        #     submit_button.click()
+        #     print("Form submitted!")
+        # except Exception as e:
+        #     print(f"Could not automatically submit the form. Error: {e}")
+
+        print("Process finished. You can now close the browser window.")
+        time.sleep(10)  # Give user time to see the final message
 
     except Exception as e:
-        status_updater.error("A critical error occurred during the automation routing.", e)
+        print(f"A critical error occurred during the automation process: {e}")
+        # Save a screenshot for debugging
+        driver.save_screenshot("critical_error.png")
+        print("Saved a screenshot to 'critical_error.png'.")
+
+    finally:
+        print("Closing WebDriver.")
+        driver.quit()
+
+
+# --- Example Usage (for testing this script directly) ---
+if __name__ == '__main__':
+    print("--- Running Automator Test ---")
+
+    # Create dummy data for the test run.
+    # IMPORTANT: You MUST replace 'resume_path' with the absolute path to a real file.
+    test_resume_data = {
+        'first_name': 'Testy',
+        'last_name': 'McTestface',
+        'email': 'testy.mctestface@example.com',
+        'phone': '555-123-4567',
+        # Get the absolute path to the resume file relative to this script
+        'resume_path': os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'Resume', 'New_resume.pdf'))
+    }
+
+    test_application_text = """As a highly motivated software developer, I am excited by the opportunity to contribute my skills in Python and cloud technologies to your team. My resume highlights my experience in building scalable applications and my dedication to writing clean, efficient code."""
+
+    # Example URL for a Greenhouse application.
+    # Replace this with a live URL you want to test.
+    test_job_url = "https://boards.greenhouse.io/debricked/jobs/4006096007"
+
+    if not os.path.exists(test_resume_data['resume_path']):
+        print("FATAL ERROR: The test resume file was not found at the specified path:")
+        print(f"-> {test_resume_data['resume_path']}")
+        print("Please ensure the file exists and the path is correct in the `if __name__ == '__main__':` block.")
+    else:
+        start_application(test_job_url, test_resume_data, test_application_text)
+
+    print("\n--- Automator Test Finished ---")

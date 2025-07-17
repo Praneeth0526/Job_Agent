@@ -87,14 +87,43 @@ def extract_skills_from_text(text):
     if not text:
         return set()
 
-    # This list is from your Streamlit app. You can manage it here centrally.
+    # A comprehensive, categorized list of skills for a modern software developer role.
     technical_skills = {
-        'python', 'java', 'c++', 'javascript', 'react', 'angular', 'vue', 'node.js', 'next.js',
-        'sql', 'mysql', 'postgresql', 'mongodb', 'nosql', 'dynamodb', 'docker', 'kubernetes', 'aws',
-        'azure', 'gcp', 'terraform', 'ansible', 'selenium', 'django', 'flask', 'fastapi', 'git',
-        'api', 'rest', 'graphql', 'html', 'css', 'typescript', 'machine learning', 'data science',
-        'pandas', 'numpy', 'scikit-learn', 'tensorflow', 'pytorch', 'deep learning', 'nlp',
-        'data analysis', 'business intelligence', 'tableau', 'power bi', 'big data', 'spark', 'hadoop'
+        # Programming Languages
+        'python', 'java', 'c++', 'c#', 'javascript', 'typescript', 'go', 'rust', 'kotlin', 'swift', 'ruby', 'php',
+        'html', 'css', 'sql',
+
+        # Web Frameworks (Backend)
+        'django', 'flask', 'fastapi', 'node.js', 'express.js', 'spring boot', 'ruby on rails', '.net',
+
+        # Web Frameworks (Frontend & Mobile)
+        'react', 'angular', 'vue', 'vue.js', 'svelte', 'next.js', 'nuxt.js', 'flutter', 'react native',
+
+        # Databases
+        'mysql', 'postgresql', 'mssql', 'sqlite', 'oracle', 'mongodb', 'redis', 'cassandra', 'dynamodb',
+        'nosql', 'firebase', 'neo4j',
+
+        # Cloud & DevOps
+        'aws', 'azure', 'gcp', 'google cloud', 'heroku', 'digitalocean', 'oracle cloud',
+        'docker', 'kubernetes', 'openshift',
+        'jenkins', 'gitlab', 'github actions', 'circleci',
+        'terraform', 'ansible', 'puppet', 'chef',
+        'prometheus', 'grafana', 'datadog', 'splunk',
+
+        # Data Science & Machine Learning
+        'pandas', 'numpy', 'scipy', 'matplotlib', 'seaborn',
+        'scikit-learn', 'tensorflow', 'pytorch', 'keras',
+        'opencv', 'nltk', 'spacy', 'hugging face', 'langchain',
+        'spark', 'hadoop', 'kafka',
+        'tableau', 'power bi', 'looker',
+        'machine learning', 'deep learning', 'nlp', 'natural language processing', 'data science', 'data analysis',
+        'business intelligence', 'big data', 'data visualization', 'etl',
+
+        # Tools & Methodologies
+        'git', 'github', 'jira', 'confluence',
+        'agile', 'scrum', 'kanban',
+        'rest', 'graphql', 'soap', 'api', 'microservices', 'serverless',
+        'selenium', 'pytest', 'junit', 'jest'
     }
 
     found_skills = {skill for skill in technical_skills if

@@ -35,6 +35,8 @@ LINKEDIN_PASSWORD = os.getenv("LINKEDIN_PASSWORD")
 
 # Initialize logger and database
 log = logger.setup_logger()
+database.init_db()  # Ensure the database and tables are created on startup
+
 
 
 # --- Helper Functions ---
@@ -175,33 +177,38 @@ with st.sidebar:
                         show_error("Could not initialize the browser. Scraping aborted.")
                         st.session_state.scraped_jobs = []
 
-            # --- DATABASE INTEGRATION ---
-            # Filter out jobs that have already been processed
-            unprocessed_jobs = []
+            # --- DATABASE INTEGRATION & RANKING ---
             if st.session_state.scraped_jobs:
-                processed_urls = {job['job_url'] for job in database.get_all_jobs()}
-                for job in st.session_state.scraped_jobs:
-                    # Add a unique ID based on the job link for database tracking
-                    job['id'] = job.get('link') or f"no_link_{job.get('title')}"
-                    # Use the link as the unique URL
-                    job['job_url'] = job.get('link')
-                    if job['job_url'] and job['job_url'] not in processed_urls:
-                        database.add_job(job) # Add new job with 'found' status
-                        unprocessed_jobs.append(job)
-                log.info(f"Found {len(unprocessed_jobs)} new, unprocessed jobs.")
+                with st.spinner("Filtering and ranking new jobs..."):
+                    # 1. Get URLs of jobs already in the database to avoid duplicates
+                    processed_urls = {job['job_url'] for job in database.get_all_jobs()}
+
+                    # 2. Filter out jobs that have already been processed
+                    unprocessed_jobs = []
+                    for job in st.session_state.scraped_jobs:
+                        job['job_url'] = job.get('link')
+                        if job.get('job_url') and job['job_url'] not in processed_urls:
+                            unprocessed_jobs.append(job)
+
+                    log.info(f"Scraped {len(st.session_state.scraped_jobs)} total jobs. Found {len(unprocessed_jobs)} new jobs to process.")
+
+                    if unprocessed_jobs:
+                        # 3. Rank the new, unprocessed jobs to get scores and matched skills
+                        ranked_jobs = find_relevant_jobs(unprocessed_jobs, st.session_state.my_skills)
+                        log.info(f"Found {len(ranked_jobs)} relevant jobs after ranking.")
+
+                        # 4. Add the newly ranked jobs to the database
+                        newly_added_count = 0
+                        for job in ranked_jobs:
+                            # The job dict now contains score, matched_skills, and criteria
+                            if database.add_job(job):
+                                newly_added_count += 1
+
+                        show_success(f"Added {newly_added_count} new relevant jobs to the database for review.")
+                    else:
+                        show_warning("No new jobs found that match your profile. Try different keywords or check back later.")
             else:
                 log.warning("Scraper returned no jobs.")
-
-            if unprocessed_jobs:
-                show_success(f"Scraped {len(st.session_state.scraped_jobs)} jobs. Found {len(unprocessed_jobs)} new ones.")
-                with st.spinner("Ranking jobs against your profile..."):
-                    st.session_state.relevant_jobs = find_relevant_jobs(
-                        unprocessed_jobs,
-                        st.session_state.my_skills
-                    )
-                show_success(f"Found {len(st.session_state.relevant_jobs)} relevant jobs.")
-            else:
-                show_warning("No new jobs found that match your profile. Try different keywords or check back later.")
 
     if st.button("Quit Browser Session"):
         if st.session_state.driver:
@@ -212,65 +219,105 @@ with st.sidebar:
             st.sidebar.info("No active browser session to close.")
 
 # --- Main Content Area ---
-if not st.session_state.relevant_jobs:
-    st.info("Click 'Fetch & Rank Jobs' in the sidebar to start your search.")
+# Fetch jobs with 'found' status directly from the database for display
+jobs_to_display = database.get_jobs_by_status('found')
+
+if not jobs_to_display:
+    st.info("No new jobs to display. Click 'Fetch & Rank Jobs' in the sidebar to search for more.")
 else:
-    st.header(f"Top {len(st.session_state.relevant_jobs)} Relevant Jobs")
+    st.header(f"{len(jobs_to_display)} New Jobs Found For Review")
     st.markdown("---")
 
     # Display jobs in a grid
     cols = st.columns(3)
-    col_idx = 0
-
-    for i, job in enumerate(st.session_state.relevant_jobs):
-        job_id = job['id']
-
-        # This check is now redundant due to pre-filtering but kept as a failsafe for the view
-        if database.get_job_status(job_id) != 'found':
+    for i, job in enumerate(jobs_to_display):
+        job_id = job.get('id')
+        if not job_id:
+            log.warning(f"Skipping a job because it has no ID: {job.get('title')}")
             continue
 
-        with cols[col_idx % 3]:
+        with cols[i % 3]:
             with st.container(border=True):
                 st.subheader(job.get('title', 'No Title'))
                 st.write(f"**Company:** {job.get('company', 'N/A')}")
                 st.write(f"**Location:** {job.get('location', 'N/A')}")
                 st.metric(label="Relevance Score", value=job.get('score', 0))
-                st.write(f"**Matched Skills:** {', '.join(job.get('matched_skills', []))}")
+
+                # The 'matched_skills' key might not exist in all DB records, so handle it safely
+                matched_skills_list = job.get('matched_skills', [])
+                if matched_skills_list:
+                    st.write(f"**Matched Skills:** {', '.join(matched_skills_list)}")
 
                 with st.expander("Show Job Criteria"):
                     st.markdown(job.get('criteria', 'Not available.'), unsafe_allow_html=True)
 
-                c1, c2, c3 = st.columns(3)
-                if c1.button("✅ Approve & Apply", key=f"approve_{job_id}", type="primary"):
-                    log.info(f"User approved job: {job.get('title')}")
-                    if st.session_state.driver is None:
-                        with st.spinner("Initializing browser... Please wait."):
-                            log.info("Initializing Selenium driver...")
-                            st.session_state.driver = automator.initialize_driver()
-                            show_info("Browser initialized. You may need to log in manually the first time.")
+                c1, c2, c3 = st.columns([1, 1, 1])
 
-                    current_resume_path = os.path.abspath(resume_path_input)
-                    if not os.path.exists(current_resume_path):
-                        log.critical(f"Resume file not found at absolute path: {current_resume_path}")
-                        show_error(f"FATAL: Resume not found at {current_resume_path}")
-                    else:
-                        database.update_job_status(job_id, 'applied')
-                        status_updater = StreamlitStatusUpdater()
-                        automator.automate_application(st.session_state.driver, job, current_resume_path,
-                                                       status_updater)
+                if c1.button("✅ Approve & Apply", key=f"approve_{job_id}", type="primary", use_container_width=True):
+                    log.info(f"User approved job for application: {job.get('title')}")
+                    database.update_job_status(job_id, 'applying')
                     st.rerun()
 
-                if c2.button("❌ Reject", key=f"reject_{job_id}"):
+                if c2.button("❌ Reject", key=f"reject_{job_id}", use_container_width=True):
                     log.info(f"User rejected job: {job.get('title')}")
                     database.update_job_status(job_id, 'rejected')
                     st.rerun()
 
                 with c3:
-                    if st.button("💡 AI Insights", key=f"ai_{job_id}"):
+                    if st.button("💡 AI Insights", key=f"ai_{job_id}", use_container_width=True):
                         log.info(f"User requested AI insights for: {job.get('title')}")
                         with st.spinner("Asking the AI for talking points..."):
                             prompt = llm_helper.generate_talking_points_prompt(job, st.session_state.my_skills)
                             insights = llm_helper.get_ai_insights(prompt)
                             st.info(f"**AI Insights for {job.get('title')}**")
                             st.markdown(insights)
-        col_idx += 1
+
+# --- Section for jobs ready to be applied for ---
+jobs_to_apply = database.get_jobs_by_status('applying')
+
+if jobs_to_apply:
+    st.header("🎯 Ready to Apply")
+    st.markdown("---")
+
+    for job in jobs_to_apply:
+        job_id = job.get('id')
+        if not job_id:
+            continue
+
+        with st.container(border=True):
+            st.subheader(f"Generate text for: {job.get('title')} at {job.get('company')}")
+
+            # Use session state to store the generated text for each job
+            if f"app_text_{job_id}" not in st.session_state:
+                st.session_state[f"app_text_{job_id}"] = ""
+
+            if st.button("📝 Generate Application Text", key=f"generate_{job_id}"):
+                with st.spinner("🤖 AI is writing your application summary..."):
+                    resume_text, _ = parser.parse_resume(resume_path_input)
+                    if resume_text:
+                        prompt = llm_helper.generate_application_text_prompt(job, resume_text)
+                        generated_text = llm_helper.get_ai_insights(prompt)
+                        st.session_state[f"app_text_{job_id}"] = generated_text
+                    else:
+                        st.session_state[f"app_text_{job_id}"] = "Error: Could not read resume text to generate content."
+
+            if st.session_state[f"app_text_{job_id}"]:
+                st.text_area(
+                    "Review and edit the generated text:",
+                    value=st.session_state[f"app_text_{job_id}"],
+                    height=250,
+                    key=f"textarea_{job_id}"
+                )
+
+                c1, c2, _ = st.columns([1, 1, 3])
+
+                if c1.button("👍 Looks Good, Start Applying", key=f"start_apply_{job_id}", type="primary"):
+                    # This will be the hook for Phase 3 browser automation
+                    database.update_job_status(job_id, 'applied')
+                    st.rerun()
+
+                if c2.button("👎 Cancel", key=f"cancel_apply_{job_id}"):
+                    # Move the job back to the 'found' queue for re-review
+                    database.update_job_status(job_id, 'found')
+                    st.session_state[f"app_text_{job_id}"] = ""  # Clear the generated text
+                    st.rerun()
