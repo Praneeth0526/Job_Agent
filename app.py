@@ -127,7 +127,7 @@ with st.sidebar:
     resume_path_input = st.text_input("Path to your Resume", value=RESUME_FILE_PATH)
     st.markdown("---")
     st.header("Scraper Settings")
-    search_term = st.text_input("Job Title / Keywords", value="Python Developer")
+    search_term = st.text_input("Additional Keywords (e.g., 'Remote', 'Fintech')", value="")
     location = st.text_input("Location", value="India")
     use_test_data = st.checkbox("Use local test data (`jobs.json`)", value=False)
 
@@ -158,7 +158,7 @@ with st.sidebar:
                     show_error("`jobs.json` not found. Please uncheck the box or create the file.")
                     st.session_state.scraped_jobs = []
             else:
-                with st.spinner(f"Scraping LinkedIn for '{search_term}' in '{location}'..."):
+                with st.spinner(f"Running intelligent LinkedIn search based on your resume..."):
                     # Ensure a browser session is active, reusing it if possible
                     if st.session_state.driver is None:
                         log.info("No active driver found. Initializing a new one for scraping.")
@@ -168,8 +168,8 @@ with st.sidebar:
 
                     if st.session_state.driver:
                         st.session_state.scraped_jobs = scraper.run_scraper(
-                            st.session_state.driver, search_term, location,
-                            email=LINKEDIN_EMAIL, password=LINKEDIN_PASSWORD
+                            st.session_state.driver, st.session_state.my_skills, location,
+                            email=LINKEDIN_EMAIL, password=LINKEDIN_PASSWORD, additional_keywords=search_term
                         )
                     else:
                         show_error("Could not initialize the browser. Scraping aborted.")

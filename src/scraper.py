@@ -1,199 +1,185 @@
-# src/scraper.py
+# --------------------------------------------------------------------------
+# --- AI JOB APPLICATION AGENT - SCRAPER MODULE
+# --- Version: 1.2
+# --- Description: Implements an intelligent, multi-query scraping strategy
+# ---              for LinkedIn based on resume skills and roles.
+# --------------------------------------------------------------------------
+
 import time
-from selenium import webdriver
+import urllib.parse
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
+from bs4 import BeautifulSoup
 
-# --- Configuration ---
-URL = "https://www.linkedin.com/jobs/search"
+from src import logger
+
+log = logger.setup_logger()
 
 
-# --- Main Functions ---
-
-def initialize_driver():
-    """
-    Initializes the Selenium WebDriver.
-
-    Returns:
-        webdriver: An instance of the Selenium WebDriver.
-    """
-    print("Setting up the Selenium browser driver...")
-    # Use the same persistent profile as the automator for a consistent session
-    chrome_profile_path = "user-data-dir=chrome_profile_for_job_agent"
-
-    options = webdriver.ChromeOptions()
-    options.add_argument(chrome_profile_path)
-    options.add_argument(
-        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36")
-    service = Service(ChromeDriverManager().install())
+def _linkedin_login(driver, email, password):
+    """Handles LinkedIn login if not already logged in."""
+    log.info("Navigating to LinkedIn login page.")
+    driver.get("https://www.linkedin.com/login")
     try:
-        driver = webdriver.Chrome(service=service, options=options)
-        return driver
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "username"))
+        )
+        log.info("Login page loaded. Entering credentials.")
+        driver.find_element(By.ID, "username").send_keys(email)
+        driver.find_element(By.ID, "password").send_keys(password)
+        driver.find_element(By.XPATH, "//button[@type='submit']").click()
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "global-nav-search"))
+        )
+        log.info("LinkedIn login successful.")
+        return True
+    except (NoSuchElementException, TimeoutException):
+        # It's possible we are already logged in. Check for a key element.
+        if "global-nav-search" in driver.page_source:
+            log.info("Already logged in.")
+            return True
+        log.error("LinkedIn login failed.")
+        return False
+
+
+def _get_job_links_from_search_page(driver, search_url):
+    """
+    Navigates to a search URL, scrolls to load all results, and extracts
+    all unique job links from the page.
+    """
+    log.info(f"Navigating to job search URL: {search_url}")
+    driver.get(search_url)
+
+    try:
+        WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CLASS_NAME, "base-card")))
+        log.info("Initial job cards loaded.")
+    except TimeoutException:
+        log.error(f"Job cards not found on page: {search_url}")
+        return []
+
+    log.info("Scrolling to load all job listings...")
+    last_height = driver.execute_script("return document.body.scrollHeight")
+    while True:
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(2)  # Wait for new jobs to load
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            break
+        last_height = new_height
+
+    log.info("Extracting job links from search page...")
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    link_elements = soup.find_all('a', class_='base-card__full-link')
+    job_links = {link['href'] for link in link_elements if 'href' in link.attrs}  # Use a set for automatic deduplication
+    return list(job_links)
+
+
+def _scrape_single_job_page(driver, job_url):
+    """
+    Visits a single job URL and scrapes the title, company, location,
+    and full job description.
+    """
+    log.info(f"Scraping job page: {job_url}")
+    driver.get(job_url)
+    try:
+        # Wait for the main description container to load
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "show-more-less-html"))
+        )
+
+        # Click the "show more" button to expand the description
+        try:
+            see_more_button = driver.find_element(By.CLASS_NAME, 'show-more-less-html__button')
+            driver.execute_script("arguments[0].click();", see_more_button)
+            time.sleep(1)  # Wait for content to expand
+        except NoSuchElementException:
+            log.debug("No 'show more' button found, description is likely short.")
+            pass
+
+        # Parse the page with the full description
+        job_soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+        # --- Extract data ---
+        job_title = job_soup.find('h1', class_='top-card-layout__title').get_text(strip=True)
+        company_name = job_soup.find('a', class_='topcard__org-name-link').get_text(strip=True)
+        location = job_soup.find('span', class_='topcard__flavor--bullet').get_text(strip=True)
+        description_div = job_soup.find('div', class_='show-more-less-html__markup')
+        # Get the full HTML for analysis and the plain text for display/matching
+        job_description_html = str(description_div) if description_div else "Not found"
+
+        return {
+            "title": job_title,
+            "company": company_name,
+            "location": location,
+            "criteria": job_description_html,
+            "link": job_url
+        }
     except Exception as e:
-        print(f"Error: Could not initialize the WebDriver. Please ensure it's installed and in your PATH.")
-        print(f"Details: {e}")
+        log.error(f"Could not scrape {job_url}. Error: {e}")
         return None
 
 
-def search_linkedin_jobs(driver, search_term, location):
+def run_scraper(driver, resume_skills, location, email, password, additional_keywords=""):
     """
-    Navigates to the website and performs a job search.
-
-    Args:
-        driver (webdriver): The Selenium WebDriver instance.
-        search_term (str): The job title to search for.
-        location (str): The location to search within.
+    Main scraper function. Logs into LinkedIn, constructs intelligent search
+    queries from resume skills, scrapes multiple search pages, and visits
+    each unique job link to get full details.
     """
-    driver.get(URL)
-    print(f"Navigating to LinkedIn Jobs to search for '{search_term}' in '{location}'...")
-
-    try:
-        # Find keyword and location input fields
-        keyword_input = driver.find_element(By.ID, "job-search-bar-keywords")
-        location_input = driver.find_element(By.ID, "job-search-bar-location")
-
-        keyword_input.send_keys(search_term)
-        location_input.clear()
-        location_input.send_keys(location)
-        location_input.send_keys(Keys.ENTER)
-
-    except TimeoutException:
-        print("Error: Timed out waiting for search elements to load. The website structure may have changed.")
-    except NoSuchElementException:
-        print("Error: Could not find one of the search input fields. The website structure may have changed.")
-
-
-def login_to_linkedin(driver, email, password):
-    """Handles logging into LinkedIn if required."""
+    log.info("Starting intelligent LinkedIn scraper...")
+    # --- 1. Login ---
     driver.get("https://www.linkedin.com/feed/")
-    time.sleep(2)  # Allow page to redirect if not logged in
+    if "feed" not in driver.current_url:
+        log.warning("Not on feed page, attempting login.")
+        if not _linkedin_login(driver, email, password):
+            log.error("LinkedIn login failed. Aborting scrape.")
+            return []
 
-    # If the URL contains 'login' or the security 'authwall', we need to sign in.
-    if "login" in driver.current_url or "authwall" in driver.current_url:
-        print("LinkedIn login required. Attempting to log in...")
-        if not email or not password:
-            print("WARNING: LinkedIn credentials not provided. Please log in manually in the browser and wait for the script to continue.")
-            try:
-                # Wait for the user to log in manually by waiting for the feed to load
-                WebDriverWait(driver, 120, poll_frequency=2).until(EC.url_contains("feed"))
-                print("Manual login detected. Continuing scrape.")
-            except TimeoutException:
-                print("ERROR: Manual login was not detected within 2 minutes. Aborting scrape.")
-                raise  # Re-raise the exception to stop the process
-            return
+    # --- 2. Construct Search Queries ---
+    # Use top 5 skills from resume for focused search
+    top_skills = list(resume_skills)[:5]
+    skill_query_part = " OR ".join([f'"{s}"' for s in top_skills])
 
-        try:
-            # Standard login form
-            email_input = driver.find_element(By.ID, "username")
-            password_input = driver.find_element(By.ID, "password")
-            email_input.send_keys(email)
-            password_input.send_keys(password)
-            password_input.send_keys(Keys.ENTER)
-            # Wait for the feed to confirm successful login
-            WebDriverWait(driver, 20).until(EC.url_contains("feed"))
-            print("Successfully logged into LinkedIn via automation.")
-        except (NoSuchElementException, TimeoutException):
-            print("ERROR: Automated login failed. This can be due to a CAPTCHA or changed layout.")
+    base_queries = [
+        f'({skill_query_part}) AND (Intern OR Internship)',
+        '("Software Engineer" OR "Computer Science Engineer" OR "IT" OR "Software Developer") AND (Intern OR Internship)',
+        skill_query_part
+    ]
+
+    # Add any user-provided keywords to all queries
+    if additional_keywords:
+        final_queries = [f'({q}) AND ("{additional_keywords}")' for q in base_queries]
     else:
-        print("Already logged into LinkedIn.")
+        final_queries = base_queries
 
+    # --- 3. Scrape links from all search queries ---
+    all_job_links = set()
+    for query in final_queries:
+        log.info(f"Searching for: {query}")
+        encoded_query = urllib.parse.quote(query)
+        search_url = f"https://www.linkedin.com/jobs/search/?keywords={encoded_query}&location={location}&f_WT=2"
+        links_from_page = _get_job_links_from_search_page(driver, search_url)
+        if links_from_page:
+            log.info(f"Found {len(links_from_page)} links for this query.")
+            all_job_links.update(links_from_page)
 
-def scrape_linkedin_results(driver, max_jobs=15):
-    """
-    Scrapes job details from the LinkedIn search results, including the full description.
-    """
-    jobs = []
-    try:
-        # 1. Locate the list of job cards on the left
-        job_list_element = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "jobs-search__results-list")))
+    if not all_job_links:
+        log.warning("No job links found across all search queries.")
+        return []
 
-        job_cards = job_list_element.find_elements(By.CLASS_NAME, "base-search-card")
-        print(f"Found {len(job_cards)} job cards. Scraping top {max_jobs}...")
+    log.info(f"Found {len(all_job_links)} unique job links in total. Now scraping details...")
 
-        # 2. Iterate through each card, click it, and scrape the details
-        for card in job_cards[:max_jobs]:
-            try:
-                # Scroll the card into view to ensure it's clickable
-                driver.execute_script("arguments[0].scrollIntoView(true);", card)
-                time.sleep(0.5)  # Brief pause to prevent issues
-                card.click()
-                time.sleep(1)  # Wait for the description pane to update
+    # --- 4. Visit each unique link and scrape the details ---
+    final_jobs = []
+    for i, link in enumerate(list(all_job_links)):
+        log.info(f"Processing link {i+1}/{len(all_job_links)}")
+        job_data = _scrape_single_job_page(driver, link)
+        if job_data:
+            final_jobs.append(job_data)
+        time.sleep(1)  # Be respectful to LinkedIn's servers
 
-                # 3. Wait for the description pane to be ready
-                description_pane = WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.CLASS_NAME, "jobs-search__job-details-container"))
-                )
-
-                # 4. Scrape all data
-                title = card.find_element(By.CLASS_NAME, "base-search-card__title").text.strip()
-                company = card.find_element(By.CLASS_NAME, "base-search-card__subtitle").text.strip()
-                location = card.find_element(By.CLASS_NAME, "job-search-card__location").text.strip()
-                link = card.find_element(By.TAG_NAME, "a").get_attribute("href")
-                description_html = description_pane.get_attribute('innerHTML')
-
-                job = {
-                    "title": title,
-                    "company": company,
-                    "location": location,
-                    "link": link,
-                    "criteria": description_html,  # Now contains the full description
-                }
-                jobs.append(job)
-                print(f"  + Scraped: {title}")
-            except (NoSuchElementException, TimeoutException) as e:
-                print(f"  - Could not scrape a job card. Skipping. Details: {e}")
-                continue
-    except TimeoutException:
-        print("Error: Timed out waiting for the initial job listings to appear.")
-    return jobs
-
-def run_scraper(driver, search_term, location, email=None, password=None):
-    """
-    Runs the scraping process using a provided Selenium driver instance.
-
-    Returns:
-        list: A list of scraped job dictionaries.
-    """
-    jobs = []
-    if not driver:
-        print("ERROR: run_scraper was called with no Selenium driver.")
-        return jobs
-
-    try:
-        # Login if needed, then perform the search and scrape
-        login_to_linkedin(driver, email, password)
-        search_linkedin_jobs(driver, search_term, location)
-        time.sleep(2)  # Allow results list to settle before starting scrape
-        jobs = scrape_linkedin_results(driver, max_jobs=15)
-    except Exception as e:
-        print(f"An unexpected error occurred in the main scraper workflow: {e}")
-
-    print(f"Scraping complete. Found {len(jobs)} jobs.")
-    return jobs
-
-# --- Execution ---
-
-if __name__ == "__main__":
-    print("--- Selenium Scraper Script (Test Run) ---")
-    # Example usage for testing
-    test_search_term = "Software Engineer"
-    test_location = "Bengaluru, Karnataka, India"
-    # NOTE: The standalone test now needs to manage its own driver instance
-    test_driver = initialize_driver()
-    job_data = []
-    if test_driver:
-        try:
-            # Pass the driver instance to the function
-            job_data = run_scraper(test_driver, test_search_term, test_location)
-        finally:
-            test_driver.quit()
-
-    if job_data:
-        print(f"\n--- Scraper Test Finished: Found {len(job_data)} jobs. ---")
-        print("First job found:", job_data[0])
+    # --- 5. Return results ---
+    log.info(f"Successfully scraped details for {len(final_jobs)} jobs.")
+    return final_jobs
