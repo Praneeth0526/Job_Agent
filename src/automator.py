@@ -18,7 +18,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 
 
-def initialize_driver():
+def initialize_driver(headless=False):
     """Initializes and returns a Selenium WebDriver instance."""
     # Using a persistent profile can help with logins, but for this task, a fresh one is fine.
     # CHROME_PROFILE_PATH = "user-data-dir=chrome_profile_for_job_agent"
@@ -28,7 +28,8 @@ def initialize_driver():
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
     # To see the browser in action, keep headless mode off.
-    # options.add_argument("--headless")
+    if headless:
+        options.add_argument("--headless")
 
     # Use webdriver_manager to handle the driver automatically
     service = Service(ChromeDriverManager().install())
@@ -233,21 +234,24 @@ def _fill_generic_form(driver, resume_data, application_text):
             pass  # Silently skip if not found on a generic page
 
 
-def start_application(job_url, resume_data, application_text):
+def start_application(driver, job_url, resume_data, application_text):
     """
-    Initializes a browser, navigates to the job URL, and attempts to fill the application.
+    Uses an existing browser session to navigate to the job URL and attempts to fill the application.
+    The browser window is left open for manual review, login, and submission.
 
     Args:
+        driver: The active Selenium WebDriver instance.
         job_url (str): The URL of the job application page.
         resume_data (dict): A dictionary containing parsed resume information.
         application_text (str): The AI-generated text for cover letters/summaries.
     """
     # Defensive check for required data
-    if not all([job_url, resume_data, application_text]):
-        print("Error: Missing job_url, resume_data, or application_text.")
+    if not all([driver, job_url, resume_data, application_text]):
+        print("Error: Missing driver, job_url, resume_data, or application_text.")
         return
 
-    driver = initialize_driver()
+    # This function no longer initializes its own driver. It uses the one passed in.
+    # This is the key to waiting for the user: the browser is already open and controlled by the main app.
     try:
         print(f"Navigating to job URL: {job_url}")
         driver.get(job_url)
@@ -266,35 +270,21 @@ def start_application(job_url, resume_data, application_text):
         # --- Final Manual Review Step ---
         print("\n" + "=" * 50)
         print("✅ Automation complete. The form has been pre-filled.")
-        print("Please review all fields in the browser window carefully.")
+        print(">>> Please review the application in the browser window. <<<")
+        print(">>> You may need to log in or complete a CAPTCHA. <<<")
         print("=" * 50 + "\n")
 
         # This input will pause the script until the user presses Enter in the console.
         # This is the moment to manually check the form, complete any CAPTCHAs,
         # and fill in any fields the bot missed.
-        input("--> Press Enter in this terminal after you have reviewed and are ready to submit...")
-
-        # In a fully automated system, you would find the submit button and click it here.
-        # For example:
-        # try:
-        #     submit_button = driver.find_element(By.XPATH, "//button[@type='submit']")
-        #     submit_button.click()
-        #     print("Form submitted!")
-        # except Exception as e:
-        #     print(f"Could not automatically submit the form. Error: {e}")
-
-        print("Process finished. You can now close the browser window.")
-        time.sleep(10)  # Give user time to see the final message
+        # By not having an input() and not quitting the driver, we leave the browser open
+        # for the user to interact with freely. The user will close it via the Streamlit UI.
 
     except Exception as e:
         print(f"A critical error occurred during the automation process: {e}")
         # Save a screenshot for debugging
         driver.save_screenshot("critical_error.png")
         print("Saved a screenshot to 'critical_error.png'.")
-
-    finally:
-        print("Closing WebDriver.")
-        driver.quit()
 
 
 # --- Example Usage (for testing this script directly) ---
@@ -323,6 +313,10 @@ if __name__ == '__main__':
         print(f"-> {test_resume_data['resume_path']}")
         print("Please ensure the file exists and the path is correct in the `if __name__ == '__main__':` block.")
     else:
-        start_application(test_job_url, test_resume_data, test_application_text)
+        # For direct testing, we now need to initialize a driver first and pass it.
+        test_driver = initialize_driver()
+        start_application(test_driver, test_job_url, test_resume_data, test_application_text)
+        input("--> Test finished. Press Enter in this terminal to close the browser...")
+        test_driver.quit()
 
     print("\n--- Automator Test Finished ---")

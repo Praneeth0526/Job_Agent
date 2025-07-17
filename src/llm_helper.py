@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 # --- Configuration ---
 # It is highly recommended to set your API key as an environment variable.
 API_KEY = os.getenv("GEMINI_API_KEY")
-API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={API_KEY}"
+API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
 
 
 def generate_talking_points_prompt(job, user_skills):

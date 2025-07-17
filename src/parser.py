@@ -79,6 +79,34 @@ def find_email_in_text(text):
     return match.group(0) if match else None
 
 
+def find_phone_in_text(text):
+    """
+    Uses a regular expression to find a phone number in a block of text.
+    This regex is designed for common formats.
+    """
+    # This regex looks for various formats like (123) 456-7890, 123-456-7890, 123 456 7890, etc.
+    phone_regex = r"(\(?\d{3}\)?[-.\s]?)?(\d{3}[-.\s]?\d{4})"
+    match = re.search(phone_regex, text)
+    return match.group(0) if match else None
+
+
+def find_name_in_text(text):
+    """
+    A heuristic-based approach to find a person's name in resume text.
+    It looks for a 2-3 word line near the top of the text.
+    """
+    # Names are often in the first few lines of a resume.
+    lines = text.split('\n')[:5]
+    for line in lines:
+        line = line.strip()
+        # A common name format is 2-3 words, no numbers, no special characters other than spaces.
+        if 1 < len(line.split()) < 4 and re.match(r"^[a-zA-Z\s]*$", line):
+            # Very basic check to avoid catching headers like "Professional Experience"
+            if "experience" not in line.lower() and "education" not in line.lower():
+                return line
+    return None
+
+
 def extract_skills_from_text(text):
     """
     Extracts a predefined list of technical skills from text.
@@ -91,7 +119,7 @@ def extract_skills_from_text(text):
     technical_skills = {
         # Programming Languages
         'python', 'java', 'c++', 'c#', 'javascript', 'typescript', 'go', 'rust', 'kotlin', 'swift', 'ruby', 'php',
-        'html', 'css', 'sql',
+        'html', 'css', 'sql', 'c','dart',
 
         # Web Frameworks (Backend)
         'django', 'flask', 'fastapi', 'node.js', 'express.js', 'spring boot', 'ruby on rails', '.net',
@@ -101,7 +129,7 @@ def extract_skills_from_text(text):
 
         # Databases
         'mysql', 'postgresql', 'mssql', 'sqlite', 'oracle', 'mongodb', 'redis', 'cassandra', 'dynamodb',
-        'nosql', 'firebase', 'neo4j',
+        'nosql', 'firebase', 'neo4j', 'supabase',
 
         # Cloud & DevOps
         'aws', 'azure', 'gcp', 'google cloud', 'heroku', 'digitalocean', 'oracle cloud',
@@ -115,13 +143,13 @@ def extract_skills_from_text(text):
         'scikit-learn', 'tensorflow', 'pytorch', 'keras',
         'opencv', 'nltk', 'spacy', 'hugging face', 'langchain',
         'spark', 'hadoop', 'kafka',
-        'tableau', 'power bi', 'looker',
+        'tableau', 'power bi', 'looker', 'streamlit',
         'machine learning', 'deep learning', 'nlp', 'natural language processing', 'data science', 'data analysis',
         'business intelligence', 'big data', 'data visualization', 'etl',
 
         # Tools & Methodologies
         'git', 'github', 'jira', 'confluence',
-        'agile', 'scrum', 'kanban',
+        'agile', 'scrum', 'kanban','figma','kaggle',
         'rest', 'graphql', 'soap', 'api', 'microservices', 'serverless',
         'selenium', 'pytest', 'junit', 'jest'
     }
@@ -139,27 +167,40 @@ def parse_resume(file_path):
         file_path (str): The full path to the .pdf or .docx resume file.
 
     Returns:
-        tuple: A tuple containing (full_text, found_skills_set) or (None, None) on failure.
+        dict: A dictionary containing all parsed data, or None on failure.
     """
-    text = ""
+    full_text = ""
     if not os.path.exists(file_path):
         print(f"Error: Resume file not found at '{file_path}'.")
-        return None, None
+        return None
 
     if file_path.lower().endswith(".pdf"):
-        text = extract_text_from_pdf(file_path)
+        full_text = extract_text_from_pdf(file_path)
     elif file_path.lower().endswith(".docx"):
-        text = extract_text_from_docx(file_path)
+        full_text = extract_text_from_docx(file_path)
     else:
         print(f"Unsupported file format: {file_path}")
-        return None, None
+        return None
 
-    if not text:
+    if not full_text:
         print(f"Could not extract text from {file_path}.")
-        return None, None
+        return None
 
-    skills = extract_skills_from_text(text)
-    return text, skills
+    # Extract all components
+    name = find_name_in_text(full_text)
+    first_name = name.split()[0] if name else ""
+    last_name = name.split()[-1] if name and len(name.split()) > 1 else ""
+
+    return {
+        'full_text': full_text,
+        'skills': extract_skills_from_text(full_text),
+        'name': name,
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': find_email_in_text(full_text),
+        'phone': find_phone_in_text(full_text),
+        'resume_path': os.path.abspath(file_path) # Ensure the path is absolute for Selenium
+    }
 
 
 # --- Execution for testing ---
@@ -171,13 +212,14 @@ if __name__ == "__main__":
     resume_to_test = os.path.join("..", "Resume", "New_resume.pdf")
 
     if os.path.exists(resume_to_test):
-        full_text, found_skills = parse_resume(resume_to_test)
-        if full_text and found_skills:
+        resume_data = parse_resume(resume_to_test)
+        if resume_data:
             print(f"\nSuccessfully parsed: {resume_to_test}")
+            print(f"\n--- Found Name: {resume_data.get('name', 'N/A')} ---")
+            print(f"--- Found Email: {resume_data.get('email', 'N/A')} ---")
+            print(f"--- Found Phone: {resume_data.get('phone', 'N/A')} ---")
             print("\n--- Found Skills ---")
-            print(", ".join(sorted(list(found_skills))))
-            email = find_email_in_text(full_text)
-            print(f"\n--- Found Email ---\n{email or 'No email found.'}")
+            print(", ".join(sorted(list(resume_data.get('skills', [])))))
         else:
             print(f"Failed to parse {resume_to_test}.")
     else:

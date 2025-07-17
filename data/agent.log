@@ -1782,3 +1782,646 @@ Stacktrace:
 2025-07-17 20:00:17,384 - INFO - app - User requested AI insights for: Project Manager – AI & Technology Initiatives
 2025-07-17 20:00:25,202 - INFO - app - User approved job for application: Project Manager – AI & Technology Initiatives
 2025-07-17 20:00:28,374 - INFO - app - User approved job for application: SAP Basis Intern
+2025-07-17 21:46:21,640 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-17 21:46:21,693 - INFO - app - Resume parsed. Found 17 skills.
+2025-07-17 21:46:21,696 - INFO - app - No active driver found. Initializing a new one for scraping.
+2025-07-17 21:46:21,697 - INFO - logger - ====== WebDriver manager ======
+2025-07-17 21:46:21,896 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 21:46:21,982 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 21:46:22,047 - INFO - logger - Driver [/home/praneeth/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver-linux64/chromedriver] found in cache
+2025-07-17 21:46:23,087 - INFO - scraper - Starting intelligent LinkedIn scraper...
+2025-07-17 21:46:25,269 - INFO - scraper - Searching for: ("data analysis" OR "gcp" OR "agile" OR "javascript" OR "pandas") AND (Intern OR Internship)
+2025-07-17 21:46:25,269 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%22data%20analysis%22%20OR%20%22gcp%22%20OR%20%22agile%22%20OR%20%22javascript%22%20OR%20%22pandas%22%29%20AND%20%28Intern%20OR%20Internship%29&location=India&f_WT=2
+2025-07-17 21:46:27,055 - INFO - scraper - Initial job cards loaded.
+2025-07-17 21:46:27,055 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 21:46:41,454 - INFO - scraper - Extracting job links from search page...
+2025-07-17 21:46:41,631 - INFO - scraper - Found 116 links for this query.
+2025-07-17 21:46:41,631 - INFO - scraper - Searching for: ("Software Engineer" OR "Computer Science Engineer" OR "IT" OR "Software Developer") AND (Intern OR Internship)
+2025-07-17 21:46:41,631 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%22Software%20Engineer%22%20OR%20%22Computer%20Science%20Engineer%22%20OR%20%22IT%22%20OR%20%22Software%20Developer%22%29%20AND%20%28Intern%20OR%20Internship%29&location=India&f_WT=2
+2025-07-17 21:46:43,083 - INFO - scraper - Initial job cards loaded.
+2025-07-17 21:46:43,083 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 21:46:57,483 - INFO - scraper - Extracting job links from search page...
+2025-07-17 21:46:57,681 - INFO - scraper - Found 119 links for this query.
+2025-07-17 21:46:57,681 - INFO - scraper - Searching for: "data analysis" OR "gcp" OR "agile" OR "javascript" OR "pandas"
+2025-07-17 21:46:57,681 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%22data%20analysis%22%20OR%20%22gcp%22%20OR%20%22agile%22%20OR%20%22javascript%22%20OR%20%22pandas%22&location=India&f_WT=2
+2025-07-17 21:46:59,099 - INFO - scraper - Initial job cards loaded.
+2025-07-17 21:46:59,099 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 21:47:13,426 - INFO - scraper - Extracting job links from search page...
+2025-07-17 21:47:13,601 - INFO - scraper - Found 120 links for this query.
+2025-07-17 21:47:13,601 - INFO - scraper - Found 355 unique job links in total. Now scraping details...
+2025-07-17 21:47:13,601 - INFO - scraper - Processing link 1/10 (TESTING: limited to 10)
+2025-07-17 21:47:13,601 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/intern-rasa-at-datafoundry-4267679992?position=4&pageNum=12&refId=f06z4FnFW2YglfjAFtw4qw%3D%3D&trackingId=ylN5K8FoU%2FLJ%2Fnk%2FeSG2ww%3D%3D
+2025-07-17 21:47:17,882 - INFO - scraper - Processing link 2/10 (TESTING: limited to 10)
+2025-07-17 21:47:17,882 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/we-are-hiring-web-developer-intern-at-eazybyts-com-4259587295?position=60&pageNum=0&refId=f%2FbKe2UcSlFxkOI24YWuUA%3D%3D&trackingId=zXpHrxZfpcZwBIBYZufGMg%3D%3D
+2025-07-17 21:47:22,071 - INFO - scraper - Processing link 3/10 (TESTING: limited to 10)
+2025-07-17 21:47:22,072 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-science-intern-at-inlighnx-global-private-limited-4267754073?position=39&pageNum=0&refId=f%2FbKe2UcSlFxkOI24YWuUA%3D%3D&trackingId=yMwtaEXIXHHLMOpLsAzbqA%3D%3D
+2025-07-17 21:47:26,142 - INFO - scraper - Processing link 4/10 (TESTING: limited to 10)
+2025-07-17 21:47:26,143 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/java-developer-intern-at-eazybyts-com-4260676030?position=58&pageNum=0&refId=IJLcm0xfm0HeZ78zLo4p6w%3D%3D&trackingId=%2Bvkuh99WR6gh4Ra2RA8RkQ%3D%3D
+2025-07-17 21:47:30,217 - INFO - scraper - Processing link 5/10 (TESTING: limited to 10)
+2025-07-17 21:47:30,218 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/marketing-intern-at-parikshak-ai-4265303528?position=17&pageNum=0&refId=IJLcm0xfm0HeZ78zLo4p6w%3D%3D&trackingId=7DTTbGrz0Kac24X7tcHq0w%3D%3D
+2025-07-17 21:47:33,177 - INFO - scraper - Processing link 6/10 (TESTING: limited to 10)
+2025-07-17 21:47:33,177 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resources-intern-at-ten-news-aggregator-4268164495?position=10&pageNum=2&refId=jB8UCo0w%2B4H7z8EtZf9NPQ%3D%3D&trackingId=7xGiRTGM%2BizBnbSGNKClfw%3D%3D
+2025-07-17 21:47:36,336 - INFO - scraper - Processing link 7/10 (TESTING: limited to 10)
+2025-07-17 21:47:36,336 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ai-engineer-internship-remote-at-ibovi-staffing-consulting-and-recruitment-services-4265396131?position=30&pageNum=0&refId=f%2FbKe2UcSlFxkOI24YWuUA%3D%3D&trackingId=AUpyuZhI0mfoPw0viKfRZw%3D%3D
+2025-07-17 21:47:39,882 - INFO - scraper - Processing link 8/10 (TESTING: limited to 10)
+2025-07-17 21:47:39,882 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/associate-software-engineer-at-duck-creek-payments-4268211370?position=4&pageNum=5&refId=ERkYQFGu33%2Blr27QGyvrKw%3D%3D&trackingId=A1i0TR%2BIVch8CsFq5JGwDg%3D%3D
+2025-07-17 21:47:43,519 - INFO - scraper - Processing link 9/10 (TESTING: limited to 10)
+2025-07-17 21:47:43,519 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/google-ccai-bot-developer-at-miratech-4245998554?position=8&pageNum=12&refId=O%2B1RTYSBs5%2B0TyynchmAfg%3D%3D&trackingId=%2Fp778qdF%2BfIQJT2Y2B%2Fstg%3D%3D
+2025-07-17 21:47:46,527 - INFO - scraper - Processing link 10/10 (TESTING: limited to 10)
+2025-07-17 21:47:46,528 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/research-analyst-at-sambodhi-research-and-communications-pvt-ltd-4257913521?position=6&pageNum=5&refId=hNttfQ14s8bspiMs7HjJmg%3D%3D&trackingId=QQnPdBSLG5fbQeDA%2FwvGQA%3D%3D
+2025-07-17 21:47:49,709 - INFO - scraper - Successfully scraped details for 10 jobs.
+2025-07-17 21:47:49,714 - INFO - app - Scraped 10 total jobs. Found 10 new jobs to process.
+2025-07-17 21:47:49,750 - INFO - app - Found 3 relevant jobs after ranking.
+2025-07-17 22:23:06,796 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-17 22:23:06,847 - INFO - app - Resume parsed. Found 17 skills.
+2025-07-17 22:23:06,849 - INFO - app - No active driver found. Initializing a new one for scraping.
+2025-07-17 22:23:06,851 - INFO - logger - ====== WebDriver manager ======
+2025-07-17 22:23:07,011 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 22:23:07,090 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 22:23:07,158 - INFO - logger - Driver [/home/praneeth/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver-linux64/chromedriver] found in cache
+2025-07-17 22:23:08,189 - INFO - scraper - Starting intelligent LinkedIn scraper...
+2025-07-17 22:23:10,328 - INFO - scraper - Searching for: (("css" OR "sql" OR "javascript" OR "github" OR "agile") AND (Intern OR Internship)) AND ("Intern")
+2025-07-17 22:23:10,328 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%28%22css%22%20OR%20%22sql%22%20OR%20%22javascript%22%20OR%20%22github%22%20OR%20%22agile%22%29%20AND%20%28Intern%20OR%20Internship%29%29%20AND%20%28%22Intern%22%29&location=India&f_WT=2
+2025-07-17 22:23:12,139 - INFO - scraper - Initial job cards loaded.
+2025-07-17 22:23:12,139 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 22:23:22,445 - INFO - scraper - Extracting job links from search page...
+2025-07-17 22:23:22,644 - INFO - scraper - Found 97 links for this query.
+2025-07-17 22:23:22,644 - INFO - scraper - Searching for: (("Software Engineer" OR "Computer Science Engineer" OR "IT" OR "Software Developer") AND (Intern OR Internship)) AND ("Intern")
+2025-07-17 22:23:22,644 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%28%22Software%20Engineer%22%20OR%20%22Computer%20Science%20Engineer%22%20OR%20%22IT%22%20OR%20%22Software%20Developer%22%29%20AND%20%28Intern%20OR%20Internship%29%29%20AND%20%28%22Intern%22%29&location=India&f_WT=2
+2025-07-17 22:23:24,917 - INFO - scraper - Initial job cards loaded.
+2025-07-17 22:23:24,917 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 22:23:39,320 - INFO - scraper - Extracting job links from search page...
+2025-07-17 22:23:39,509 - INFO - scraper - Found 118 links for this query.
+2025-07-17 22:23:39,509 - INFO - scraper - Searching for: ("css" OR "sql" OR "javascript" OR "github" OR "agile") AND ("Intern")
+2025-07-17 22:23:39,509 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%22css%22%20OR%20%22sql%22%20OR%20%22javascript%22%20OR%20%22github%22%20OR%20%22agile%22%29%20AND%20%28%22Intern%22%29&location=India&f_WT=2
+2025-07-17 22:23:40,761 - INFO - scraper - Initial job cards loaded.
+2025-07-17 22:23:40,761 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 22:23:51,163 - INFO - scraper - Extracting job links from search page...
+2025-07-17 22:23:51,374 - INFO - scraper - Found 100 links for this query.
+2025-07-17 22:23:51,374 - INFO - scraper - Found 315 unique job links in total. Now scraping details...
+2025-07-17 22:23:51,375 - INFO - scraper - Processing link 1/10 (TESTING: limited to 10)
+2025-07-17 22:23:51,375 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/intern-operations-night-shift-role-at-interview-kickstart-4260206253?position=1&pageNum=12&refId=bugucJE6XCJkl7yRzsZ05Q%3D%3D&trackingId=m4rQKko0IStIzKfbDap0Cw%3D%3D
+2025-07-17 22:23:55,738 - INFO - scraper - Processing link 2/10 (TESTING: limited to 10)
+2025-07-17 22:23:55,738 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/wordpress-developer-trainee-intern-at-quantum-it-innovation-4266868651?position=54&pageNum=0&refId=uohBgu32fvJ5xmRm9XcZOw%3D%3D&trackingId=WDUejhXhJMDdW0azxqk34Q%3D%3D
+2025-07-17 22:23:59,320 - INFO - scraper - Processing link 3/10 (TESTING: limited to 10)
+2025-07-17 22:23:59,321 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-unified-mentor-private-limited-4268284645?position=8&pageNum=7&refId=gT%2B7oQ1zkoKBIGuhpeEbfw%3D%3D&trackingId=%2BW8IJRiZXrLYEJ%2BDWZQ3dA%3D%3D
+2025-07-17 22:24:03,616 - INFO - scraper - Processing link 4/10 (TESTING: limited to 10)
+2025-07-17 22:24:03,616 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/business-development-intern-at-reelax-4267322688?position=18&pageNum=0&refId=ogqswpxHyZxJiMN6zjRlNA%3D%3D&trackingId=bmh0dEOpdDkv5%2FbB3%2BOEmA%3D%3D
+2025-07-17 22:24:06,871 - INFO - scraper - Processing link 5/10 (TESTING: limited to 10)
+2025-07-17 22:24:06,871 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/java-developer-intern-at-eazybyts-com-4260676030?position=33&pageNum=0&refId=NS0wPgbkTVrZZaQuotwy%2FQ%3D%3D&trackingId=Y92Mhk8YPEA9%2BGHg3MqZeg%3D%3D
+2025-07-17 22:24:10,809 - INFO - scraper - Processing link 6/10 (TESTING: limited to 10)
+2025-07-17 22:24:10,809 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/marketing-and-business-development-intern-at-adfinity-techwave-4264218234?position=10&pageNum=2&refId=mRhEQwxIah%2BrJKj00y%2FycA%3D%3D&trackingId=Q6z1tuZh2pIdeAiOPJ6THA%3D%3D
+2025-07-17 22:24:13,772 - INFO - scraper - Processing link 7/10 (TESTING: limited to 10)
+2025-07-17 22:24:13,772 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resources-intern-at-ten-book-engine-4267747377?position=9&pageNum=2&refId=mRhEQwxIah%2BrJKj00y%2FycA%3D%3D&trackingId=OerJxWvssUwXoHIe1Q3Lsw%3D%3D
+2025-07-17 22:24:16,857 - INFO - scraper - Processing link 8/10 (TESTING: limited to 10)
+2025-07-17 22:24:16,857 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/web-development-intern-at-elevate-labs-4263817649?position=3&pageNum=2&refId=cCvzNCBBE6rPufwcPU68OA%3D%3D&trackingId=IoxJibvjqBLeY6fBOCQ%2BTg%3D%3D
+2025-07-17 22:24:20,724 - INFO - scraper - Processing link 9/10 (TESTING: limited to 10)
+2025-07-17 22:24:20,724 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/business-development-intern-at-idea-usher-4174280017?position=3&pageNum=0&refId=ogqswpxHyZxJiMN6zjRlNA%3D%3D&trackingId=2wXAmGKCVyXzSYIhhW58sQ%3D%3D
+2025-07-17 22:24:24,235 - INFO - scraper - Processing link 10/10 (TESTING: limited to 10)
+2025-07-17 22:24:24,235 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/devops-intern-at-sproutsai-4227655398?position=51&pageNum=0&refId=NS0wPgbkTVrZZaQuotwy%2FQ%3D%3D&trackingId=XQK5PtAthqmPDX7e7KGthw%3D%3D
+2025-07-17 22:24:28,266 - INFO - scraper - Successfully scraped details for 10 jobs.
+2025-07-17 22:24:28,270 - INFO - app - Scraped 10 total jobs. Found 10 new jobs to process.
+2025-07-17 22:24:28,307 - INFO - app - Found 4 relevant jobs after ranking.
+2025-07-17 22:24:40,397 - INFO - app - User requested AI insights for: Java Developer Intern
+2025-07-17 22:25:18,011 - INFO - app - User approved job for application: Java Developer Intern
+2025-07-17 22:25:51,741 - INFO - app - User rejected job: WordPress Developer Trainee/Intern
+2025-07-17 22:39:45,454 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-17 22:39:45,508 - INFO - app - Resume parsed. Found 23 skills.
+2025-07-17 22:39:45,511 - INFO - app - No active driver found. Initializing a new one for scraping.
+2025-07-17 22:39:45,512 - INFO - logger - ====== WebDriver manager ======
+2025-07-17 22:39:45,666 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 22:39:45,814 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 22:39:45,978 - INFO - logger - Driver [/home/praneeth/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver-linux64/chromedriver] found in cache
+2025-07-17 22:39:47,061 - INFO - scraper - Starting intelligent LinkedIn scraper...
+2025-07-17 22:39:49,561 - INFO - scraper - Searching for: ("api" OR "javascript" OR "gcp" OR "supabase" OR "aws") AND (Intern OR Internship)
+2025-07-17 22:39:49,561 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%22api%22%20OR%20%22javascript%22%20OR%20%22gcp%22%20OR%20%22supabase%22%20OR%20%22aws%22%29%20AND%20%28Intern%20OR%20Internship%29&location=India&f_WT=2
+2025-07-17 22:39:51,425 - INFO - scraper - Initial job cards loaded.
+2025-07-17 22:39:51,425 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 22:40:01,861 - INFO - scraper - Extracting job links from search page...
+2025-07-17 22:40:02,056 - INFO - scraper - Found 95 links for this query.
+2025-07-17 22:40:02,056 - INFO - scraper - Searching for: ("Software Engineer" OR "Computer Science Engineer" OR "IT" OR "Software Developer") AND (Intern OR Internship)
+2025-07-17 22:40:02,056 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%22Software%20Engineer%22%20OR%20%22Computer%20Science%20Engineer%22%20OR%20%22IT%22%20OR%20%22Software%20Developer%22%29%20AND%20%28Intern%20OR%20Internship%29&location=India&f_WT=2
+2025-07-17 22:40:03,446 - INFO - scraper - Initial job cards loaded.
+2025-07-17 22:40:03,446 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 22:40:17,917 - INFO - scraper - Extracting job links from search page...
+2025-07-17 22:40:18,120 - INFO - scraper - Found 119 links for this query.
+2025-07-17 22:40:18,120 - INFO - scraper - Searching for: "api" OR "javascript" OR "gcp" OR "supabase" OR "aws"
+2025-07-17 22:40:18,120 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%22api%22%20OR%20%22javascript%22%20OR%20%22gcp%22%20OR%20%22supabase%22%20OR%20%22aws%22&location=India&f_WT=2
+2025-07-17 22:40:19,588 - INFO - scraper - Initial job cards loaded.
+2025-07-17 22:40:19,588 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 22:40:34,073 - INFO - scraper - Extracting job links from search page...
+2025-07-17 22:40:34,272 - INFO - scraper - Found 120 links for this query.
+2025-07-17 22:40:34,272 - INFO - scraper - Found 334 unique job links in total. Now scraping details...
+2025-07-17 22:40:34,272 - INFO - scraper - Processing link 1/10 (TESTING: limited to 10)
+2025-07-17 22:40:34,272 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/frontend-development-intern-at-inlighnx-global-private-limited-4267753158?position=37&pageNum=0&refId=LKOJkObLZm9HDfs0HOHxGw%3D%3D&trackingId=QkumBhHDa0GcbUsLamvGnQ%3D%3D
+2025-07-17 22:40:39,365 - INFO - scraper - Processing link 2/10 (TESTING: limited to 10)
+2025-07-17 22:40:39,365 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/full-stack-software-engineering-intern-corporate-finance-m-a-and-fundraising-advisory-at-alehar-4223160828?position=2&pageNum=10&refId=M9aV1ZprI8ck33iFbPewMg%3D%3D&trackingId=ubCA0MlyTJgeCpS%2BDORQPQ%3D%3D
+2025-07-17 22:40:43,648 - INFO - scraper - Processing link 3/10 (TESTING: limited to 10)
+2025-07-17 22:40:43,648 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-developer-intern-at-elevate-labs-4263825039?position=3&pageNum=5&refId=3bNwb2eZfEMjbLgB3siWUQ%3D%3D&trackingId=0gZgFxyk4uaeYpFNxeNukA%3D%3D
+2025-07-17 22:40:47,223 - INFO - scraper - Processing link 4/10 (TESTING: limited to 10)
+2025-07-17 22:40:47,223 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/software-developer-intern-at-cryptochakra-4263853389?position=57&pageNum=0&refId=pe6CNMbMdD9nBrKBa2MwkQ%3D%3D&trackingId=hJOG%2BOg6wRX7efJNRcQDSQ%3D%3D
+2025-07-17 22:40:50,294 - INFO - scraper - Processing link 5/10 (TESTING: limited to 10)
+2025-07-17 22:40:50,294 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sales-and-marketing-intern-twitter-focused-at-purplerain-techsafe-4265885664?position=32&pageNum=0&refId=pe6CNMbMdD9nBrKBa2MwkQ%3D%3D&trackingId=Cr32Klt70mCvRZ%2BfFgZIyw%3D%3D
+2025-07-17 22:40:53,528 - INFO - scraper - Processing link 6/10 (TESTING: limited to 10)
+2025-07-17 22:40:53,528 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ai-product-engineering-intern-at-time-ai-4265922743?position=7&pageNum=2&refId=9kzDB7xiOhQcvw0tCK59sQ%3D%3D&trackingId=OcyHrmkq4EHmWkRH%2BYuGgg%3D%3D
+2025-07-17 22:40:56,433 - INFO - scraper - Processing link 7/10 (TESTING: limited to 10)
+2025-07-17 22:40:56,434 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/it-sales-b2b-intern-at-idea-usher-4259997974?position=8&pageNum=10&refId=p%2BNJXWyIIJv07%2FEcJysp7g%3D%3D&trackingId=qhKn2bkuEFx0IPb80OTerw%3D%3D
+2025-07-17 22:40:59,794 - INFO - scraper - Processing link 8/10 (TESTING: limited to 10)
+2025-07-17 22:40:59,794 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/social-media-marketing-intern-at-chefscircle-4267900979?position=9&pageNum=2&refId=7U7f3sfcgGPWJIc5vLtbhw%3D%3D&trackingId=c%2BcTjQnnukRl%2FoRnPqGprg%3D%3D
+2025-07-17 22:41:02,956 - INFO - scraper - Processing link 9/10 (TESTING: limited to 10)
+2025-07-17 22:41:02,956 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/senior-ml-engineer-at-tensoriot-inc-3919439336?position=9&pageNum=15&refId=sSw2Q79N%2F86tcprs4%2BIufA%3D%3D&trackingId=knTLMfJUMyKN6cF0lF%2FKBg%3D%3D
+2025-07-17 22:41:07,318 - INFO - scraper - Processing link 10/10 (TESTING: limited to 10)
+2025-07-17 22:41:07,319 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/devops-intern-at-elevate-labs-4263823162?position=4&pageNum=5&refId=hJhR2GI1NixsJJzH72KDiA%3D%3D&trackingId=3%2BxcUQtS%2BoJfOl9Hy3CRIw%3D%3D
+2025-07-17 22:41:11,345 - INFO - scraper - Successfully scraped details for 10 jobs.
+2025-07-17 22:41:11,349 - INFO - app - Scraped 10 total jobs. Found 10 new jobs to process.
+2025-07-17 22:41:11,382 - INFO - app - Found 5 relevant jobs after ranking.
+2025-07-17 22:42:05,595 - INFO - app - User requested AI insights for: DevOps Intern
+2025-07-17 22:43:39,971 - INFO - app - User approved job for application: DevOps Intern
+2025-07-17 22:43:42,695 - INFO - app - User approved job for application: Data Analyst Intern
+2025-07-17 22:46:26,240 - INFO - app - Starting automation for: Data Analyst Intern
+2025-07-17 22:46:26,284 - INFO - logger - ====== WebDriver manager ======
+2025-07-17 22:46:26,445 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 22:46:26,514 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 22:46:26,568 - INFO - logger - Driver [/home/praneeth/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver-linux64/chromedriver] found in cache
+2025-07-17 23:30:15,379 - INFO - app - User requested AI insights for: Python Developer Intern
+2025-07-17 23:32:34,318 - INFO - app - User requested AI insights for: Python Developer Intern
+2025-07-17 23:33:23,312 - INFO - app - User requested AI insights for: Python Developer Intern
+2025-07-17 23:36:40,633 - INFO - app - User approved job for application: Python Developer Intern
+2025-07-17 23:37:01,230 - INFO - app - Starting automation for: Python Developer Intern
+2025-07-17 23:37:01,277 - INFO - logger - ====== WebDriver manager ======
+2025-07-17 23:37:01,433 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 23:37:01,496 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 23:37:01,554 - INFO - logger - Driver [/home/praneeth/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver-linux64/chromedriver] found in cache
+2025-07-17 23:50:12,047 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-17 23:50:12,047 - INFO - app - Parsing resume to identify your skills...
+2025-07-17 23:50:12,088 - INFO - app - Resume parsed. Found 23 skills.
+2025-07-17 23:50:52,980 - INFO - app - 'Fetch & Rank Jobs' button clicked.
+2025-07-17 23:50:52,980 - INFO - app - Parsing resume to identify your skills...
+2025-07-17 23:50:53,023 - INFO - app - Resume parsed. Found 23 skills.
+2025-07-17 23:50:53,023 - INFO - app - Running intelligent LinkedIn search based on your resume...
+2025-07-17 23:50:53,023 - INFO - app - No active driver found. Initializing a new one for scraping.
+2025-07-17 23:50:53,024 - INFO - logger - ====== WebDriver manager ======
+2025-07-17 23:50:53,177 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 23:50:53,302 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 23:50:53,358 - INFO - logger - Driver [/home/praneeth/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver-linux64/chromedriver] found in cache
+2025-07-17 23:50:54,420 - INFO - scraper - Starting intelligent LinkedIn scraper...
+2025-07-17 23:50:56,411 - INFO - scraper - Searching for: (("kaggle" OR "javascript" OR "agile" OR "python" OR "postgresql") AND (Intern OR Internship)) AND ("Intern")
+2025-07-17 23:50:56,411 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%28%22kaggle%22%20OR%20%22javascript%22%20OR%20%22agile%22%20OR%20%22python%22%20OR%20%22postgresql%22%29%20AND%20%28Intern%20OR%20Internship%29%29%20AND%20%28%22Intern%22%29&location=India&f_WT=2
+2025-07-17 23:50:57,980 - INFO - scraper - Initial job cards loaded.
+2025-07-17 23:50:57,980 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 23:51:10,619 - INFO - scraper - Extracting job links from search page...
+2025-07-17 23:51:10,830 - INFO - scraper - Found 106 links for this query.
+2025-07-17 23:51:10,830 - INFO - scraper - Searching for: (("Software Engineer" OR "Computer Science Engineer" OR "IT" OR "Software Developer") AND (Intern OR Internship)) AND ("Intern")
+2025-07-17 23:51:10,830 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%28%22Software%20Engineer%22%20OR%20%22Computer%20Science%20Engineer%22%20OR%20%22IT%22%20OR%20%22Software%20Developer%22%29%20AND%20%28Intern%20OR%20Internship%29%29%20AND%20%28%22Intern%22%29&location=India&f_WT=2
+2025-07-17 23:51:12,098 - INFO - scraper - Initial job cards loaded.
+2025-07-17 23:51:12,099 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 23:51:26,449 - INFO - scraper - Extracting job links from search page...
+2025-07-17 23:51:26,570 - INFO - scraper - Found 118 links for this query.
+2025-07-17 23:51:26,571 - INFO - scraper - Searching for: ("kaggle" OR "javascript" OR "agile" OR "python" OR "postgresql") AND ("Intern")
+2025-07-17 23:51:26,571 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%22kaggle%22%20OR%20%22javascript%22%20OR%20%22agile%22%20OR%20%22python%22%20OR%20%22postgresql%22%29%20AND%20%28%22Intern%22%29&location=India&f_WT=2
+2025-07-17 23:51:27,705 - INFO - scraper - Initial job cards loaded.
+2025-07-17 23:51:27,705 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 23:51:39,961 - INFO - scraper - Extracting job links from search page...
+2025-07-17 23:51:40,128 - INFO - scraper - Found 107 links for this query.
+2025-07-17 23:51:40,128 - INFO - scraper - Found 331 unique job links in total. Now scraping details...
+2025-07-17 23:51:40,128 - INFO - scraper - Processing link 1/10 (TESTING: limited to 10)
+2025-07-17 23:51:40,128 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/top-angular-remote-jobs-you-can-apply-for-right-now-at-career-cartz-4227812664?position=4&pageNum=12&refId=8tc%2BbtQKrT4i20HnKABM9w%3D%3D&trackingId=5xlawTR5Xd97F3sIdmRgJw%3D%3D
+2025-07-17 23:51:45,387 - INFO - scraper - Processing link 2/10 (TESTING: limited to 10)
+2025-07-17 23:51:45,387 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sql-developer-intern-at-elevate-labs-4263823100?position=52&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=d98ifMrdY7IoO%2BjHu%2F0dVA%3D%3D
+2025-07-17 23:51:49,569 - INFO - scraper - Processing link 3/10 (TESTING: limited to 10)
+2025-07-17 23:51:49,569 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sales-and-marketing-intern-at-digiwaves-tech-4265475627?position=39&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=hjoKmBabPPrZlwSj5tDvdA%3D%3D
+2025-07-17 23:51:52,560 - INFO - scraper - Processing link 4/10 (TESTING: limited to 10)
+2025-07-17 23:51:52,561 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sql-developer-intern-at-workassist-4267782543?position=9&pageNum=7&refId=L1Uos4Koh0N%2FPmlCJz57DQ%3D%3D&trackingId=KnaHCOfe3UgTEBFQxW3VtA%3D%3D
+2025-07-17 23:51:56,577 - INFO - scraper - Processing link 5/10 (TESTING: limited to 10)
+2025-07-17 23:51:56,578 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-webboost-solutions-by-um-4268625430?position=1&pageNum=7&refId=Wm9AXbAzSKrxL7HEBv2ySg%3D%3D&trackingId=D4Dsamb7iwC3rkwb9oIUbA%3D%3D
+2025-07-17 23:52:00,634 - INFO - scraper - Processing link 6/10 (TESTING: limited to 10)
+2025-07-17 23:52:00,634 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/social-media-marketing-intern-at-chefscircle-4267900979?position=32&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=sv7%2BpC15iUqPNYcI9a7S4A%3D%3D
+2025-07-17 23:52:03,639 - INFO - scraper - Processing link 7/10 (TESTING: limited to 10)
+2025-07-17 23:52:03,639 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-elevate-labs-4263813717?position=12&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=krBGDr9%2BnowQ4uFUDdsMVQ%3D%3D
+2025-07-17 23:52:07,663 - INFO - scraper - Processing link 8/10 (TESTING: limited to 10)
+2025-07-17 23:52:07,663 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/software-testing-intern-at-sourcingxpress-4225307120?position=3&pageNum=7&refId=f9AbztvNjK%2ByXIobb1ye%2FA%3D%3D&trackingId=WiQNyGxlUZ8eykRz1c7BJQ%3D%3D
+2025-07-17 23:52:11,650 - INFO - scraper - Processing link 9/10 (TESTING: limited to 10)
+2025-07-17 23:52:11,650 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-developer-intern-at-unified-mentor-private-limited-4268283796?position=56&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=Il3yOuU6ukdxiY6Jau2f3g%3D%3D
+2025-07-17 23:52:15,860 - INFO - scraper - Processing link 10/10 (TESTING: limited to 10)
+2025-07-17 23:52:15,861 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/engineering-intern-%E2%80%93-gen-ai-for-fp-a-platform-at-drivetrain-4247227584?position=4&pageNum=7&refId=L1Uos4Koh0N%2FPmlCJz57DQ%3D%3D&trackingId=6inK7A2ZMH4tFbyxV9sZjQ%3D%3D
+2025-07-17 23:52:19,879 - INFO - scraper - Processing link 11/10 (TESTING: limited to 10)
+2025-07-17 23:52:19,879 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/wordpress-developer-trainee-intern-at-quantum-it-innovation-4266868651?position=5&pageNum=10&refId=w69D1u6mTE9Bx%2FfUJlaLGQ%3D%3D&trackingId=SUofZXezFqJbigwd2bxM8g%3D%3D
+2025-07-17 23:52:23,465 - INFO - scraper - Processing link 12/10 (TESTING: limited to 10)
+2025-07-17 23:52:23,465 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/accounts-executive-trainee-intern-at-quantum-it-innovation-4266874123?position=12&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=zFGQZc6xlEt0Rv%2FoeMy53w%3D%3D
+2025-07-17 23:52:27,006 - INFO - scraper - Processing link 13/10 (TESTING: limited to 10)
+2025-07-17 23:52:27,007 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-optimspace-in-4267163938?position=25&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=SKB%2F1h3VSaRvmK9nntXfiQ%3D%3D
+2025-07-17 23:52:31,243 - INFO - scraper - Processing link 14/10 (TESTING: limited to 10)
+2025-07-17 23:52:31,243 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/web-development-intern-at-elevate-labs-4263817649?position=27&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=KuzWbCrTr2GpGAYZedWXAw%3D%3D
+2025-07-17 23:52:35,083 - INFO - scraper - Processing link 15/10 (TESTING: limited to 10)
+2025-07-17 23:52:35,083 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-science-intern-at-optimspace-in-4268263976?position=5&pageNum=5&refId=31KcHNLcuFlKoeiel9nlkA%3D%3D&trackingId=jPg%2Fm%2B00nLzZQsBxzTqxFQ%3D%3D
+2025-07-17 23:52:38,984 - INFO - scraper - Processing link 16/10 (TESTING: limited to 10)
+2025-07-17 23:52:38,984 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ui-ux-design-intern-at-sproutsai-4227901068?position=2&pageNum=12&refId=Ctx0y0h%2FWRQY7cEz3fgmKQ%3D%3D&trackingId=MaemVmFKqhEOq95K518PPQ%3D%3D
+2025-07-17 23:52:43,018 - INFO - scraper - Processing link 17/10 (TESTING: limited to 10)
+2025-07-17 23:52:43,018 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/business-development-intern-at-idea-usher-4174280017?position=3&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=Ue7FRws1IhpjOziKA4ouqg%3D%3D
+2025-07-17 23:52:46,699 - INFO - scraper - Processing link 18/10 (TESTING: limited to 10)
+2025-07-17 23:52:46,699 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ios-app-developer-trainee-intern-at-quantum-it-innovation-4266872226?position=9&pageNum=5&refId=mlXjXaFXWHDBPdrbEOU2Mg%3D%3D&trackingId=WOBtDIaR71NcizKIhPFYGA%3D%3D
+2025-07-17 23:52:50,099 - INFO - scraper - Processing link 19/10 (TESTING: limited to 10)
+2025-07-17 23:52:50,100 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-inlighnx-global-private-limited-4267748912?position=6&pageNum=5&refId=nI5pH%2FEVJgA%2Fgexv9Ah7NA%3D%3D&trackingId=RXkZb1xuWcKxVr7HpruxhA%3D%3D
+2025-07-17 23:52:54,430 - INFO - scraper - Processing link 20/10 (TESTING: limited to 10)
+2025-07-17 23:52:54,430 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/technical-support-engineer-at-atlan-4227020592?position=15&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=sLfwwTzuvt%2BuK3S9ZSNqzg%3D%3D
+2025-07-17 23:52:58,691 - INFO - scraper - Processing link 21/10 (TESTING: limited to 10)
+2025-07-17 23:52:58,691 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/next-js-developer-at-bridging-points-media-pvt-ltd-4257191153?position=3&pageNum=12&refId=8tc%2BbtQKrT4i20HnKABM9w%3D%3D&trackingId=sSIKcjkcdoP56YN8lnZj9g%3D%3D
+2025-07-17 23:53:02,062 - INFO - scraper - Processing link 22/10 (TESTING: limited to 10)
+2025-07-17 23:53:02,062 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/devops-engineer-intern-at-yellow-ai-4240913536?position=40&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=pI%2FbzzwyfK8aIprONXtlTg%3D%3D
+2025-07-17 23:53:06,023 - INFO - scraper - Processing link 23/10 (TESTING: limited to 10)
+2025-07-17 23:53:06,023 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/student-marketing-internship-remote-at-lautek-solutions-4266015969?position=41&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=%2B7SN7uFew7A44irUlk8CXg%3D%3D
+2025-07-17 23:53:09,013 - INFO - scraper - Processing link 24/10 (TESTING: limited to 10)
+2025-07-17 23:53:09,014 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resources-intern-at-ten-book-engine-4266939042?position=8&pageNum=2&refId=Z3CIo8KNoeFd9k1Jo5LXhQ%3D%3D&trackingId=ZcTTZhCNE94XQfUfOCLUYA%3D%3D
+2025-07-17 23:53:12,181 - INFO - scraper - Processing link 25/10 (TESTING: limited to 10)
+2025-07-17 23:53:12,181 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/intern-rasa-at-datafoundry-4267679992?position=9&pageNum=10&refId=T5%2BldwrE2sVsrTtS9AYr3g%3D%3D&trackingId=pFeICk9t5au520sCzpOKvg%3D%3D
+2025-07-17 23:53:15,583 - INFO - scraper - Processing link 26/10 (TESTING: limited to 10)
+2025-07-17 23:53:15,583 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/mern-stack-intern-at-sproutsai-4227655401?position=54&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=DkLoty6E%2Bd2RntYrym%2FENQ%3D%3D
+2025-07-17 23:53:19,708 - INFO - scraper - Processing link 27/10 (TESTING: limited to 10)
+2025-07-17 23:53:19,709 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/full-stack-developer-intern-at-hiredude-4267152168?position=48&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=RWeV7jI7TN2Zn1YDa5TT1w%3D%3D
+2025-07-17 23:53:23,578 - INFO - scraper - Processing link 28/10 (TESTING: limited to 10)
+2025-07-17 23:53:23,578 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/video-editor-plus-graphic-designer-intern-kannada-language-remote-at-take-it-smart-opc-private-limited-4267682422?position=3&pageNum=15&refId=n6Asr6MCKDvMZlZ7fYjTCg%3D%3D&trackingId=hdkZ6KpECHd93yvDZthUzw%3D%3D
+2025-07-17 23:53:26,554 - INFO - scraper - Processing link 29/10 (TESTING: limited to 10)
+2025-07-17 23:53:26,555 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/javascript-developer-at-bodytolk-4257674018?position=2&pageNum=7&refId=Wm9AXbAzSKrxL7HEBv2ySg%3D%3D&trackingId=PFKjmC56Yzwq8SQk8%2Ba8Xw%3D%3D
+2025-07-17 23:53:30,019 - INFO - scraper - Processing link 30/10 (TESTING: limited to 10)
+2025-07-17 23:53:30,019 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ux-designer-intern-at-techolution-4259967180?position=3&pageNum=12&refId=Ctx0y0h%2FWRQY7cEz3fgmKQ%3D%3D&trackingId=D1jhzSGzw4eD7Jz4sbPrGA%3D%3D
+2025-07-17 23:53:33,289 - INFO - scraper - Processing link 31/10 (TESTING: limited to 10)
+2025-07-17 23:53:33,289 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/automation-testing-intern-remote-at-clootrack-4193914345?position=1&pageNum=5&refId=31KcHNLcuFlKoeiel9nlkA%3D%3D&trackingId=6opnaflLbhCGHtQlVeOpIQ%3D%3D
+2025-07-17 23:53:37,781 - INFO - scraper - Processing link 32/10 (TESTING: limited to 10)
+2025-07-17 23:53:37,781 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sales-and-marketing-intern-at-eubrics-4268205814?position=28&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=rgvXKHxJKJdeD8xZoxxfjg%3D%3D
+2025-07-17 23:53:41,109 - INFO - scraper - Processing link 33/10 (TESTING: limited to 10)
+2025-07-17 23:53:41,109 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/java-developer-intern-at-eazybyts-com-4260676030?position=8&pageNum=10&refId=EJioZvnokmuFXCSAdd3MpQ%3D%3D&trackingId=vEbd3GtT5RNTE5NF7TWYrw%3D%3D
+2025-07-17 23:53:44,975 - INFO - scraper - Processing link 34/10 (TESTING: limited to 10)
+2025-07-17 23:53:44,975 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/social-media-marketing-intern-at-chefscircle-4267900979?position=7&pageNum=2&refId=Z3CIo8KNoeFd9k1Jo5LXhQ%3D%3D&trackingId=SxNcDuK50mumtKtR7tBe7w%3D%3D
+2025-07-17 23:53:48,173 - INFO - scraper - Processing link 35/10 (TESTING: limited to 10)
+2025-07-17 23:53:48,173 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/artificial-intelligence-machine-learning-intern-at-inlighnx-global-private-limited-4267750719?position=46&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=IxOT3TNcNc%2FNxRErp9U7cQ%3D%3D
+2025-07-17 23:53:51,879 - INFO - scraper - Processing link 36/10 (TESTING: limited to 10)
+2025-07-17 23:53:51,879 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/technical-support-engineer-at-atlan-4227020592?position=34&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=8kOS7Yj321wdI5rH76ILpA%3D%3D
+2025-07-17 23:53:55,866 - INFO - scraper - Processing link 37/10 (TESTING: limited to 10)
+2025-07-17 23:53:55,866 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sql-developer-intern-at-elevate-labs-4263823100?position=3&pageNum=5&refId=nI5pH%2FEVJgA%2Fgexv9Ah7NA%3D%3D&trackingId=ndmvc%2BzECkQ6iLj8%2FnwHbQ%3D%3D
+2025-07-17 23:53:59,741 - INFO - scraper - Processing link 38/10 (TESTING: limited to 10)
+2025-07-17 23:53:59,741 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/flutter-developer-intern-at-idea-usher-4225884665?position=5&pageNum=5&refId=nI5pH%2FEVJgA%2Fgexv9Ah7NA%3D%3D&trackingId=RfHjEjHr8i3BFoaCFejpqg%3D%3D
+2025-07-17 23:54:03,063 - INFO - scraper - Processing link 39/10 (TESTING: limited to 10)
+2025-07-17 23:54:03,063 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-intern-remote-at-udhyam-learning-foundation-4259117313?position=8&pageNum=5&refId=mlXjXaFXWHDBPdrbEOU2Mg%3D%3D&trackingId=rNCi6yGT2C8bQh2edqy54Q%3D%3D
+2025-07-17 23:54:07,123 - INFO - scraper - Processing link 40/10 (TESTING: limited to 10)
+2025-07-17 23:54:07,123 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/motion-graphic-designer-intern-remote-at-hike-4264470823?position=10&pageNum=7&refId=L1Uos4Koh0N%2FPmlCJz57DQ%3D%3D&trackingId=B0pZCnsJFz8th0%2F7sznvLw%3D%3D
+2025-07-17 23:54:10,439 - INFO - scraper - Processing link 41/10 (TESTING: limited to 10)
+2025-07-17 23:54:10,439 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-optimspace-in-4267699108?position=5&pageNum=2&refId=s6h4cwl7MK73Bw2iKZzwIw%3D%3D&trackingId=sKVWRCAJ6KPl0jrHEKkBRA%3D%3D
+2025-07-17 23:54:14,577 - INFO - scraper - Processing link 42/10 (TESTING: limited to 10)
+2025-07-17 23:54:14,577 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-webboost-solutions-by-um-4268632145?position=10&pageNum=7&refId=f9AbztvNjK%2ByXIobb1ye%2FA%3D%3D&trackingId=s1gnNlknAgGclRfMIyMQ7A%3D%3D
+2025-07-17 23:54:19,090 - INFO - scraper - Processing link 43/10 (TESTING: limited to 10)
+2025-07-17 23:54:19,090 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/best-remote-jobs-for-freshers-to-start-their-career-in-2025-at-career-cartz-4228268616?position=18&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=1BfvKvECOEcYe0jOJNz7lQ%3D%3D
+2025-07-17 23:54:23,057 - INFO - scraper - Processing link 44/10 (TESTING: limited to 10)
+2025-07-17 23:54:23,057 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/devops-intern-at-sproutsai-4227655398?position=8&pageNum=7&refId=L1Uos4Koh0N%2FPmlCJz57DQ%3D%3D&trackingId=OEZIPRt1wvpInIzzUt21YA%3D%3D
+2025-07-17 23:54:27,067 - INFO - scraper - Processing link 45/10 (TESTING: limited to 10)
+2025-07-17 23:54:27,067 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-developer-intern-at-sproutsai-4227697668?position=1&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=zxtI8bN0Kguk0vJB6wyjJg%3D%3D
+2025-07-17 23:54:31,374 - INFO - scraper - Processing link 46/10 (TESTING: limited to 10)
+2025-07-17 23:54:31,374 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-developer-intern-at-innovate-solutions-4266637720?position=50&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=chUKeUVnKsumJ0BigUnhig%3D%3D
+2025-07-17 23:54:35,353 - INFO - scraper - Processing link 47/10 (TESTING: limited to 10)
+2025-07-17 23:54:35,353 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/digital-marketing-intern-at-bioqubiit-autozen-4268173723?position=7&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=ojm4KpzVpxUviva4ajC%2F7w%3D%3D
+2025-07-17 23:54:38,318 - INFO - scraper - Processing link 48/10 (TESTING: limited to 10)
+2025-07-17 23:54:38,319 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/business-analyst-intern-at-webboost-solutions-by-um-4268630201?position=7&pageNum=10&refId=EJioZvnokmuFXCSAdd3MpQ%3D%3D&trackingId=P%2FVs5m4p0pQCiRDHEuSZ8Q%3D%3D
+2025-07-17 23:54:42,168 - INFO - scraper - Processing link 49/10 (TESTING: limited to 10)
+2025-07-17 23:54:42,169 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/software-developer-intern-at-cryptochakra-4263853389?position=24&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=rS8uy7TUYX9u44lEEz3ioQ%3D%3D
+2025-07-17 23:54:45,594 - INFO - scraper - Processing link 50/10 (TESTING: limited to 10)
+2025-07-17 23:54:45,595 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/scrum-master-at-bodytolk-4261111471?position=9&pageNum=10&refId=w69D1u6mTE9Bx%2FfUJlaLGQ%3D%3D&trackingId=sC6S6hhJC6lZ4%2FIvFSDAww%3D%3D
+2025-07-17 23:54:49,020 - INFO - scraper - Processing link 51/10 (TESTING: limited to 10)
+2025-07-17 23:54:49,021 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ai-automation-expert-co-founder-at-caremeez-4264831787?position=7&pageNum=12&refId=Ctx0y0h%2FWRQY7cEz3fgmKQ%3D%3D&trackingId=8bdF%2BT%2FBdwY2doZkJNJn%2FQ%3D%3D
+2025-07-17 23:54:52,436 - INFO - scraper - Processing link 52/10 (TESTING: limited to 10)
+2025-07-17 23:54:52,436 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-at-zetheta-algorithms-private-limited-4266166190?position=59&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=zXTbsUy8yOtGDNt8EbKHNw%3D%3D
+2025-07-17 23:54:56,004 - INFO - scraper - Processing link 53/10 (TESTING: limited to 10)
+2025-07-17 23:54:56,005 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resources-intern-at-ten-news-aggregator-4267636739?position=44&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=8rQsJIwN6kAmQ5mQvxLl3Q%3D%3D
+2025-07-17 23:54:59,227 - INFO - scraper - Processing link 54/10 (TESTING: limited to 10)
+2025-07-17 23:54:59,228 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/machine-learning-intern-at-unified-mentor-private-limited-4268283827?position=5&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=DPO5RnOpI8GidH5DpUSQ9w%3D%3D
+2025-07-17 23:55:03,585 - INFO - scraper - Processing link 55/10 (TESTING: limited to 10)
+2025-07-17 23:55:03,585 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/marketing-and-business-development-intern-at-adfinity-techwave-4264218234?position=10&pageNum=2&refId=Z3CIo8KNoeFd9k1Jo5LXhQ%3D%3D&trackingId=j259XRa%2BBeeuFwIRtvbsnw%3D%3D
+2025-07-17 23:55:06,619 - INFO - scraper - Processing link 56/10 (TESTING: limited to 10)
+2025-07-17 23:55:06,619 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/web-development-intern-at-webboost-solutions-by-um-4268626145?position=6&pageNum=7&refId=Wm9AXbAzSKrxL7HEBv2ySg%3D%3D&trackingId=KX5MPE7F%2BHAJl3Suy6HBNg%3D%3D
+2025-07-17 23:55:10,590 - INFO - scraper - Processing link 57/10 (TESTING: limited to 10)
+2025-07-17 23:55:10,590 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-developer-intern-at-innovate-solutions-4266637720?position=16&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=uXnZeQKsSS5DC2AT9ZC1FQ%3D%3D
+2025-07-17 23:55:14,787 - INFO - scraper - Processing link 58/10 (TESTING: limited to 10)
+2025-07-17 23:55:14,787 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ai-ml-intern-at-zuddl-4246253715?position=9&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=nj%2Fv4hi7u3FWd%2B1sIAlNXA%3D%3D
+2025-07-17 23:55:18,413 - INFO - scraper - Processing link 59/10 (TESTING: limited to 10)
+2025-07-17 23:55:18,413 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/full-stack-software-engineering-intern-corporate-finance-m-a-and-fundraising-advisory-at-alehar-4223160828?position=4&pageNum=12&refId=Ctx0y0h%2FWRQY7cEz3fgmKQ%3D%3D&trackingId=x%2FS%2FYTWu6jYPN4oVwVbyXA%3D%3D
+2025-07-17 23:55:22,287 - INFO - scraper - Processing link 60/10 (TESTING: limited to 10)
+2025-07-17 23:55:22,287 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/social-media-marketing-intern-at-bhartics-ecom-services-pvt-ltd-4268282998?position=4&pageNum=2&refId=Z3CIo8KNoeFd9k1Jo5LXhQ%3D%3D&trackingId=oICZfHgMS4uRvi8eGvUo2w%3D%3D
+2025-07-17 23:55:25,384 - INFO - scraper - Processing link 61/10 (TESTING: limited to 10)
+2025-07-17 23:55:25,384 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ai-amp-ml-intern-at-sproutsai-4264638432?position=7&pageNum=7&refId=L1Uos4Koh0N%2FPmlCJz57DQ%3D%3D&trackingId=GKNub1Bhj0cn5mmGmkhrOw%3D%3D
+2025-07-17 23:55:29,697 - INFO - scraper - Processing link 62/10 (TESTING: limited to 10)
+2025-07-17 23:55:29,697 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ai-engineering-intern-at-echo-4266129120?position=26&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=ubSymJVdufXcybJNEiYlWg%3D%3D
+2025-07-17 23:55:33,093 - INFO - scraper - Processing link 63/10 (TESTING: limited to 10)
+2025-07-17 23:55:33,094 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/seo-intern-at-prometteur-solutions-pvt-ltd-4248028683?position=7&pageNum=10&refId=T5%2BldwrE2sVsrTtS9AYr3g%3D%3D&trackingId=G1RMkAzG750wQ2u534fZVw%3D%3D
+2025-07-17 23:55:36,337 - INFO - scraper - Processing link 64/10 (TESTING: limited to 10)
+2025-07-17 23:55:36,337 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/business-development-intern-at-reelax-4267322688?position=18&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=QgzVl%2FN3h0xDVWeCko%2BzbA%3D%3D
+2025-07-17 23:55:39,735 - INFO - scraper - Processing link 65/10 (TESTING: limited to 10)
+2025-07-17 23:55:39,735 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ai-product-engineering-intern-at-time-ai-4265922743?position=36&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=tw9xx0U50gzZr5%2FPVHwpYg%3D%3D
+2025-07-17 23:55:42,713 - INFO - scraper - Processing link 66/10 (TESTING: limited to 10)
+2025-07-17 23:55:42,713 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/frontend-development-intern-at-inlighnx-global-private-limited-4267753158?position=10&pageNum=7&refId=Wm9AXbAzSKrxL7HEBv2ySg%3D%3D&trackingId=%2Br0dFGTjCd2QryevV5EfZQ%3D%3D
+2025-07-17 23:55:46,810 - INFO - scraper - Processing link 67/10 (TESTING: limited to 10)
+2025-07-17 23:55:46,810 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/junior-engineer-qa-intern-at-cornerstone-ondemand-4265709082?position=3&pageNum=7&refId=L1Uos4Koh0N%2FPmlCJz57DQ%3D%3D&trackingId=gmlrmFx7YPabvEH85P93XQ%3D%3D
+2025-07-17 23:55:50,612 - INFO - scraper - Processing link 68/10 (TESTING: limited to 10)
+2025-07-17 23:55:50,613 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ai-amp-ml-intern-at-sproutsai-4264638432?position=2&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=9sczkHpi5VzVD0PR7%2BCd0w%3D%3D
+2025-07-17 23:55:54,871 - INFO - scraper - Processing link 69/10 (TESTING: limited to 10)
+2025-07-17 23:55:54,871 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/mern-stack-intern-at-sproutsai-4227655401?position=5&pageNum=2&refId=HOIotrhi5zg4%2BPli991HwA%3D%3D&trackingId=aHT4hY7OP18r8TK54U8s4A%3D%3D
+2025-07-17 23:55:59,048 - INFO - scraper - Processing link 70/10 (TESTING: limited to 10)
+2025-07-17 23:55:59,048 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/qa-intern-at-techyrr-4229931420?position=8&pageNum=2&refId=HOIotrhi5zg4%2BPli991HwA%3D%3D&trackingId=SJ7tnhMTrp416FXZn1WqeQ%3D%3D
+2025-07-17 23:56:02,066 - INFO - scraper - Processing link 71/10 (TESTING: limited to 10)
+2025-07-17 23:56:02,066 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/full-stack-web-developer-intern-at-callus-company-inc-4259136491?position=7&pageNum=2&refId=HOIotrhi5zg4%2BPli991HwA%3D%3D&trackingId=3MvKYtE9pBg5fTCtT%2FRaoQ%3D%3D
+2025-07-17 23:56:06,285 - INFO - scraper - Processing link 72/10 (TESTING: limited to 10)
+2025-07-17 23:56:06,285 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/research-analyst-intern-or-part-time-founder-s-office-at-nine-spot-seven-4257963786?position=5&pageNum=10&refId=T5%2BldwrE2sVsrTtS9AYr3g%3D%3D&trackingId=meTKmuqHtkRSamXMpQIb3w%3D%3D
+2025-07-17 23:56:09,703 - INFO - scraper - Processing link 73/10 (TESTING: limited to 10)
+2025-07-17 23:56:09,704 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/flutter-developer-intern-at-idea-usher-4225884665?position=54&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=PVGE2SFz36mMslEoRLlUZg%3D%3D
+2025-07-17 23:56:12,902 - INFO - scraper - Processing link 74/10 (TESTING: limited to 10)
+2025-07-17 23:56:12,902 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/devops-engineer-intern-at-yellow-ai-4240913536?position=23&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=EXwgJND6%2FMu2CAzBfhTzew%3D%3D
+2025-07-17 23:56:17,204 - INFO - scraper - Processing link 75/10 (TESTING: limited to 10)
+2025-07-17 23:56:17,205 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/technical-support-engineer-at-atlan-4227020592?position=9&pageNum=2&refId=s6h4cwl7MK73Bw2iKZzwIw%3D%3D&trackingId=wtz4ycuxnRJJCyD4maG2LQ%3D%3D
+2025-07-17 23:56:21,227 - INFO - scraper - Processing link 76/10 (TESTING: limited to 10)
+2025-07-17 23:56:21,228 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/software-developer-intern-at-cryptochakra-4263853389?position=28&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=c5PZb6%2B7ssgR0VSdcGwEvg%3D%3D
+2025-07-17 23:56:24,336 - INFO - scraper - Processing link 77/10 (TESTING: limited to 10)
+2025-07-17 23:56:24,336 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/compliance-associate-at-atlan-4227023167?position=6&pageNum=10&refId=w69D1u6mTE9Bx%2FfUJlaLGQ%3D%3D&trackingId=pXdOLQyyEJjtl6SIWlpBNQ%3D%3D
+2025-07-17 23:56:28,476 - INFO - scraper - Processing link 78/10 (TESTING: limited to 10)
+2025-07-17 23:56:28,476 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/business-analyst-intern-at-webboost-solutions-by-um-4268630201?position=6&pageNum=12&refId=Ctx0y0h%2FWRQY7cEz3fgmKQ%3D%3D&trackingId=Y%2FVGdquCV2WeX9K6tmmQsw%3D%3D
+2025-07-17 23:56:32,522 - INFO - scraper - Processing link 79/10 (TESTING: limited to 10)
+2025-07-17 23:56:32,523 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-inlighnx-global-private-limited-4267748912?position=2&pageNum=5&refId=31KcHNLcuFlKoeiel9nlkA%3D%3D&trackingId=Gct4PIVq7ZPUdJPH5tqrFw%3D%3D
+2025-07-17 23:56:36,772 - INFO - scraper - Processing link 80/10 (TESTING: limited to 10)
+2025-07-17 23:56:36,772 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ux-designer-intern-at-techolution-4259967180?position=9&pageNum=7&refId=Wm9AXbAzSKrxL7HEBv2ySg%3D%3D&trackingId=xzvfQnVoZZpGoWfmj3gr%2Fw%3D%3D
+2025-07-17 23:56:40,517 - INFO - scraper - Processing link 81/10 (TESTING: limited to 10)
+2025-07-17 23:56:40,517 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/software-developer-intern-at-cryptochakra-4263853389?position=4&pageNum=5&refId=mlXjXaFXWHDBPdrbEOU2Mg%3D%3D&trackingId=k1FmILDujdhkyIg3L68jkA%3D%3D
+2025-07-17 23:56:43,613 - INFO - scraper - Processing link 82/10 (TESTING: limited to 10)
+2025-07-17 23:56:43,613 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-developer-intern-at-innovate-solutions-4266637720?position=1&pageNum=5&refId=mlXjXaFXWHDBPdrbEOU2Mg%3D%3D&trackingId=zIueZoaRo7tn7r76z%2BelJg%3D%3D
+2025-07-17 23:56:47,547 - INFO - scraper - Processing link 83/10 (TESTING: limited to 10)
+2025-07-17 23:56:47,548 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-science-intern-at-hypersonix-inc-4257492526?position=8&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=pM%2FMerOvo%2B4Dhn7Qax4Aog%3D%3D
+2025-07-17 23:56:50,859 - INFO - scraper - Processing link 84/10 (TESTING: limited to 10)
+2025-07-17 23:56:50,859 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resources-intern-at-ten-infinity-health-engine-4268163892?position=2&pageNum=2&refId=Z3CIo8KNoeFd9k1Jo5LXhQ%3D%3D&trackingId=zI4JkjqF78W26vf4PqKsSA%3D%3D
+2025-07-17 23:56:53,940 - INFO - scraper - Processing link 85/10 (TESTING: limited to 10)
+2025-07-17 23:56:53,940 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/intern-software-developer-at-i-design-my-life-4257197008?position=33&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=65x%2B%2FHaV5lzC4DMyQnA9Tg%3D%3D
+2025-07-17 23:56:57,656 - INFO - scraper - Processing link 86/10 (TESTING: limited to 10)
+2025-07-17 23:56:57,656 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ui-ux-design-intern-at-sproutsai-4227901068?position=44&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=EHIlWFivpm3iLMVxpQqWfQ%3D%3D
+2025-07-17 23:57:01,695 - INFO - scraper - Processing link 87/10 (TESTING: limited to 10)
+2025-07-17 23:57:01,695 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-inlighnx-global-private-limited-4267748912?position=55&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=1jmZ3bRlfjp9%2BjbeemWPJA%3D%3D
+2025-07-17 23:57:06,036 - INFO - scraper - Processing link 88/10 (TESTING: limited to 10)
+2025-07-17 23:57:06,036 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/payroll-lead-at-atlan-4227019662?position=7&pageNum=7&refId=Wm9AXbAzSKrxL7HEBv2ySg%3D%3D&trackingId=p%2FyS8g7MkclGo0f6E0VFow%3D%3D
+2025-07-17 23:57:09,935 - INFO - scraper - Processing link 89/10 (TESTING: limited to 10)
+2025-07-17 23:57:09,935 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sales-and-marketing-intern-at-saralgroups-a-group-of-trusted-venture-builders-4266923480?position=1&pageNum=2&refId=Z3CIo8KNoeFd9k1Jo5LXhQ%3D%3D&trackingId=nshKEdXkDu%2Fub%2F2Qw8cUmw%3D%3D
+2025-07-17 23:57:13,523 - INFO - scraper - Processing link 90/10 (TESTING: limited to 10)
+2025-07-17 23:57:13,523 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/full-stack-web-developer-intern-at-callus-company-inc-4259136491?position=35&pageNum=0&refId=%2FE6IV9pOHG1NLJk39JGWAw%3D%3D&trackingId=Iadl4zOE6cE%2FaktOwITSsA%3D%3D
+2025-07-17 23:57:17,634 - INFO - scraper - Processing link 91/10 (TESTING: limited to 10)
+2025-07-17 23:57:17,635 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/automation-testing-intern-remote-at-clootrack-4193914345?position=59&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=AdF1mxCUtPH4Fq3evy5B9A%3D%3D
+2025-07-17 23:57:21,581 - INFO - scraper - Processing link 92/10 (TESTING: limited to 10)
+2025-07-17 23:57:21,581 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/intern-%E2%80%93-computer-vision-at-arthrex-india-4213353244?position=22&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=qXzVO7f56RMX7Idf3j4sxw%3D%3D
+2025-07-17 23:57:25,387 - INFO - scraper - Processing link 93/10 (TESTING: limited to 10)
+2025-07-17 23:57:25,387 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/information-technology-intern-at-marquee-fellowship-program-4267946640?position=7&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=kAKkA%2BBX%2Fz4aRW%2FYzdJVEA%3D%3D
+2025-07-17 23:57:28,623 - INFO - scraper - Processing link 94/10 (TESTING: limited to 10)
+2025-07-17 23:57:28,623 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sustainability-intern-at-treeandhumanknot-4268225709?position=2&pageNum=15&refId=n6Asr6MCKDvMZlZ7fYjTCg%3D%3D&trackingId=0ZpOT8%2B%2FQD9Elsl%2Fs%2BrvQA%3D%3D
+2025-07-17 23:57:31,813 - INFO - scraper - Processing link 95/10 (TESTING: limited to 10)
+2025-07-17 23:57:31,813 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/qa-testing-intern-ai-automation-at-blink-digital-4263736293?position=33&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=Jmnv6e%2F7gXp3mGBr64GMAg%3D%3D
+2025-07-17 23:57:34,810 - INFO - scraper - Processing link 96/10 (TESTING: limited to 10)
+2025-07-17 23:57:34,810 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-at-zetheta-algorithms-private-limited-4266166190?position=9&pageNum=5&refId=31KcHNLcuFlKoeiel9nlkA%3D%3D&trackingId=4E2ibuqoU%2FnuHEBJ9Gy69A%3D%3D
+2025-07-17 23:57:38,649 - INFO - scraper - Processing link 97/10 (TESTING: limited to 10)
+2025-07-17 23:57:38,649 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/intern-software-developer-at-i-design-my-life-4257197008?position=19&pageNum=0&refId=AUmdRv6EsoEYTfFitF%2BnOQ%3D%3D&trackingId=yMpNtvKcqRoaek%2F%2BneNR3w%3D%3D
+2025-07-17 23:57:44,372 - INFO - scraper - Processing link 98/10 (TESTING: limited to 10)
+2025-07-17 23:57:44,372 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resources-trainee-intern-at-quantum-it-innovation-4266872081?position=11&pageNum=0&refId=oJ%2FHNdilYMVzaDVLZ8PbeA%3D%3D&trackingId=i3alNy7%2FJm90x5ylu19a0A%3D%3D
+2025-07-17 23:59:22,427 - INFO - app - 'Fetch & Rank Jobs' triggered.
+2025-07-17 23:59:22,427 - INFO - app - Parsing resume to identify your skills...
+2025-07-17 23:59:22,477 - INFO - app - Resume parsed. Found 23 skills.
+2025-07-17 23:59:22,477 - INFO - app - Running intelligent LinkedIn search based on your resume...
+2025-07-17 23:59:22,477 - INFO - app - No active driver found. Initializing a new headless one for scraping.
+2025-07-17 23:59:22,478 - INFO - logger - ====== WebDriver manager ======
+2025-07-17 23:59:22,634 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 23:59:22,744 - INFO - logger - Get LATEST chromedriver version for google-chrome
+2025-07-17 23:59:22,816 - INFO - logger - Driver [/home/praneeth/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver-linux64/chromedriver] found in cache
+2025-07-17 23:59:23,272 - INFO - scraper - Starting intelligent LinkedIn scraper...
+2025-07-17 23:59:25,667 - INFO - scraper - Searching for: (("aws" OR "django" OR "supabase" OR "c" OR "sql") AND (Intern OR Internship)) AND ("Intern")
+2025-07-17 23:59:25,667 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%28%22aws%22%20OR%20%22django%22%20OR%20%22supabase%22%20OR%20%22c%22%20OR%20%22sql%22%29%20AND%20%28Intern%20OR%20Internship%29%29%20AND%20%28%22Intern%22%29&location=India&f_WT=2
+2025-07-17 23:59:27,482 - INFO - scraper - Initial job cards loaded.
+2025-07-17 23:59:27,483 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 23:59:33,844 - INFO - scraper - Extracting job links from search page...
+2025-07-17 23:59:33,998 - INFO - scraper - Found 84 links for this query.
+2025-07-17 23:59:33,998 - INFO - scraper - Searching for: (("Software Engineer" OR "Computer Science Engineer" OR "IT" OR "Software Developer") AND (Intern OR Internship)) AND ("Intern")
+2025-07-17 23:59:33,998 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%28%22Software%20Engineer%22%20OR%20%22Computer%20Science%20Engineer%22%20OR%20%22IT%22%20OR%20%22Software%20Developer%22%29%20AND%20%28Intern%20OR%20Internship%29%29%20AND%20%28%22Intern%22%29&location=India&f_WT=2
+2025-07-17 23:59:35,433 - INFO - scraper - Initial job cards loaded.
+2025-07-17 23:59:35,434 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 23:59:43,706 - INFO - scraper - Extracting job links from search page...
+2025-07-17 23:59:43,848 - INFO - scraper - Found 99 links for this query.
+2025-07-17 23:59:43,848 - INFO - scraper - Searching for: ("aws" OR "django" OR "supabase" OR "c" OR "sql") AND ("Intern")
+2025-07-17 23:59:43,848 - INFO - scraper - Navigating to job search URL: https://www.linkedin.com/jobs/search/?keywords=%28%22aws%22%20OR%20%22django%22%20OR%20%22supabase%22%20OR%20%22c%22%20OR%20%22sql%22%29%20AND%20%28%22Intern%22%29&location=India&f_WT=2
+2025-07-17 23:59:44,967 - INFO - scraper - Initial job cards loaded.
+2025-07-17 23:59:44,968 - INFO - scraper - Scrolling to load all job listings...
+2025-07-17 23:59:49,163 - INFO - scraper - Extracting job links from search page...
+2025-07-17 23:59:49,283 - INFO - scraper - Found 70 links for this query.
+2025-07-17 23:59:49,283 - INFO - scraper - Found 253 unique job links in total. Now scraping details...
+2025-07-17 23:59:49,283 - INFO - scraper - Processing link 1/253
+2025-07-17 23:59:49,283 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/staff-software-engineer-backend-at-atlan-4228015397?position=58&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=R1rsj5VZy65lmaVF0aGqXg%3D%3D
+2025-07-17 23:59:54,167 - INFO - scraper - Processing link 2/253
+2025-07-17 23:59:54,168 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resource-intern-at-ten-space-research-4267753734?position=38&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=vnAEEw60PRS1fcFTDy%2Fxjg%3D%3D
+2025-07-17 23:59:57,241 - INFO - scraper - Processing link 3/253
+2025-07-17 23:59:57,241 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-optimspace-in-4268171632?position=29&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=nSdIlju0bw%2Bxc7yz6evhZg%3D%3D
+2025-07-18 00:00:01,220 - INFO - scraper - Processing link 4/253
+2025-07-18 00:00:01,220 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/junior-engineer-qa-intern-at-cornerstone-ondemand-4265709082?position=4&pageNum=7&refId=b%2BmX94a4JVmL21pHjvDR%2Fg%3D%3D&trackingId=CRMNjVOt5fxmetnsrsfvuw%3D%3D
+2025-07-18 00:00:04,807 - INFO - scraper - Processing link 5/253
+2025-07-18 00:00:04,807 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/social-media-intern-at-dodo-payments-4262367479?position=6&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=PYn2G5qZeXTDjJGf0G4FiA%3D%3D
+2025-07-18 00:00:08,083 - INFO - scraper - Processing link 6/253
+2025-07-18 00:00:08,083 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/business-development-intern-at-sproutsai-4211141800?position=9&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=9e3OqcaELeecdXy6cQhOYg%3D%3D
+2025-07-18 00:00:12,126 - INFO - scraper - Processing link 7/253
+2025-07-18 00:00:12,127 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/mern-stack-intern-at-techyrr-4235466690?position=22&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=i7plQ1imo%2FiwUIhvkY5ETA%3D%3D
+2025-07-18 00:00:15,372 - INFO - scraper - Processing link 8/253
+2025-07-18 00:00:15,372 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resource-intern-remote-at-superprocure-4177779312?position=5&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=Yarjj01f0z9n7xpViovAHw%3D%3D
+2025-07-18 00:00:18,823 - INFO - scraper - Processing link 9/253
+2025-07-18 00:00:18,824 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/information-technology-intern-at-marquee-fellowship-program-4267946640?position=7&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=MS6RDfZCBIAtchgRLgRW2A%3D%3D
+2025-07-18 00:00:21,827 - INFO - scraper - Processing link 10/253
+2025-07-18 00:00:21,827 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-developer-intern-at-innovate-solutions-4266637720?position=1&pageNum=5&refId=Hpoivl8pA%2BNKxQINyBwLqw%3D%3D&trackingId=oQovi0tPU73ySHjCHKSAaA%3D%3D
+2025-07-18 00:00:25,713 - INFO - scraper - Processing link 11/253
+2025-07-18 00:00:25,713 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/artificial-intelligence-intern-at-something-bigger-4263800639?position=1&pageNum=10&refId=q9LzBAp3XGqPZ4Oqmv11OQ%3D%3D&trackingId=4nNYzlwi5qrrV%2F1rCIObBA%3D%3D
+2025-07-18 00:00:28,802 - INFO - scraper - Processing link 12/253
+2025-07-18 00:00:28,802 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-developer-intern-at-elevate-labs-4263825039?position=48&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=YXPHxEz06TpNSQAOvnNTFA%3D%3D
+2025-07-18 00:00:32,785 - INFO - scraper - Processing link 13/253
+2025-07-18 00:00:32,785 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/artificial-intelligence-intern-at-zetheta-algorithms-private-limited-4267730708?position=38&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=A1KjR03LX2sHszwbkr3B8A%3D%3D
+2025-07-18 00:00:36,078 - INFO - scraper - Processing link 14/253
+2025-07-18 00:00:36,078 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resources-intern-at-ten-car-4266628044?position=45&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=%2B6B2LojwK%2FcAvhUZOb0s0g%3D%3D
+2025-07-18 00:00:38,964 - INFO - scraper - Processing link 15/253
+2025-07-18 00:00:38,965 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/node-js-developer-at-bodytolk-4257691603?position=26&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=Fk9fZ3nDfpOOtCGrDScaEQ%3D%3D
+2025-07-18 00:00:42,552 - INFO - scraper - Processing link 16/253
+2025-07-18 00:00:42,552 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/gen-ai-at-quantum-it-innovation-4266871227?position=7&pageNum=5&refId=Hpoivl8pA%2BNKxQINyBwLqw%3D%3D&trackingId=dVIpsT%2FspEJH7e%2F%2Fad2jrg%3D%3D
+2025-07-18 00:00:46,381 - INFO - scraper - Processing link 17/253
+2025-07-18 00:00:46,381 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/accounts-executive-trainee-intern-at-quantum-it-innovation-4266874123?position=54&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=XsqGbGR2uHxf16O%2FDOLXKQ%3D%3D
+2025-07-18 00:00:49,820 - INFO - scraper - Processing link 18/253
+2025-07-18 00:00:49,820 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/business-analyst-intern-at-inlighnx-global-private-limited-4267748831?position=1&pageNum=7&refId=Cl3lOpCtxJ3PQpkyLj%2F2aQ%3D%3D&trackingId=6o7MuIuAK33U4StVAvlMeg%3D%3D
+2025-07-18 00:00:53,605 - INFO - scraper - Processing link 19/253
+2025-07-18 00:00:53,605 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/android-app-developer-trainee-intern-at-quantum-it-innovation-4266874009?position=52&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=9pmC5NQB0VzYSGFL2asvvA%3D%3D
+2025-07-18 00:00:57,049 - INFO - scraper - Processing link 20/253
+2025-07-18 00:00:57,049 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/growth-engineer-intern-at-hyperbrowser-4249317190?position=6&pageNum=7&refId=b%2BmX94a4JVmL21pHjvDR%2Fg%3D%3D&trackingId=jQV%2FIGp1CIel8pMwLTNW1w%3D%3D
+2025-07-18 00:01:00,783 - INFO - scraper - Processing link 21/253
+2025-07-18 00:01:00,783 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/genai-full-stack-intern-at-stealth-startup-4265667914?position=36&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=C6U42dgrPGVhRTSWyaS3Cg%3D%3D
+2025-07-18 00:01:04,244 - INFO - scraper - Processing link 22/253
+2025-07-18 00:01:04,244 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-science-intern-at-apna-cricket-team-com-4268412806?position=56&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=xo6931ZEuoo2ZDrYRwdclg%3D%3D
+2025-07-18 00:01:07,330 - INFO - scraper - Processing link 23/253
+2025-07-18 00:01:07,331 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sales-and-marketing-intern-at-eubrics-4268205814?position=28&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=h6Axr8inUPccLRtdZQAE8A%3D%3D
+2025-07-18 00:01:10,680 - INFO - scraper - Processing link 24/253
+2025-07-18 00:01:10,680 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/business-analyst-intern-at-inlighnx-global-private-limited-4267748831?position=40&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=9x0oSR%2FxvwhHV0Os2mxSfg%3D%3D
+2025-07-18 00:01:14,504 - INFO - scraper - Processing link 25/253
+2025-07-18 00:01:14,504 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-webboost-solutions-by-um-4268631157?position=2&pageNum=5&refId=FgrnvOKdTv3jzV7XcDTvYQ%3D%3D&trackingId=YAI3uCBpjhNRhpqcYpSa8Q%3D%3D
+2025-07-18 00:01:18,518 - INFO - scraper - Processing link 26/253
+2025-07-18 00:01:18,518 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sales-and-marketing-intern-at-digiwaves-tech-4265475627?position=39&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=Ny7N6gBrTp0Xwp0h%2FMyp%2Bw%3D%3D
+2025-07-18 00:01:21,505 - INFO - scraper - Processing link 27/253
+2025-07-18 00:01:21,505 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-webboost-solutions-by-um-4268625430?position=39&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=pJ4gSbplrtSwtHaTAKv3Pw%3D%3D
+2025-07-18 00:01:25,519 - INFO - scraper - Processing link 28/253
+2025-07-18 00:01:25,519 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/mern-stack-intern-at-techyrr-4235466690?position=16&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=ZGgVMXf%2BzTHvssxVSLM3qQ%3D%3D
+2025-07-18 00:01:28,804 - INFO - scraper - Processing link 29/253
+2025-07-18 00:01:28,804 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sql-developer-intern-at-elevate-labs-4263823100?position=21&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=JzC2G%2BF%2FYypmKRmLxeILHA%3D%3D
+2025-07-18 00:01:32,464 - INFO - scraper - Processing link 30/253
+2025-07-18 00:01:32,465 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-webboost-solutions-by-um-4268625026?position=45&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=CxiQYtgazMBbx7tNgxitPQ%3D%3D
+2025-07-18 00:01:36,497 - INFO - scraper - Processing link 31/253
+2025-07-18 00:01:36,498 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sql-developer-intern-at-workassist-4267782543?position=46&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=qoG75LuEdemhRUrScKpWfQ%3D%3D
+2025-07-18 00:01:40,069 - INFO - scraper - Processing link 32/253
+2025-07-18 00:01:40,069 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/marketing-and-business-outreach-intern-at-lisen-4267660368?position=6&pageNum=2&refId=9fsMLa868Iile%2FVoCG0%2FhA%3D%3D&trackingId=3c7Ztdtta8Wp%2Fd7UTMEtTQ%3D%3D
+2025-07-18 00:01:43,228 - INFO - scraper - Processing link 33/253
+2025-07-18 00:01:43,228 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resources-intern-at-ten-book-engine-4267747377?position=9&pageNum=2&refId=9fsMLa868Iile%2FVoCG0%2FhA%3D%3D&trackingId=ELDdGbBkX3gF5YKuIWMgKQ%3D%3D
+2025-07-18 00:01:46,324 - INFO - scraper - Processing link 34/253
+2025-07-18 00:01:46,325 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/intern-at-fluke-corporation-4266297738?position=10&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=EDlDpUPNM%2Fygh2HsOJC9cg%3D%3D
+2025-07-18 00:01:49,657 - INFO - scraper - Processing link 35/253
+2025-07-18 00:01:49,657 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/android-app-developer-trainee-intern-at-quantum-it-innovation-4266874009?position=3&pageNum=5&refId=Hpoivl8pA%2BNKxQINyBwLqw%3D%3D&trackingId=h%2Fk1%2FODcSufA17BEBLjL%2FQ%3D%3D
+2025-07-18 00:01:52,879 - INFO - scraper - Processing link 36/253
+2025-07-18 00:01:52,880 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-at-zetheta-algorithms-private-limited-4266166190?position=26&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=fRBCS9LMTrtY21%2B31eK1Qg%3D%3D
+2025-07-18 00:01:56,391 - INFO - scraper - Processing link 37/253
+2025-07-18 00:01:56,391 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-developer-intern-at-unified-mentor-private-limited-4268283796?position=8&pageNum=2&refId=6Yab3v94OCyNlhD%2F%2BHjC%2Bg%3D%3D&trackingId=K9alaH4R6NqvsLdRphQgvg%3D%3D
+2025-07-18 00:02:00,273 - INFO - scraper - Processing link 38/253
+2025-07-18 00:02:00,274 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/mlops-engineer-entry-level-intern-at-betterdata-4256747169?position=21&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=quecdfygOp2yR2CHR6qbPw%3D%3D
+2025-07-18 00:02:04,318 - INFO - scraper - Processing link 39/253
+2025-07-18 00:02:04,319 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/java-developer-intern-at-eazybyts-com-4260676030?position=57&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=TACnJdaySJX0T8C8GKRPYw%3D%3D
+2025-07-18 00:02:08,115 - INFO - scraper - Processing link 40/253
+2025-07-18 00:02:08,115 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/engineering-intern-%E2%80%93-gen-ai-for-fp-a-platform-at-drivetrain-4247227584?position=3&pageNum=7&refId=b%2BmX94a4JVmL21pHjvDR%2Fg%3D%3D&trackingId=DCn8p7vUId6drFfJ52RMuA%3D%3D
+2025-07-18 00:02:12,000 - INFO - scraper - Processing link 41/253
+2025-07-18 00:02:12,000 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-unified-mentor-private-limited-4268284645?position=1&pageNum=5&refId=FgrnvOKdTv3jzV7XcDTvYQ%3D%3D&trackingId=LA6A192VvzaitrFsEgj3%2Fg%3D%3D
+2025-07-18 00:02:15,878 - INFO - scraper - Processing link 42/253
+2025-07-18 00:02:15,878 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/intern-at-fluke-corporation-4266297737?position=8&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=QdtaYjtxEASO37KqRz752w%3D%3D
+2025-07-18 00:02:19,218 - INFO - scraper - Processing link 43/253
+2025-07-18 00:02:19,218 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/full-stack-developer-trainee-intern-at-quantum-it-innovation-4266870714?position=47&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=qjNz68tuaLJvMOpFYtKe2g%3D%3D
+2025-07-18 00:02:22,758 - INFO - scraper - Processing link 44/253
+2025-07-18 00:02:22,758 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/accounts-executive-trainee-intern-at-quantum-it-innovation-4266874123?position=1&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=YZWWdmIsjhpaKZn7Om4bFA%3D%3D
+2025-07-18 00:02:25,835 - INFO - scraper - Processing link 45/253
+2025-07-18 00:02:25,835 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/intern-rasa-at-datafoundry-4267679992?position=9&pageNum=10&refId=q9LzBAp3XGqPZ4Oqmv11OQ%3D%3D&trackingId=vNOKpMwUEU%2Bjrfz9Mmj9dQ%3D%3D
+2025-07-18 00:02:29,060 - INFO - scraper - Processing link 46/253
+2025-07-18 00:02:29,062 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/network-operations-support-engineer-at-atlan-4227017782?position=42&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=kK%2FY3Ltdp9K%2F%2BVpZ%2FofnQA%3D%3D
+2025-07-18 00:02:32,790 - INFO - scraper - Processing link 47/253
+2025-07-18 00:02:32,791 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-webboost-solutions-by-um-4268625026?position=49&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=kLlquOhgkyYgholeySReUw%3D%3D
+2025-07-18 00:02:36,815 - INFO - scraper - Processing link 48/253
+2025-07-18 00:02:36,815 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/search-engine-optimization-seo-trainee-intern-at-quantum-it-innovation-4266870289?position=8&pageNum=10&refId=q9LzBAp3XGqPZ4Oqmv11OQ%3D%3D&trackingId=S7vLZ%2FWkgkmHFeBe8f%2F37g%3D%3D
+2025-07-18 00:02:39,978 - INFO - scraper - Processing link 49/253
+2025-07-18 00:02:39,979 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-inlighnx-global-private-limited-4267748912?position=6&pageNum=2&refId=VxWavPjWvwOijtHOh%2FHKpg%3D%3D&trackingId=IRnuDxAJNWoopXSsY8Vatw%3D%3D
+2025-07-18 00:02:44,023 - INFO - scraper - Processing link 50/253
+2025-07-18 00:02:44,023 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/artificial-intelligence-intern-at-zetheta-algorithms-private-limited-4267730708?position=43&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=tjPUi8ckd15B3ETdhPhUiQ%3D%3D
+2025-07-18 00:02:47,446 - INFO - scraper - Processing link 51/253
+2025-07-18 00:02:47,446 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-science-intern-at-hypersonix-inc-4257492526?position=1&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=dF3Gy2P0H8HmnOpktAuVfw%3D%3D
+2025-07-18 00:02:50,738 - INFO - scraper - Processing link 52/253
+2025-07-18 00:02:50,739 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/social-media-marketing-intern-at-bhartics-ecom-services-pvt-ltd-4268282998?position=29&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=3ulwTVuuMDlGqFPw9y%2FiMQ%3D%3D
+2025-07-18 00:02:53,707 - INFO - scraper - Processing link 53/253
+2025-07-18 00:02:53,708 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-intern-at-zenotalent-4266565061?position=14&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=gCjw%2BvFNiVANlmQzQTFIOw%3D%3D
+2025-07-18 00:02:57,431 - INFO - scraper - Processing link 54/253
+2025-07-18 00:02:57,431 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-science-intern-at-inlighnx-global-private-limited-4267754073?position=47&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=5KeXhmCFuyFCXkko1u9iwg%3D%3D
+2025-07-18 00:03:01,307 - INFO - scraper - Processing link 55/253
+2025-07-18 00:03:01,307 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/marketing-intern-corporate-finance-m-a-and-fundraising-advisory-at-alehar-4244493813?position=20&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=dnPuaEgofyUC%2FzrdqoEjXw%3D%3D
+2025-07-18 00:03:04,907 - INFO - scraper - Processing link 56/253
+2025-07-18 00:03:04,907 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/intern-software-developer-at-i-design-my-life-4257197008?position=2&pageNum=5&refId=Hpoivl8pA%2BNKxQINyBwLqw%3D%3D&trackingId=vJIPvGrLEdFx2%2FbBhZ%2FDfQ%3D%3D
+2025-07-18 00:03:08,797 - INFO - scraper - Processing link 57/253
+2025-07-18 00:03:08,797 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/best-work-from-home-jobs-in-noida-for-freshers-and-college-students-at-career-cartz-4250027498?position=3&pageNum=10&refId=q9LzBAp3XGqPZ4Oqmv11OQ%3D%3D&trackingId=Ael7OamynS9DOZsu4kkiXg%3D%3D
+2025-07-18 00:03:12,543 - INFO - scraper - Processing link 58/253
+2025-07-18 00:03:12,543 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/marketing-media-intern-at-essite-4267695995?position=3&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=fYI1JJ%2B%2F%2BbVVHmUA6%2BFCsg%3D%3D
+2025-07-18 00:03:15,671 - INFO - scraper - Processing link 59/253
+2025-07-18 00:03:15,672 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/mern-stack-intern-at-sproutsai-4227655401?position=12&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=IeVA9rxULFAA%2BXjvCZF52g%3D%3D
+2025-07-18 00:03:19,563 - INFO - scraper - Processing link 60/253
+2025-07-18 00:03:19,563 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/java-developer-intern-at-eazybyts-com-4260676030?position=5&pageNum=5&refId=Hpoivl8pA%2BNKxQINyBwLqw%3D%3D&trackingId=ADjVLROyUpBB2ZgPl3Z5tQ%3D%3D
+2025-07-18 00:03:23,419 - INFO - scraper - Processing link 61/253
+2025-07-18 00:03:23,419 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/node-js-developer-at-bodytolk-4257691603?position=35&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=V%2BvGEoei17XFI5QZySCa9A%3D%3D
+2025-07-18 00:03:26,829 - INFO - scraper - Processing link 62/253
+2025-07-18 00:03:26,829 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/devops-engineer-at-bodytolk-4259368461?position=48&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=1G8wjv%2FVYzFMVMD990ZRWA%3D%3D
+2025-07-18 00:03:30,021 - INFO - scraper - Processing link 63/253
+2025-07-18 00:03:30,021 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-optimspace-in-4267163938?position=20&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=GMxpKYGK2Jfe05L%2BxnAkxQ%3D%3D
+2025-07-18 00:03:33,978 - INFO - scraper - Processing link 64/253
+2025-07-18 00:03:33,979 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ai-ml-intern-at-optimspace-in-4268163631?position=60&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=D9kLsS66B%2BX%2BLZzWEigYJw%3D%3D
+2025-07-18 00:03:37,950 - INFO - scraper - Processing link 65/253
+2025-07-18 00:03:37,950 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ai-ml-intern-at-optimspace-in-4268163631?position=10&pageNum=5&refId=FgrnvOKdTv3jzV7XcDTvYQ%3D%3D&trackingId=XC%2B%2BWYTTx35EoCXx%2FBgWDQ%3D%3D
+2025-07-18 00:03:41,773 - INFO - scraper - Processing link 66/253
+2025-07-18 00:03:41,774 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/marketing-and-business-development-intern-at-indofolk-wellness-4266427821?position=25&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=ef7MZ3YbDreD%2F436zbhi5Q%3D%3D
+2025-07-18 00:03:45,138 - INFO - scraper - Processing link 67/253
+2025-07-18 00:03:45,139 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/social-media-marketing-intern-at-bhartics-ecom-services-pvt-ltd-4268282998?position=4&pageNum=2&refId=9fsMLa868Iile%2FVoCG0%2FhA%3D%3D&trackingId=C9socKwlnPhaW%2B7xCWyh8Q%3D%3D
+2025-07-18 00:03:48,092 - INFO - scraper - Processing link 68/253
+2025-07-18 00:03:48,092 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/internship-finance-regulatory-reporting-at-oaknorth-in-india-4265340335?position=37&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=4kBd4la5Q%2BciQLT0U0T6lg%3D%3D
+2025-07-18 00:03:51,960 - INFO - scraper - Processing link 69/253
+2025-07-18 00:03:51,960 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-optimspace-in-4268171632?position=3&pageNum=2&refId=VxWavPjWvwOijtHOh%2FHKpg%3D%3D&trackingId=YCG%2BlQkcmJkxJVuzsUDQCg%3D%3D
+2025-07-18 00:03:55,858 - INFO - scraper - Processing link 70/253
+2025-07-18 00:03:55,858 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/devops-intern-at-sproutsai-4227655398?position=9&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=sa7fEsqqhvBg6fU3h83LVw%3D%3D
+2025-07-18 00:03:59,651 - INFO - scraper - Processing link 71/253
+2025-07-18 00:03:59,651 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/software-developer-intern-at-cryptochakra-4263853389?position=4&pageNum=5&refId=Hpoivl8pA%2BNKxQINyBwLqw%3D%3D&trackingId=O1zs6%2F3enMSNSy0pWqpvuQ%3D%3D
+2025-07-18 00:04:02,896 - INFO - scraper - Processing link 72/253
+2025-07-18 00:04:02,897 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analytics-intern-risk-at-funding-societies-modalku-group-4255629809?position=10&pageNum=2&refId=6Yab3v94OCyNlhD%2F%2BHjC%2Bg%3D%3D&trackingId=9P6D4BlGnKaBo6kZRvIZ9A%3D%3D
+2025-07-18 00:04:06,324 - INFO - scraper - Processing link 73/253
+2025-07-18 00:04:06,325 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-developer-intern-at-innovate-solutions-4266637720?position=50&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=YXyHX60GKBdrtw8o35oa4g%3D%3D
+2025-07-18 00:04:10,233 - INFO - scraper - Processing link 74/253
+2025-07-18 00:04:10,233 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ai-ml-intern-at-optimspace-in-4268163631?position=55&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=2K43oEGSMGfNoH45%2BoKZQQ%3D%3D
+2025-07-18 00:04:13,904 - INFO - scraper - Processing link 75/253
+2025-07-18 00:04:13,905 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/account-executive-intern-at-zemoso-technologies-4256692673?position=48&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=eKVr2MHdkBFAn6BfhL%2BWOA%3D%3D
+2025-07-18 00:04:17,009 - INFO - scraper - Processing link 76/253
+2025-07-18 00:04:17,010 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resources-intern-at-ten-news-aggregator-4267636739?position=44&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=uELlmAeeBu1rMWZfeu%2Bf9w%3D%3D
+2025-07-18 00:04:20,132 - INFO - scraper - Processing link 77/253
+2025-07-18 00:04:20,132 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/devops-engineer-intern-at-yellow-ai-4240913536?position=15&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=lZqc2hbXvWmuX8cLu%2FWSbw%3D%3D
+2025-07-18 00:04:24,205 - INFO - scraper - Processing link 78/253
+2025-07-18 00:04:24,205 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/mba-intern-%E2%80%93-hr-at-intechnative-4251829705?position=13&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=36yOSV3xH3hTJ3dEzWMo1w%3D%3D
+2025-07-18 00:04:27,932 - INFO - scraper - Processing link 79/253
+2025-07-18 00:04:27,932 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/growth-engineer-intern-at-techkareer-4261828288?position=12&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=mz1KOPHXjBwttsVnzsBhJw%3D%3D
+2025-07-18 00:04:31,211 - INFO - scraper - Processing link 80/253
+2025-07-18 00:04:31,212 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resources-intern-at-ten-infinity-health-engine-4268163892?position=27&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=mVAOgedo7ulQinK1%2BDiQAQ%3D%3D
+2025-07-18 00:04:34,077 - INFO - scraper - Processing link 81/253
+2025-07-18 00:04:34,078 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sap-basis-intern-at-vegah-4260255658?position=2&pageNum=7&refId=Cl3lOpCtxJ3PQpkyLj%2F2aQ%3D%3D&trackingId=UVvCaHJaJG%2FqJCkT%2FRhz1A%3D%3D
+2025-07-18 00:04:37,225 - INFO - scraper - Processing link 82/253
+2025-07-18 00:04:37,225 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/business-analyst-intern-at-webboost-solutions-by-um-4268630201?position=9&pageNum=2&refId=6Yab3v94OCyNlhD%2F%2BHjC%2Bg%3D%3D&trackingId=N%2FnpO70IWkgQT1f%2BFs69vQ%3D%3D
+2025-07-18 00:04:40,837 - INFO - scraper - Processing link 83/253
+2025-07-18 00:04:40,837 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/full-stack-engineer-internship-at-zentechnexus-4263889373?position=58&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=TgwfybLijz5iC%2FkEkJRyiA%3D%3D
+2025-07-18 00:04:44,409 - INFO - scraper - Processing link 84/253
+2025-07-18 00:04:44,410 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/marketing-and-business-development-intern-at-adfinity-techwave-4264218234?position=35&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=nskMAyARs7EoKWX9CE8Jxw%3D%3D
+2025-07-18 00:04:48,088 - INFO - scraper - Processing link 85/253
+2025-07-18 00:04:48,088 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-unified-mentor-private-limited-4268284645?position=51&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=sshWuD%2FYRK8l5BYy5bOskw%3D%3D
+2025-07-18 00:04:52,258 - INFO - scraper - Processing link 86/253
+2025-07-18 00:04:52,258 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/back-end-developer-at-zetheta-algorithms-private-limited-4267733730?position=57&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=yltfSEHoy7ofwqP6dFUMoQ%3D%3D
+2025-07-18 00:04:55,680 - INFO - scraper - Processing link 87/253
+2025-07-18 00:04:55,680 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/full-stack-developer-intern-at-hiredude-4267152168?position=6&pageNum=5&refId=Hpoivl8pA%2BNKxQINyBwLqw%3D%3D&trackingId=%2BZHcmeEfmPXv9N4XtQBqww%3D%3D
+2025-07-18 00:04:59,616 - INFO - scraper - Processing link 88/253
+2025-07-18 00:04:59,617 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/software-tester-trainee-intern-at-quantum-it-innovation-4266868819?position=49&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=0S3gNM3bQIVvVV1fQdCeJg%3D%3D
+2025-07-18 00:05:02,872 - INFO - scraper - Processing link 89/253
+2025-07-18 00:05:02,872 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/devops-intern-at-elevate-labs-4263823162?position=16&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=YaCjtKIcPftCvKE%2BL4661w%3D%3D
+2025-07-18 00:05:06,676 - INFO - scraper - Processing link 90/253
+2025-07-18 00:05:06,676 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/devops-engineer-at-ddverse-initiatives-4257193459?position=17&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=FV1dDNs0vdjC7hXVtCGA5w%3D%3D
+2025-07-18 00:05:10,294 - INFO - scraper - Processing link 91/253
+2025-07-18 00:05:10,294 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/django-developer-intern-at-perpex-4268169265?position=5&pageNum=2&refId=6Yab3v94OCyNlhD%2F%2BHjC%2Bg%3D%3D&trackingId=d9sYjUXZXnLlKNa42fQUxw%3D%3D
+2025-07-18 00:05:14,385 - INFO - scraper - Processing link 92/253
+2025-07-18 00:05:14,385 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/human-resources-intern-at-zylentrix-4267770253?position=22&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=Woy%2BA5KMXA0ilbZHDb3NZA%3D%3D
+2025-07-18 00:05:17,290 - INFO - scraper - Processing link 93/253
+2025-07-18 00:05:17,290 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/research-analyst-intern-or-part-time-founder-s-office-at-nine-spot-seven-4257963786?position=5&pageNum=10&refId=q9LzBAp3XGqPZ4Oqmv11OQ%3D%3D&trackingId=UrGIccRb%2BGU0VQPpdohrxg%3D%3D
+2025-07-18 00:05:20,506 - INFO - scraper - Processing link 94/253
+2025-07-18 00:05:20,507 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/python-developer-intern-at-unified-mentor-private-limited-4268283796?position=33&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=Sn9i7D8HoZkqL4ps6jELBw%3D%3D
+2025-07-18 00:05:24,385 - INFO - scraper - Processing link 95/253
+2025-07-18 00:05:24,385 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sql-developer-intern-at-elevate-labs-4263823100?position=20&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=5vA95wGwHVGzFrykjS%2BPkg%3D%3D
+2025-07-18 00:05:28,204 - INFO - scraper - Processing link 96/253
+2025-07-18 00:05:28,204 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sales-and-marketing-intern-at-signiance-technologies-4260371246?position=2&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=qc5BQDYN7Xhdn8wqj9Vs8g%3D%3D
+2025-07-18 00:05:31,448 - INFO - scraper - Processing link 97/253
+2025-07-18 00:05:31,449 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-analyst-intern-at-inlighnx-global-private-limited-4267748912?position=43&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=i8RQUEdsqjBiSu6lLeeTuw%3D%3D
+2025-07-18 00:05:35,406 - INFO - scraper - Processing link 98/253
+2025-07-18 00:05:35,406 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/automation-testing-intern-remote-at-clootrack-4193914345?position=59&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=YIf33JP2IlUoTqvH3KyjlA%3D%3D
+2025-07-18 00:05:39,243 - INFO - scraper - Processing link 99/253
+2025-07-18 00:05:39,243 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sql-developer-intern-at-workassist-4267782543?position=37&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=ZxveUQ%2FAHn4LI9WJGv3FXg%3D%3D
+2025-07-18 00:05:42,805 - INFO - scraper - Processing link 100/253
+2025-07-18 00:05:42,805 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/back-end-developer-at-zetheta-algorithms-private-limited-4267733730?position=7&pageNum=5&refId=FgrnvOKdTv3jzV7XcDTvYQ%3D%3D&trackingId=1AOF7%2B2LDCJVSzAcxUC4Ow%3D%3D
+2025-07-18 00:05:46,165 - INFO - scraper - Processing link 101/253
+2025-07-18 00:05:46,166 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ios-app-developer-trainee-intern-at-quantum-it-innovation-4266872226?position=5&pageNum=2&refId=VxWavPjWvwOijtHOh%2FHKpg%3D%3D&trackingId=kyeenIJKvDt04HNvqtbX1A%3D%3D
+2025-07-18 00:05:49,428 - INFO - scraper - Processing link 102/253
+2025-07-18 00:05:49,429 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/marketing-and-business-development-intern-at-adfinity-techwave-4264218234?position=10&pageNum=2&refId=9fsMLa868Iile%2FVoCG0%2FhA%3D%3D&trackingId=6LYu97wpaK9vbak0Ex%2FBJQ%3D%3D
+2025-07-18 00:05:52,419 - INFO - scraper - Processing link 103/253
+2025-07-18 00:05:52,420 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/growth-engineer-intern-at-techkareer-4261828288?position=17&pageNum=0&refId=%2BF1Ve9LyfZ29yMrjA%2BK%2BFg%3D%3D&trackingId=4z52K1p1%2BUCqT1jbGtql3w%3D%3D
+2025-07-18 00:05:55,847 - INFO - scraper - Processing link 104/253
+2025-07-18 00:05:55,847 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/ux-research-intern-at-aspire-4264441953?position=7&pageNum=2&refId=VxWavPjWvwOijtHOh%2FHKpg%3D%3D&trackingId=sN%2FHaHJjlZvt%2BnpqHezppA%3D%3D
+2025-07-18 00:05:59,372 - INFO - scraper - Processing link 105/253
+2025-07-18 00:05:59,373 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/data-intern-remote-at-udhyam-learning-foundation-4259117313?position=8&pageNum=5&refId=Hpoivl8pA%2BNKxQINyBwLqw%3D%3D&trackingId=5bZhBxZyFtmY8t%2F9%2FLHovQ%3D%3D
+2025-07-18 00:06:03,470 - INFO - scraper - Processing link 106/253
+2025-07-18 00:06:03,470 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/graphic-designer-intern-remote-at-hike-4266538877?position=5&pageNum=7&refId=b%2BmX94a4JVmL21pHjvDR%2Fg%3D%3D&trackingId=9Y%2BneKyXRtq1imO0EN4IiA%3D%3D
+2025-07-18 00:06:06,734 - INFO - scraper - Processing link 107/253
+2025-07-18 00:06:06,734 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/sales-and-marketing-intern-unpaid-at-social-nanban-4265377246?position=42&pageNum=0&refId=wF7ITsNGCvB5efkTUE4MGA%3D%3D&trackingId=illyWI2NCY2gP05%2Fh4xEjw%3D%3D
+2025-07-18 00:06:10,019 - INFO - scraper - Processing link 108/253
+2025-07-18 00:06:10,019 - INFO - scraper - Scraping job page: https://in.linkedin.com/jobs/view/full-stack-development-intern-at-inlighnx-global-private-limited-4267746996?position=24&pageNum=0&refId=ATQeWJGRLYJcxgtJOfJj7A%3D%3D&trackingId=7Ugqw%2BRACFyXL3XuFuPq3g%3D%3D

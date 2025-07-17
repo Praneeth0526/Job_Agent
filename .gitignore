@@ -10,10 +10,14 @@ __pycache__/
 # Browser Profile
 chrome_profile/
 chrome_profile_for_job_agent/
+data/
 
-job_application.db
 job_applications.db
 linkedin_job_descriptions.csv
 linkedin_jobs.csv
 linkedin_scraper.log
 test.py
+critical_error.png
+temp/
+src/gui_automation.py
+Resume/

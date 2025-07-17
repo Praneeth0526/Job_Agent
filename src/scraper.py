@@ -173,8 +173,10 @@ def run_scraper(driver, resume_skills, location, email, password, additional_key
 
     # --- 4. Visit each unique link and scrape the details ---
     final_jobs = []
-    for i, link in enumerate(list(all_job_links)):
-        log.info(f"Processing link {i+1}/{len(all_job_links)}")
+    # --- FOR TESTING: Limit the number of jobs to scrape ---
+    for i, link in enumerate(list(all_job_links)): # Original line
+    # for i, link in enumerate(list(all_job_links)[:10]): # Test with only 10 jobs
+        log.info(f"Processing link {i+1}/{len(list(all_job_links)[:])}")
         job_data = _scrape_single_job_page(driver, link)
         if job_data:
             final_jobs.append(job_data)

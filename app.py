@@ -27,8 +27,6 @@ from src import llm_helper
 load_dotenv()
 
 # --- Constants ---
-# IMPORTANT: Update this path to your resume file.
-RESUME_FILE_PATH = "Resume/New_resume.pdf"
 BROWSEAI_API_KEY = os.getenv("BROWSEAI_API_KEY")
 LINKEDIN_EMAIL = os.getenv("LINKEDIN_EMAIL")
 LINKEDIN_PASSWORD = os.getenv("LINKEDIN_PASSWORD")
@@ -104,8 +102,100 @@ class StreamlitStatusUpdater:
 
 # --- 4. STREAMLIT UI ---
 
-st.set_page_config(layout="wide", page_title="AI Job Agent")
+st.set_page_config(layout="wide", page_title="AI Job Agent", page_icon="🤖")
 st.title("🤖 AI Job Application Agent")
+
+# --- Custom CSS for 3D Effects, Gradient Background, and Enhanced UI ---
+ui_enhancements_css = """
+<style>
+/* New background gradient */
+[data-testid="stAppViewContainer"] > .main {
+    background-image: linear-gradient(to top, #f0f2f6 0%, #e6e9f0 100%);
+}
+
+/* Remove header background to blend with gradient */
+[data-testid="stHeader"] {
+    background-color: rgba(0,0,0,0);
+}
+
+/* 3D effect for job cards created with st.container(border=True) */
+div[data-testid="stVerticalBlock"] > div[style*="border: 1px solid"] {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+    border: 1px solid #e2ebf0;
+}
+
+div[data-testid="stVerticalBlock"] > div[style*="border: 1px solid"]:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+}
+
+/* --- Button Styling --- */
+.stButton > button {
+    border-radius: 8px !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Green 'Approve' and 'Start Applying' buttons */
+button[kind="primary"] {
+    background-color: #28a745 !important;
+    color: white !important;
+    border-color: #28a745 !important;
+}
+button[kind="primary"]:hover {
+    background-color: #218838 !important;
+    border-color: #218838 !important;
+}
+button[kind="primary"]:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40,167,69,.5) !important;
+    background-color: #218838 !important;
+    border-color: #218838 !important;
+}
+
+/* Red 'Skip' and 'Cancel' buttons */
+/* This affects ALL non-primary buttons by default. */
+button[kind="secondary"] {
+    background-color: #dc3545 !important;
+    color: white !important;
+    border-color: #dc3545 !important;
+}
+button[kind="secondary"]:hover, button[kind="secondary"]:focus {
+    background-color: #c82333 !important;
+    border-color: #c82333 !important;
+}
+
+/* Yellow 'AI Insights' buttons - Overriding the general secondary style */
+/* This targets the button in the third column of the job card controls. */
+div[data-testid="stHorizontalBlock"] > div:nth-child(3) > div[data-testid="stVerticalBlock"] button[kind="secondary"] {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+    border-color: #ffc107 !important;
+}
+div[data-testid="stHorizontalBlock"] > div:nth-child(3) > div[data-testid="stVerticalBlock"] button[kind="secondary"]:hover,
+div[data-testid="stHorizontalBlock"] > div:nth-child(3) > div[data-testid="stVerticalBlock"] button[kind="secondary"]:focus {
+    background-color: #e0a800 !important;
+    border-color: #d39e00 !important;
+    color: #212529 !important;
+}
+
+/* Compact spacing for job criteria expander */
+div[data-testid="stExpander"] div[data-testid="stMarkdown"] p {
+    margin-bottom: 0.25rem !important;
+    line-height: 1.3 !important;
+}
+div[data-testid="stExpander"] div[data-testid="stMarkdown"] ul {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.5rem !important;
+    padding-left: 1.2rem !important;
+}
+div[data-testid="stExpander"] div[data-testid="stMarkdown"] li {
+    margin-bottom: 0.1rem !important;
+}
+</style>
+"""
+st.markdown(ui_enhancements_css, unsafe_allow_html=True)
+
 st.markdown("Focusing on **LinkedIn**, **Indeed**, and **Direct Company Portals** for the Indian Tech Market.")
 
 # Initialize session state
@@ -122,95 +212,47 @@ if 'rejected_jobs' not in st.session_state:
     st.session_state.rejected_jobs = set()
 if 'driver' not in st.session_state:
     st.session_state.driver = None
+if 'show_insights_for' not in st.session_state:
+    st.session_state.show_insights_for = None
+if 'resume_path' not in st.session_state:
+    st.session_state.resume_path = None
+if 'fetching_jobs' not in st.session_state:
+    st.session_state.fetching_jobs = False
 
 # --- Sidebar Controls ---
 with st.sidebar:
-    st.header("Controls")
-    resume_path_input = st.text_input("Path to your Resume", value=RESUME_FILE_PATH)
+    st.header("🛠️ 1. Upload Resume")
+    uploaded_file = st.file_uploader(
+        "Upload your resume to get started.",
+        type=['pdf', 'docx'],
+        help="We'll analyze your resume to find the best job matches."
+    )
+
+    # Handle the file upload and store its path in the session state
+    if uploaded_file is not None:
+        if not os.path.exists("temp"):
+            os.makedirs("temp")
+        # Save the file to a temporary location
+        temp_path = os.path.join("temp", uploaded_file.name)
+        with open(temp_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        # Store the path for use across the app
+        st.session_state.resume_path = temp_path
+        st.success(f"Resume '{uploaded_file.name}' uploaded successfully!")
+
     st.markdown("---")
-    st.header("Scraper Settings")
+    st.header("⚙️ 2. Scraper Settings")
     search_term = st.text_input("Additional Keywords (e.g., 'Remote', 'Fintech')", value="")
     location = st.text_input("Location", value="India")
-    use_test_data = st.checkbox("Use local test data (`jobs.json`)", value=False)
 
-    if st.button("🚀 Fetch & Rank Jobs", type="primary"):
-        # Now handled by database checks
-        # st.session_state.approved_jobs.clear()
-        # st.session_state.rejected_jobs.clear()
-        log.info("'Fetch & Rank Jobs' button clicked.")
+    if st.button("🚀 Fetch & Rank Jobs", type="primary", help="Searches for jobs based on your resume and settings."):
+        if not st.session_state.resume_path:
+            show_error("Please upload your resume before fetching jobs.")
+        else:
+            st.session_state.fetching_jobs = True
+            st.rerun()  # Rerun to show the spinner in the main panel
 
-        with st.spinner("Parsing resume to identify your skills..."):
-            # Use the dedicated parser module now
-            _, st.session_state.my_skills = parser.parse_resume(resume_path_input)
-            if st.session_state.my_skills:
-                log.info(f"Resume parsed. Found {len(st.session_state.my_skills)} skills.")
-                st.success(f"Found {len(st.session_state.my_skills)} skills.")
-            else:
-                log.error("Failed to parse resume or find skills.")
-                st.error("Could not find skills. Aborting.")
-
-        if st.session_state.my_skills:
-            if use_test_data:
-                show_info("Using local test data from jobs.json.")
-                try:
-                    with open('jobs.json', 'r') as f:
-                        st.session_state.scraped_jobs = json.load(f)
-                except FileNotFoundError:
-                    log.error("jobs.json not found when 'Use local test data' was checked.")
-                    show_error("`jobs.json` not found. Please uncheck the box or create the file.")
-                    st.session_state.scraped_jobs = []
-            else:
-                with st.spinner(f"Running intelligent LinkedIn search based on your resume..."):
-                    # Ensure a browser session is active, reusing it if possible
-                    if st.session_state.driver is None:
-                        log.info("No active driver found. Initializing a new one for scraping.")
-                        with st.spinner("Initializing browser for the first time..."):
-                            st.session_state.driver = automator.initialize_driver()
-                            show_info("Browser initialized. It will be reused for all actions.")
-
-                    if st.session_state.driver:
-                        st.session_state.scraped_jobs = scraper.run_scraper(
-                            st.session_state.driver, st.session_state.my_skills, location,
-                            email=LINKEDIN_EMAIL, password=LINKEDIN_PASSWORD, additional_keywords=search_term
-                        )
-                    else:
-                        show_error("Could not initialize the browser. Scraping aborted.")
-                        st.session_state.scraped_jobs = []
-
-            # --- DATABASE INTEGRATION & RANKING ---
-            if st.session_state.scraped_jobs:
-                with st.spinner("Filtering and ranking new jobs..."):
-                    # 1. Get URLs of jobs already in the database to avoid duplicates
-                    processed_urls = {job['job_url'] for job in database.get_all_jobs()}
-
-                    # 2. Filter out jobs that have already been processed
-                    unprocessed_jobs = []
-                    for job in st.session_state.scraped_jobs:
-                        job['job_url'] = job.get('link')
-                        if job.get('job_url') and job['job_url'] not in processed_urls:
-                            unprocessed_jobs.append(job)
-
-                    log.info(f"Scraped {len(st.session_state.scraped_jobs)} total jobs. Found {len(unprocessed_jobs)} new jobs to process.")
-
-                    if unprocessed_jobs:
-                        # 3. Rank the new, unprocessed jobs to get scores and matched skills
-                        ranked_jobs = find_relevant_jobs(unprocessed_jobs, st.session_state.my_skills)
-                        log.info(f"Found {len(ranked_jobs)} relevant jobs after ranking.")
-
-                        # 4. Add the newly ranked jobs to the database
-                        newly_added_count = 0
-                        for job in ranked_jobs:
-                            # The job dict now contains score, matched_skills, and criteria
-                            if database.add_job(job):
-                                newly_added_count += 1
-
-                        show_success(f"Added {newly_added_count} new relevant jobs to the database for review.")
-                    else:
-                        show_warning("No new jobs found that match your profile. Try different keywords or check back later.")
-            else:
-                log.warning("Scraper returned no jobs.")
-
-    if st.button("Quit Browser Session"):
+    if st.button("🛑 Quit Browser Session"):
         if st.session_state.driver:
             st.session_state.driver.quit()
             st.session_state.driver = None
@@ -218,14 +260,81 @@ with st.sidebar:
         else:
             st.sidebar.info("No active browser session to close.")
 
+# --- Main Content Area Logic ---
+
+if st.session_state.get('fetching_jobs'):
+    # Display the spinner in the main panel
+    with st.spinner("Please wait... Fetching jobs and ranking them against your profile. This might take a minute."):
+        log.info("'Fetch & Rank Jobs' triggered.")
+
+        # --- PARSE RESUME ---
+        log.info("Parsing resume to identify your skills...")
+        resume_data = parser.parse_resume(st.session_state.resume_path)
+        if resume_data and resume_data.get('skills'):
+            st.session_state.my_skills = resume_data['skills']
+            log.info(f"Resume parsed. Found {len(st.session_state.my_skills)} skills.")
+        else:
+            log.error("Failed to parse resume or find skills.")
+            show_error("Could not find skills in the resume. Aborting.")
+            st.session_state.fetching_jobs = False
+            st.stop()
+
+        # --- SCRAPE & PROCESS (Now always live and headless) ---
+        if st.session_state.my_skills:
+            log.info(f"Running intelligent LinkedIn search based on your resume...")
+            # Ensure a browser session is active, reusing it if possible
+            if st.session_state.driver is None:
+                log.info("No active driver found. Initializing a new headless one for scraping.")
+                st.session_state.driver = automator.initialize_driver(headless=True)
+                show_info("Background browser session started for scraping.")
+
+            if st.session_state.driver:
+                st.session_state.scraped_jobs = scraper.run_scraper(
+                    st.session_state.driver, st.session_state.my_skills, location,
+                    email=LINKEDIN_EMAIL, password=LINKEDIN_PASSWORD, additional_keywords=search_term
+                )
+            else:
+                show_error("Could not initialize the browser. Scraping aborted.")
+                st.session_state.scraped_jobs = []
+
+            # --- DATABASE INTEGRATION & RANKING ---
+            if st.session_state.scraped_jobs:
+                log.info("Filtering and ranking new jobs...")
+                processed_urls = {job['job_url'] for job in database.get_all_jobs()}
+                unprocessed_jobs = []
+                for job in st.session_state.scraped_jobs:
+                    job['job_url'] = job.get('link')
+                    if job.get('job_url') and job['job_url'] not in processed_urls:
+                        unprocessed_jobs.append(job)
+
+                log.info(f"Scraped {len(st.session_state.scraped_jobs)} total jobs. Found {len(unprocessed_jobs)} new jobs to process.")
+
+                if unprocessed_jobs:
+                    ranked_jobs = find_relevant_jobs(unprocessed_jobs, st.session_state.my_skills)
+                    log.info(f"Found {len(ranked_jobs)} relevant jobs after ranking.")
+
+                    newly_added_count = 0
+                    for job in ranked_jobs:
+                        if database.add_job(job):
+                            newly_added_count += 1
+                    show_success(f"Success! Added {newly_added_count} new relevant jobs to the database for your review.")
+                else:
+                    show_warning("No new jobs found that match your profile. Try different keywords or check back later.")
+            else:
+                log.warning("Scraper returned no jobs.")
+
+    # Reset the flag after the process is complete
+    st.session_state.fetching_jobs = False
+    st.rerun()
+
 # --- Main Content Area ---
 # Fetch jobs with 'found' status directly from the database for display
 jobs_to_display = database.get_jobs_by_status('found')
 
-if not jobs_to_display:
+if not jobs_to_display and not st.session_state.get('fetching_jobs'):
     st.info("No new jobs to display. Click 'Fetch & Rank Jobs' in the sidebar to search for more.")
 else:
-    st.header(f"{len(jobs_to_display)} New Jobs Found For Review")
+    st.header(f"📬 {len(jobs_to_display)} New Jobs Found For Review")
     st.markdown("---")
 
     # Display jobs in a grid
@@ -241,36 +350,50 @@ else:
                 st.subheader(job.get('title', 'No Title'))
                 st.write(f"**Company:** {job.get('company', 'N/A')}")
                 st.write(f"**Location:** {job.get('location', 'N/A')}")
-                st.metric(label="Relevance Score", value=job.get('score', 0))
+                #st.metric(label="Relevance Score", value=job.get('score', 0))
 
-                # The 'matched_skills' key might not exist in all DB records, so handle it safely
-                matched_skills_list = job.get('matched_skills', [])
-                if matched_skills_list:
-                    st.write(f"**Matched Skills:** {', '.join(matched_skills_list)}")
+                # The 'matched_skills' field from the DB is a pre-formatted string.
+                # We just need to display it directly.
+                matched_skills_str = job.get('matched_skills')
+                if matched_skills_str:
+                    st.write(f"**Matched Skills:** {matched_skills_str}")
 
                 with st.expander("Show Job Criteria"):
                     st.markdown(job.get('criteria', 'Not available.'), unsafe_allow_html=True)
 
                 c1, c2, c3 = st.columns([1, 1, 1])
 
-                if c1.button("✅ Approve & Apply", key=f"approve_{job_id}", type="primary", use_container_width=True):
+                if c1.button("Approve & Apply", key=f"approve_{job_id}", type="primary", use_container_width=True):
                     log.info(f"User approved job for application: {job.get('title')}")
                     database.update_job_status(job_id, 'applying')
                     st.rerun()
 
-                if c2.button("❌ Reject", key=f"reject_{job_id}", use_container_width=True):
-                    log.info(f"User rejected job: {job.get('title')}")
+                if c2.button("Skip", key=f"reject_{job_id}", use_container_width=True):
+                    log.info(f"User skipped job: {job.get('title')}")
                     database.update_job_status(job_id, 'rejected')
                     st.rerun()
 
                 with c3:
+                    # This button now toggles the display of insights below
                     if st.button("💡 AI Insights", key=f"ai_{job_id}", use_container_width=True):
-                        log.info(f"User requested AI insights for: {job.get('title')}")
-                        with st.spinner("Asking the AI for talking points..."):
-                            prompt = llm_helper.generate_talking_points_prompt(job, st.session_state.my_skills)
-                            insights = llm_helper.get_ai_insights(prompt)
-                            st.info(f"**AI Insights for {job.get('title')}**")
-                            st.markdown(insights)
+                        # Toggle display: if already showing for this job, hide it.
+                        if st.session_state.get('show_insights_for') == job_id:
+                            st.session_state['show_insights_for'] = None
+                        else:
+                            # Otherwise, show it and generate insights if they don't exist yet
+                            st.session_state['show_insights_for'] = job_id
+                            if f"insights_{job_id}" not in st.session_state:
+                                with st.spinner("Asking the AI for talking points..."):
+                                    log.info(f"Generating AI insights for: {job.get('title')}")
+                                    prompt = llm_helper.generate_talking_points_prompt(job, st.session_state.my_skills)
+                                    insights = llm_helper.get_ai_insights(prompt)
+                                    st.session_state[f"insights_{job_id}"] = insights
+
+                # --- Display AI Insights below the buttons if toggled ---
+                if st.session_state.get('show_insights_for') == job_id:
+                    if f"insights_{job_id}" in st.session_state:
+                        st.info(f"**AI Insights for {job.get('title')}**")
+                        st.markdown(st.session_state[f"insights_{job_id}"])
 
 # --- Section for jobs ready to be applied for ---
 jobs_to_apply = database.get_jobs_by_status('applying')
@@ -292,9 +415,15 @@ if jobs_to_apply:
                 st.session_state[f"app_text_{job_id}"] = ""
 
             if st.button("📝 Generate Application Text", key=f"generate_{job_id}"):
+                if not st.session_state.resume_path:
+                    show_error("Resume path not found. Please upload your resume again in the sidebar.")
+                    st.stop()
+
                 with st.spinner("🤖 AI is writing your application summary..."):
-                    resume_text, _ = parser.parse_resume(resume_path_input)
-                    if resume_text:
+                    # Use the enhanced parser that returns a dictionary
+                    resume_data = parser.parse_resume(st.session_state.resume_path)
+                    if resume_data and resume_data.get('full_text'):
+                        resume_text = resume_data['full_text']
                         prompt = llm_helper.generate_application_text_prompt(job, resume_text)
                         generated_text = llm_helper.get_ai_insights(prompt)
                         st.session_state[f"app_text_{job_id}"] = generated_text
@@ -312,8 +441,36 @@ if jobs_to_apply:
                 c1, c2, _ = st.columns([1, 1, 3])
 
                 if c1.button("👍 Looks Good, Start Applying", key=f"start_apply_{job_id}", type="primary"):
-                    # This will be the hook for Phase 3 browser automation
-                    database.update_job_status(job_id, 'applied')
+                    if not st.session_state.resume_path:
+                        show_error("Resume path not found. Please upload your resume again in the sidebar.")
+                        st.stop()
+
+                    with st.spinner("Gathering data and starting browser automation..."):
+                        log.info(f"Starting automation for: {job.get('title')}")
+                        resume_data = parser.parse_resume(st.session_state.resume_path)
+                        if not resume_data:
+                            show_error("Could not parse resume. Aborting automation.")
+                            st.stop()
+
+                        # Get the latest edited text from the text area
+                        edited_application_text = st.session_state[f"textarea_{job_id}"]
+
+                        # --- TRIGGER THE AUTOMATION ---
+                        # Ensure a browser session is active, reusing or creating as needed.
+                        # This is where the app will "wait" for the user, by keeping the
+                        # browser window open for them to log in.
+                        if st.session_state.driver is None:
+                            with st.spinner("Initializing new browser session..."):
+                                st.session_state.driver = automator.initialize_driver()
+
+                        if st.session_state.driver:
+                            automator.start_application(st.session_state.driver, job['job_url'], resume_data, edited_application_text)
+                        else:
+                            show_error("Could not initialize browser for automation.")
+                            st.stop()  # stop execution if browser fails
+
+                    show_success(f"Application process for '{job.get('title')}' has finished.")
+                    database.update_job_status(job_id, 'applied') # Mark as applied after automation
                     st.rerun()
 
                 if c2.button("👎 Cancel", key=f"cancel_apply_{job_id}"):
