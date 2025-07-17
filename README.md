@@ -51,7 +51,7 @@ Get the agent running on your local machine in a few simple steps.
 
 **1. Clone the Repository:**
 ```bash
-git clone https://github.com/your-username/Job_Agent.git
+git clone https://github.com/Praneeth0526/Job_Agent.git
 cd Job_Agent
 ```
 
@@ -135,10 +135,10 @@ This project has a strong foundation with many exciting possibilities for future
 ## ► Contributing
 
 Contributions, issues, and feature requests are welcome!  
-Feel free to check the [issues page](https://github.com/your-username/Job_Agent/issues).
+Feel free to check the [issues page](https://github.com/Praneeth0526/Job_Agent/issues).
 
 ---
 
 ## ► License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the Apache-2.0 License. See the `LICENSE` file for details.
