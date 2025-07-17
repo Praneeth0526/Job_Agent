@@ -72,11 +72,6 @@ pip install -r requirements.txt
 ```
 GEMINI_API_KEY=your_actual_api_key_goes_here
 ```
-
-**5. Install WebDriver:**
-- Download the appropriate [WebDriver](https://www.selenium.dev/documentation/webdriver/getting_started/install_drivers/) for your browser (e.g., `chromedriver` for Google Chrome).
-- Ensure the WebDriver executable is placed in a directory that is included in your system's `PATH`.
-
 ---
 
 ## ► Usage
