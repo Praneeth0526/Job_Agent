@@ -6,8 +6,7 @@
 # --------------------------------------------------------------------------
 
 import os
-
-
+import subprocess
 # It's good practice to manage WebDriver installation.
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
@@ -16,22 +15,43 @@ from selenium.webdriver.chrome.options import Options
 import chromedriver_autoinstaller
 
 
-def initialize_driver(headless=False):
-    """Initializes and returns a Selenium WebDriver instance with auto-matching ChromeDriver."""
+# def initialize_driver(headless=False):
+#     """Initializes and returns a Selenium WebDriver instance with auto-matching ChromeDriver."""
+#
+#     # Install matching ChromeDriver for current system Chrome
+#     chromedriver_autoinstaller.install()
+#
+#     options = Options()
+#     options.add_argument("--start-maximized")
+#     options.add_argument("--disable-dev-shm-usage")
+#     options.add_argument("--no-sandbox")
+#     options.add_argument("--disable-gpu")
+#     if headless:
+#         options.add_argument("--headless=new")
+#
+#     driver = webdriver.Chrome(options=options)
+#     print("WebDriver initialized.")
+#     return driver
 
-    # Install matching ChromeDriver for current system Chrome
-    chromedriver_autoinstaller.install()
+def install_chrome():
+    subprocess.run(["apt-get", "update"], check=True)
+    subprocess.run([
+        "apt-get", "install", "-y", "chromium-browser", "chromium-chromedriver"
+    ], check=True)
+
+def initialize_driver(headless=False):
+    install_chrome()  # make sure Chrome is installed
 
     options = Options()
-    options.add_argument("--start-maximized")
-    options.add_argument("--disable-dev-shm-usage")
+    options.binary_location = "/usr/bin/chromium-browser"
     options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
     if headless:
         options.add_argument("--headless=new")
 
-    driver = webdriver.Chrome(options=options)
-    print("WebDriver initialized.")
+    service = Service("/usr/bin/chromedriver")
+    driver = webdriver.Chrome(service=service, options=options)
     return driver
 
 
