@@ -110,7 +110,7 @@ def find_name_in_text(text):
 def extract_skills_from_text(text):
     """
     Extracts a predefined list of technical skills from text.
-    This logic is based on your `app.py` for consistency.
+    This logic is based on your `streamlit_app.py` for consistency.
     """
     if not text:
         return set()

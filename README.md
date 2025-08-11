@@ -81,7 +81,7 @@ GEMINI_API_KEY=your_actual_api_key_goes_here
 
 **2. Run the Streamlit App:**
 ```bash
-streamlit run app.py
+streamlit run streamlit_app.py
 ```
 - The application will open in a new browser tab.
 
