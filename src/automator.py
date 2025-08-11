@@ -6,29 +6,31 @@
 # --------------------------------------------------------------------------
 
 import os
-from selenium import webdriver
+
 
 # It's good practice to manage WebDriver installation.
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import chromedriver_autoinstaller
 
 
 def initialize_driver(headless=False):
-    """Initializes and returns a Selenium WebDriver instance."""
-    # Using a persistent profile can help with logins, but for this task, a fresh one is fine.
-    # CHROME_PROFILE_PATH = "user-data-dir=chrome_profile_for_job_agent"
-    options = webdriver.ChromeOptions()
-    # options.add_argument(CHROME_PROFILE_PATH)
+    """Initializes and returns a Selenium WebDriver instance with auto-matching ChromeDriver."""
+
+    # Install matching ChromeDriver for current system Chrome
+    chromedriver_autoinstaller.install()
+
+    options = Options()
     options.add_argument("--start-maximized")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
-    # To see the browser in action, keep headless mode off.
+    options.add_argument("--disable-gpu")
     if headless:
-        options.add_argument("--headless")
+        options.add_argument("--headless=new")
 
-    # Use webdriver_manager to handle the driver automatically
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=options)
+    driver = webdriver.Chrome(options=options)
     print("WebDriver initialized.")
     return driver
 

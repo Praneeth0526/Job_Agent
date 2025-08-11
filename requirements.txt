@@ -6,3 +6,4 @@ Requests==2.32.4
 selenium==4.34.2
 streamlit==1.46.1
 webdriver_manager==4.0.2
+chromedriver-autoinstaller
