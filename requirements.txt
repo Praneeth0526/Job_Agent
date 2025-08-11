@@ -1,21 +1,8 @@
-# Core framework for the web UI
-streamlit
-
-# For browser automation and web scraping
-selenium
-
-# For parsing HTML and XML from web pages
-beautifulsoup4
-
-# For reading and parsing PDF resume files
-PyMuPDF
-PyPDF2
-
-# For interacting with the Google Gemini API
-google-generativeai
-
-# For loading environment variables (like your API key) from a .env file
-python-dotenv
-
-# For data manipulation and saving to CSV (though not explicitly in the README, it's used in your code)
-pandas
+beautifulsoup4==4.13.4
+PyPDF2==3.0.1
+python-dotenv==1.1.1
+python_docx==1.2.0
+Requests==2.32.4
+selenium==4.34.2
+streamlit==1.46.1
+webdriver_manager==4.0.2
